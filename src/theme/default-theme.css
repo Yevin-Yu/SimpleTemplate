@@ -1,0 +1,5 @@
+html.theme-default {
+    /* 与 :root 相同，但显式定义以确保一致性 */
+    --theme-color: #42b883;
+    --text-color: #333;
+}

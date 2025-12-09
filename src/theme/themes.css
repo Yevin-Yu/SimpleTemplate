@@ -1,0 +1,9 @@
+@import './default-theme.css';
+@import './red-theme.css';
+
+/* 定义主题变量 */
+:root {
+    /* 默认主题变量 */
+    --theme-color: #42b883;
+    --text-color: #333;
+}
