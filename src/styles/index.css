@@ -1,0 +1,11 @@
+/* 导入 normalize.css */
+@import './normalize.css';
+/* 导入 tailwindcss */
+@import "tailwindcss";
+
+/* 全局盒模型重置 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

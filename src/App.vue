@@ -7,7 +7,11 @@ const counter = useCounterStore()
 
 <template>
     <div>
-        <h1>Vite + Vue + TypeScript + EsLint + Router + Pinia</h1>
+        <!-- 测试 tailwindcss-->
+        <div class="min-h-screen flex items-center justify-center bg-gray-100">
+            <h1 class="text-4xl font-bold text-blue-600">Hello, Tailwind CSS!</h1>
+        </div>
+        <h1 class="text-3xl font-bold text-center text-gray-800">Vite + Vue + TypeScript + EsLint + Router + Pinia</h1>
         <nav>
             <router-link to="/">Home</router-link> |
             <router-link to="/about">About</router-link>
