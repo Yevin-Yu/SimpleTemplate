@@ -1,8 +1,7 @@
 <template>
-    <div>
+    <!-- 居中 -->
+    <div class="flex justify-center items-center h-screen">
         <h1>Home Page</h1>
-        <p>Welcome to the home page!</p>
-        <router-link to="/about">Go to About</router-link>
     </div>
 </template>
 
