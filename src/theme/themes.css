@@ -4,13 +4,16 @@
 /* 定义主题变量 */
 :root {
     /* 颜色 */
-    --default-txt-color: #333;
+    --default-text-color: #333;
     --default-shadow-color: #e0e9f6;
 }
 
 :root {
     /* 按钮 */
-    --wb-button-color: #fefefe;
-    --wb-button-default-color: var(--default-txt-color);
+    --wb-button-text-color: #fefefe;
+    --wb-button-default-color: var(--default-text-color);
     --wb-button-default-bg-color: #f1f5ff;
+    --wb-button-primary-bg-color: var(--theme-color);
+    --wb-button-default-shadow-color: var(--default-shadow-color);
+    --wb-button-hover-shadow-color: rgba(0, 0, 0, 0.25);
 }

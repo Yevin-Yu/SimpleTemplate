@@ -21,23 +21,25 @@ defineProps({
 <style scoped>
 .wb-button {
     background-color: var(--theme-color);
-    color: var(--wb-button-color);
+    color: var(--wb-button-text-color);
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 2px;
     margin: 6px 12px;
-    box-shadow: 2px 2px 0 var(--default-shadow-color);
-    transition: all 0.2s ease-in-out;
+    box-shadow: 2px 2px 0 var(--wb-button-default-shadow-color);
+    transition: all 0.1s ease-in-out;
     position: relative;
 }
 
 .wb-button:hover {
     transform: scale(1.03);
+    box-shadow: 4px 4px 8px var(--wb-button-hover-shadow-color);
 }
 
 .wb-button:active {
-    transform: translate(1px, 1px);
-    box-shadow: 0px 0px 0 var(--default-shadow-color);
+    transform: scale(0.98) translate(1px, 1px);
+    box-shadow: 0px 0px 0 var(--wb-button-default-shadow-color);
+    filter: brightness(0.95);
 }
 
 .wb-button-small {
