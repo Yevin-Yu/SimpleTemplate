@@ -1,6 +1,6 @@
 <template>
     <!-- 居中 -->
-    <div class="flex flex-col justify-center items-center h-screen gap-4">
+    <div class="container flex flex-col justify-center items-center h-screen gap-4">
         <h1>原子组件展示</h1>
         <div>
             <wb-button size="small">小按钮</wb-button>
@@ -8,6 +8,11 @@
             <wb-button size="large">大按钮</wb-button>
             <wb-button size="medium" type="default">默认按钮</wb-button>
             <wb-button size="medium" type="primary">主按钮</wb-button>
+        </div>
+        <div>
+            <wb-tag size="small">默认标签</wb-tag>
+            <wb-tag size="medium">默认标签</wb-tag>
+            <wb-tag size="large">默认标签</wb-tag>
         </div>
         <div class="mt-4 flex flex-col items-center gap-2">
             <div class="text-lg">当前主题: {{ currentTheme }}</div>
@@ -29,12 +34,17 @@
 
 <script setup lang="ts">
 import WbButton from '@/atom/wb-button.vue'
+import WbTag from '@/atom/wb-tag.vue'
 import { useTheme } from '@/hooks/useTheme'
 
 const { currentTheme, themes, setTheme, toggleTheme } = useTheme()
 </script>
 
 <style scoped>
+.container {
+    background-color: var(--default-bg-color);
+}
+
 h1 {
     color: var(--theme-color, #42b883);
 }
