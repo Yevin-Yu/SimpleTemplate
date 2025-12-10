@@ -1,15 +1,62 @@
 <template>
-    <button class="wb-button">
-        按钮
+    <button class="wb-button" :class="`wb-button-${size} wb-button-${type}`">
+        <slot></slot>
     </button>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// 传参
+defineProps({
+    // size small, medium, large
+    size: {
+        type: String,
+        default: 'medium',
+    },
+    // type primary, default
+    type: {
+        type: String,
+        default: 'primary',
+    },
+})
+</script>
 <style scoped>
 .wb-button {
-    background-color: var(--theme-color, #42b883);
-    color: #fff;
+    background-color: var(--theme-color);
+    color: var(--wb-button-color);
     padding: 10px 20px;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 2px;
+    margin: 6px 12px;
+    box-shadow: 2px 2px 0 var(--default-shadow-color);
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.wb-button:hover {
+    transform: scale(1.03);
+}
+
+.wb-button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0px 0px 0 var(--default-shadow-color);
+}
+
+.wb-button-small {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.wb-button-medium {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.wb-button-large {
+    padding: 12px 24px;
+    font-size: 20px;
+}
+
+.wb-button-default {
+    color: var(--wb-button-default-color);
+    background-color: var(--wb-button-default-bg-color);
 }
 </style>

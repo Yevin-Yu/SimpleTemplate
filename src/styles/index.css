@@ -1,7 +1,7 @@
 /* 导入 normalize.css */
 @import './normalize.css';
 /* 导入 tailwindcss */
-@import "tailwindcss";
+@import 'tailwindcss';
 /* 导入全局主题样式 */
 @import './root.css';
 @import '@/theme/themes.css';

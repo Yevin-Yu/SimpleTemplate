@@ -3,7 +3,14 @@
 
 /* 定义主题变量 */
 :root {
-    /* 默认主题变量 */
-    --theme-color: #42b883;
-    --text-color: #333;
+    /* 颜色 */
+    --default-txt-color: #333;
+    --default-shadow-color: #e0e9f6;
+}
+
+:root {
+    /* 按钮 */
+    --wb-button-color: #fefefe;
+    --wb-button-default-color: var(--default-txt-color);
+    --wb-button-default-bg-color: #f1f5ff;
 }
