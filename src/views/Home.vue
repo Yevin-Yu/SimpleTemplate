@@ -1,6 +1,7 @@
 <template>
     <!-- 居中 -->
     <div class="home-container">
+        <page-header> 原子组件展示 </page-header>
         <h1>原子组件展示</h1>
         <div>
             <wb-button size="small">小按钮</wb-button>
@@ -18,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import PageHeader from '@/components/PageHeader.vue'
 import WbButton from '@/atom/wb-button.vue'
 import WbTag from '@/atom/wb-tag.vue'
 </script>
@@ -29,7 +31,7 @@ import WbTag from '@/atom/wb-tag.vue'
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 h1 {
