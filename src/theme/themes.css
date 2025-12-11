@@ -4,14 +4,15 @@
 /* 定义主题变量 */
 :root {
     /* 颜色 */
-    --default-bg-color: #f8fbff;
+    --default-bg-color: #f3f5f8;
     --default-text-color: #333;
+    --white-text-color: #fefefe;
     --default-shadow-color: #e0e9f6;
 }
 
 :root {
     /* 按钮 */
-    --wb-button-text-color: #fefefe;
+    --wb-button-text-color: var(--white-text-color);
     --wb-button-default-color: var(--default-text-color);
     --wb-button-default-bg-color: #f1f5ff;
     --wb-button-primary-bg-color: var(--theme-color);

@@ -4,8 +4,16 @@ import Home from '@/views/Home.vue'
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home,
+        redirect: '/home',
+        name: 'DefaultLayout',
+        component: () => import('@/layout/DefaultLayout.vue'),
+        children: [
+            {
+                path: '/',
+                name: 'Home',
+                component: Home,
+            },
+        ],
     },
 ]
 
