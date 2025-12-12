@@ -2,4 +2,5 @@ html.theme-red {
     --theme-color: #c14343;
     --theme-text-color: #ea4262;
     --theme-aside-bg-color: #584347;
+    --theme-aside-shadow-color: #58434788;
 }

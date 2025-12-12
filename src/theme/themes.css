@@ -3,11 +3,16 @@
 
 /* 定义主题变量 */
 :root {
-    /* 颜色 */
+    /* 背景 */
     --default-bg-color: #f3f5f8;
+    --white-bg-color: #fff;
+    /* 字体 */
     --default-text-color: #333;
+    --label-text-color: #909399;
     --white-text-color: #fefefe;
+    /* 阴影 */
     --default-shadow-color: #e0e9f6;
+    --card-shadow-color: rgba(5, 5, 5, 0.1);
 }
 
 :root {

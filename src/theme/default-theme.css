@@ -2,4 +2,5 @@ html.theme-default {
     --theme-color: rgb(27, 85, 171);
     --theme-text-color: #0731f0;
     --theme-aside-bg-color: #2f3845;
+    --theme-aside-shadow-color: #2f384588;
 }

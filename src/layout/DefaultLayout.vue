@@ -42,7 +42,10 @@ const goLink = () => {
 .sidebar {
     width: 200px;
     background-color: var(--theme-aside-bg-color);
-    border-radius: 2px;
+    box-shadow: 3px 3px 0px var(--theme-aside-shadow-color);
+    border-radius: 6px;
+    margin: 10px;
+    margin-right: 0;
 
     .sidebar-header {
         display: flex;
