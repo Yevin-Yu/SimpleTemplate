@@ -44,16 +44,16 @@ const menuItems = [
         icon: '🏠',
     },
     {
-        key: 'atom',
+        key: 'Atom',
         label: '原子组件',
         icon: '🧬',
         children: [
             { key: 'Button', label: '按钮组件', icon: '🔘' },
-            { key: 'tag', label: '标签组件', icon: '🏷️' },
+            { key: 'Tag', label: '标签组件', icon: '🏷️' },
         ],
     },
 ]
-const activeMenu = ref('home')
+const activeMenu = ref('Home')
 import { useRouter } from 'vue-router'
 const router = useRouter()
 function onMenuSelect(item) {

@@ -58,6 +58,38 @@ const buttonCode = `<div class="button-group">
     <wbButton2 size="medium">中按钮</wbButton2>
     <wbButton2 size="large">大按钮</wbButton2>
 </div>
+<div class="button-group">
+    <div class="title">
+        <wbTag size="small">以下为：Button1 Style 示例</wbTag>
+    </div>
+    <wbButton size="small">小按钮</wbButton>
+    <wbButton size="medium">中按钮</wbButton>
+    <wbButton size="large">大按钮</wbButton>
+    <wbButton>主题按钮</wbButton>
+    <wbButton size="default">默认按钮</wbButton>
+    <div class="title">
+        <wbTag size="small">以下为：Button2 Style（模拟突出凹陷效果）：</wbTag>
+    </div>
+    <wbButton2 size="small">小按钮</wbButton2>
+    <wbButton2 size="medium">中按钮</wbButton2>
+    <wbButton2 size="large">大按钮</wbButton2>
+</div>
+<div class="button-group">
+    <div class="title">
+        <wbTag size="small">以下为：Button1 Style 示例</wbTag>
+    </div>
+    <wbButton size="small">小按钮</wbButton>
+    <wbButton size="medium">中按钮</wbButton>
+    <wbButton size="large">大按钮</wbButton>
+    <wbButton>主题按钮</wbButton>
+    <wbButton size="default">默认按钮</wbButton>
+    <div class="title">
+        <wbTag size="small">以下为：Button2 Style（模拟突出凹陷效果）：</wbTag>
+    </div>
+    <wbButton2 size="small">小按钮</wbButton2>
+    <wbButton2 size="medium">中按钮</wbButton2>
+    <wbButton2 size="large">大按钮</wbButton2>
+</div>
 `
 </script>
 <style scoped lang="less">
@@ -74,6 +106,15 @@ const buttonCode = `<div class="button-group">
 
     .card-module:last-child {
         flex: 1;
+    }
+
+    :deep(.card-content) {
+        height: calc(100% - 50px);
+    }
+
+    .code-container {
+        width: calc(100vw - 795px);
+        height: 100%;
     }
 }
 

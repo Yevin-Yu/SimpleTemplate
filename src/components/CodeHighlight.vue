@@ -62,7 +62,16 @@ onMounted(async () => {
 <style scoped lang="less">
 .code-highlight {
     overflow: auto;
-    padding: 16px;
+    margin: 16px;
     font-size: 18px;
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+
+    .code-block {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
 </style>
