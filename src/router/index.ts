@@ -13,6 +13,11 @@ const routes = [
                 name: 'Home',
                 component: Home,
             },
+            {
+                path: '/atom/button',
+                name: 'Button',
+                component: () => import('@/views/atom/Button.vue'),
+            },
         ],
     },
 ]

@@ -37,4 +37,7 @@
     /* 菜单 */
     --wb-menu-item-shadow: var(--default-shadow);
     --wb-menu-item-shadow-active: var(--default-shadow-active);
+
+    /* 卡片 */
+    --wb-card-header-bg-color: #f5f7fa;
 }

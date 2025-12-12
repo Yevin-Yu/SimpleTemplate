@@ -43,14 +43,18 @@ const menuItems = [
         label: '原子组件',
         icon: '🧬',
         children: [
-            { key: 'button', label: '按钮组件', icon: '🔘' },
+            { key: 'Button', label: '按钮组件', icon: '🔘' },
             { key: 'tag', label: '标签组件', icon: '🏷️' },
         ],
     },
 ]
 const activeMenu = ref('home')
+import { useRouter } from 'vue-router'
+const router = useRouter()
 function onMenuSelect(item) {
-    console.log('菜单选择:', item)
+    if (item.key) {
+        router.push({ name: item.key })
+    }
 }
 </script>
 <style scoped lang="less">

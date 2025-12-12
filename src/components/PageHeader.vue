@@ -19,8 +19,8 @@ defineProps({
 </script>
 <style scoped>
 .page-header {
-    width: calc(100% - 20px);
-    margin: 10px;
+    width: calc(100% - 26px);
+    margin: 10px 10px 16px 16px;
     border-radius: 6px;
     padding: 16px;
     background: var(--white-bg-color);
