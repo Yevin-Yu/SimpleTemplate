@@ -30,7 +30,7 @@ defineProps({
     h1 {
         font-size: 20px;
         line-height: 1.5;
-        color: var(--default-text-color);
+        color: var(--theme-text-color);
         margin: 0;
         display: inline-block;
     }
