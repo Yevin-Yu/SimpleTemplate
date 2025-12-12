@@ -39,6 +39,11 @@ import wbMenu from '@/molecule/wb-menu.vue'
 import { ref } from 'vue'
 const menuItems = [
     {
+        key: 'Home',
+        label: '首页',
+        icon: '🏠',
+    },
+    {
         key: 'atom',
         label: '原子组件',
         icon: '🧬',
@@ -68,6 +73,7 @@ function onMenuSelect(item) {
 
 .sidebar {
     width: 200px;
+    min-width: 200px;
     background-color: var(--theme-aside-bg-color);
     box-shadow: 3px 3px 0px var(--theme-aside-shadow-color);
     border-radius: 6px;

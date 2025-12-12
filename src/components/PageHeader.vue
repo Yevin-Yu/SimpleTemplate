@@ -17,7 +17,7 @@ defineProps({
     },
 })
 </script>
-<style scoped>
+<style scoped lang="less">
 .page-header {
     width: calc(100% - 26px);
     margin: 10px 10px 16px 16px;

@@ -20,7 +20,7 @@ const initHighlighter = async () => {
     try {
         highlighter = await shiki.createHighlighter({
             themes: ['github-dark', 'github-light'],
-            langs: ['javascript', 'typescript', 'vue', 'html', 'css']
+            langs: ['javascript', 'typescript', 'vue', 'html', 'css'],
         })
     } catch (error) {
         console.error('Shiki 高亮器初始化失败:', error)
@@ -33,7 +33,7 @@ const highlightCode = async () => {
     try {
         const html = highlighter.codeToHtml(props.code, {
             lang: props.language,
-            theme: 'github-light'
+            theme: 'github-light',
         })
         codeElement.value.innerHTML = html
     } catch (error) {
@@ -44,11 +44,14 @@ const highlightCode = async () => {
 }
 
 // 监听代码变化并重新高亮
-watch(() => [props.code, props.language], () => {
-    nextTick(() => {
-        highlightCode()
-    })
-})
+watch(
+    () => [props.code, props.language],
+    () => {
+        nextTick(() => {
+            highlightCode()
+        })
+    }
+)
 
 onMounted(async () => {
     await initHighlighter()
@@ -56,7 +59,7 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .code-highlight {
     overflow: auto;
     padding: 16px;

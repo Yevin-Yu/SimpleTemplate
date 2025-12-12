@@ -16,7 +16,7 @@ const routes = [
             {
                 path: '/atom/button',
                 name: 'Button',
-                component: () => import('@/views/atom/Button.vue'),
+                component: () => import('@/views/atom/button.vue'),
             },
         ],
     },

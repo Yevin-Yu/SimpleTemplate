@@ -12,7 +12,7 @@ defineProps({
     },
 })
 </script>
-<style scoped>
+<style scoped lang="less">
 .wb-tag {
     cursor: pointer;
     display: inline-block;

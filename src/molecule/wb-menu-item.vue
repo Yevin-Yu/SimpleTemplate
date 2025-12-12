@@ -66,7 +66,7 @@ function handleToggle() {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .wb-menu-item {
     display: flex;
     flex-direction: column;

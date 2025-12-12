@@ -89,7 +89,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .wb-menu {
     background: var(--theme-aside-bg-color);
     color: var(--white-text-color);

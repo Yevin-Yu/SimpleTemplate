@@ -26,7 +26,9 @@
             <template #header>
                 <div class="card-title">代码演示</div>
             </template>
-            <CodeHighlight :code="buttonCode" language="vue" theme="light" />
+            <div class="code-container">
+                <CodeHighlight :code="buttonCode" language="vue" theme="light" />
+            </div>
         </CardModule>
     </div>
 </template>
@@ -40,8 +42,7 @@ import wbButton2 from '@/atom/wb-button2.vue'
 import wbTag from '@/atom/wb-tag.vue'
 
 // 按钮组件代码示例
-const buttonCode = `<template>
-<div>
+const buttonCode = `<div class="button-group">
     <div class="title">
         <wbTag size="small">以下为：Button1 Style 示例</wbTag>
     </div>
@@ -50,7 +51,6 @@ const buttonCode = `<template>
     <wbButton size="large">大按钮</wbButton>
     <wbButton>主题按钮</wbButton>
     <wbButton size="default">默认按钮</wbButton>
-
     <div class="title">
         <wbTag size="small">以下为：Button2 Style（模拟突出凹陷效果）：</wbTag>
     </div>
@@ -58,14 +58,9 @@ const buttonCode = `<template>
     <wbButton2 size="medium">中按钮</wbButton2>
     <wbButton2 size="large">大按钮</wbButton2>
 </div>
-</template>
-<script setup>
-import wbButton from '@/atom/wb-button.vue'
-import wbButton2 from '@/atom/wb-button2.vue'
-<\/script>`
-
+`
 </script>
-<style>
+<style scoped lang="less">
 .button-container {
     margin: 0 10px 10px 16px;
     width: calc(100% - 26px);
@@ -74,7 +69,11 @@ import wbButton2 from '@/atom/wb-button2.vue'
     gap: 16px;
 
     .card-module:first-child {
-        width: 640px;
+        width: 540px;
+    }
+
+    .card-module:last-child {
+        flex: 1;
     }
 }
 
@@ -84,6 +83,5 @@ import wbButton2 from '@/atom/wb-button2.vue'
     .title {
         margin-top: 16px;
     }
-
 }
 </style>

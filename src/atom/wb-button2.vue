@@ -13,7 +13,7 @@ defineProps({
     },
 })
 </script>
-<style scoped>
+<style scoped lang="less">
 .wb-button2 {
     background-color: var(--theme-color);
     color: var(--wb-button-text-color);
