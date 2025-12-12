@@ -8,7 +8,9 @@
                 <div class="title">Simple Template</div>
             </div>
             <!-- 下部菜单栏 -->
-            <div class="sidebar-menu"></div>
+            <div class="sidebar-menu">
+                <wb-menu v-model="activeMenu" :items="menuItems" @select="onMenuSelect" />
+            </div>
             <!-- 底部Github -->
             <div class="footer-link">
                 <wb-tag size="small" @click="toggleTheme">🎨</wb-tag>
@@ -24,10 +26,31 @@
 </template>
 <script setup>
 import wbTag from '@/atom/wb-tag.vue'
+
+// 主题切换
 import { useTheme } from '@/hooks/useTheme'
 const { toggleTheme } = useTheme()
 const goLink = () => {
     window.open('https://github.com/Yevin-Yu/SimpleTemplate', '_self')
+}
+
+// 侧边栏菜单栏
+import wbMenu from '@/molecule/wb-menu.vue'
+import { ref } from 'vue'
+const menuItems = [
+    {
+        key: 'atom',
+        label: '原子组件',
+        icon: '🧬',
+        children: [
+            { key: 'button', label: '按钮组件', icon: '🔘' },
+            { key: 'tag', label: '标签组件', icon: '🏷️' },
+        ],
+    },
+]
+const activeMenu = ref('home')
+function onMenuSelect(item) {
+    console.log('菜单选择:', item)
 }
 </script>
 <style scoped lang="less">
@@ -67,7 +90,6 @@ const goLink = () => {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 16px 0;
         height: calc(100% - 100px);
     }
 
