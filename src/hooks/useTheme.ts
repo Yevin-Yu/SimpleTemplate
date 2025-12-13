@@ -1,16 +1,16 @@
 import { ref, onMounted } from 'vue'
 
-export type Theme = 'default' | 'red'
+export type Theme = 'default' | 'dark'
 
 const THEME_STORAGE_KEY = 'app-theme'
 
-const themes: Theme[] = ['default', 'red']
+const themes: Theme[] = ['default', 'dark']
 
 /**
  * 获取主题对应的 CSS 类名
  */
 function getThemeClass(theme: Theme): string {
-    return `theme-${theme}`
+    return `${theme}`
 }
 
 /**

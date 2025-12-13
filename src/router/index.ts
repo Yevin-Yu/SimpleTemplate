@@ -9,14 +9,9 @@ const routes = [
         component: () => import('@/layout/DefaultLayout.vue'),
         children: [
             {
-                path: '/',
+                path: '/home',
                 name: 'Home',
                 component: Home,
-            },
-            {
-                path: '/atom/button',
-                name: 'Button',
-                component: () => import('@/views/atom/button.vue'),
             },
         ],
     },

@@ -1,9 +1,6 @@
-/* 导入 normalize.css */
-@import './normalize.css';
 /* 导入 tailwindcss */
 @import 'tailwindcss';
 /* 导入全局主题样式 */
-@import './root.css';
 @import '@/theme/themes.css';
 
 /* 全局盒模型重置 */
@@ -16,6 +13,7 @@
 html,
 body,
 #app {
+    font-size: 14px;
     height: 100%;
     width: 100%;
 }
