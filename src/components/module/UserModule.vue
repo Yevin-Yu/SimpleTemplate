@@ -2,18 +2,17 @@
     <button @click="showMenus" ref="userBtnRef" class="user-info rounded-full overflow-auto">
         <img width="28" src="/logo.jpg" alt="User" />
     </button>
+    <!-- 用户信息弹窗 -->
     <transition name="menu-fade">
         <div v-show="showMenu" ref="userMenuRef" class="user-menu fixed z-9999">
             <ui-card class="p-4">
                 <div class="user-info flex items-center">
                     <img class="rounded-full m-4" width="32" src="/logo.jpg" alt="User" />
-                    <!-- 居中 -->
                     <div>
                         <div class="font-bold">Yevin</div>
                         <div class="email">yuwb0521@outlook.com</div>
                     </div>
                 </div>
-                <!-- 调整主轴方向 -->
                 <div class="user-actions flex flex-col justify-center">
                     <ui-button class="mt-2">
                         <template #icon>
