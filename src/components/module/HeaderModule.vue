@@ -6,14 +6,14 @@
             </div>
             <div class="title pl-4">SimpleTemplate</div>
         </div>
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center gap-1">
             <UserModule />
         </div>
     </div>
 </template>
 
 <script setup>
-import UserModule from './UserModule.vue'
+import UserModule from '@/components/module/UserModule.vue'
 </script>
 
 <style scoped lang="less">
