@@ -7,6 +7,10 @@
             <div class="title pl-4">SimpleTemplate</div>
         </div>
         <div class="flex justify-between items-center gap-1">
+            <!-- 绘制一条竖线 设置两边padd -->
+            <div class="line"></div>
+            <UserModule />
+            <div class="line"></div>
             <UserModule />
         </div>
     </div>
@@ -22,5 +26,11 @@ import UserModule from '@/components/module/UserModule.vue'
     height: 48px;
     padding: 0 16px;
     color: var(--foreground);
+}
+.line {
+    width: 0px;
+    height: 32px;
+    border-left: 1px solid var(--border);
+    margin: 0 4.5px;
 }
 </style>

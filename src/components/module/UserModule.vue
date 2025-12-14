@@ -15,13 +15,13 @@
                 </div>
                 <!-- 调整主轴方向 -->
                 <div class="user-actions flex flex-col justify-center">
-                    <ui-button class="m-2">
+                    <ui-button class="mt-2">
                         <template #icon>
                             <SettingsIcon size="16" />
                         </template>
                         Manage Account
                     </ui-button>
-                    <ui-button class="m-2">
+                    <ui-button class="mt-2">
                         <template #icon>
                             <LogOutIcon size="16" />
                         </template>

@@ -1,29 +1,69 @@
 <template>
-    <button class="ui-button gap-2">
+    <button class="ui-button gap-2" :class="[`ui-button-${type}`, { 'only-icon': !$slots.default }]">
         <div class="icon" v-if="$slots.icon">
             <slot name="icon"></slot>
         </div>
-        <div class="content">
+        <div class="content" v-if="$slots.default">
             <slot></slot>
         </div>
     </button>
 </template>
+<script setup>
+// 接受参数
+defineProps({
+    // primary, default, blank
+    type: {
+        type: String,
+        default: 'default',
+    },
+    size: {
+        type: String,
+        default: 'medium',
+    },
+})
+</script>
 <style scoped>
 .ui-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0px 10px;
     cursor: pointer;
     border: 1px solid var(--border);
-    box-shadow: var(--shadow-xs);
+    color: var(--text);
     line-height: 32px;
     font-family: Geist, sans-serif;
+    vertical-align: middle;
 }
 
-.ui-button:hover {
-    background-color: var(--accent);
+.ui-button-default {
+    background-color: var(--white);
+    box-shadow: var(--shadow-xs);
+    &:hover {
+        background-color: var(--accent);
+    }
 }
+
+.ui-button-primary {
+    background-color: var(--primary);
+    &:hover {
+        background-color: var(--pr imary);
+        filter: brightness(1.05);
+    }
+}
+
+.ui-button-blank {
+    background-color: transparent;
+    border: none;
+    &:hover {
+        background-color: var(--accent);
+    }
+}
+
+.ui-button.only-icon {
+    padding: 8px;
+}
+
 .icon {
     width: 16px;
     height: 16px;
