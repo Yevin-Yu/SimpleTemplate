@@ -1,19 +1,13 @@
 <template>
-    <div class="user-info">
-        <img class="rounded-full" width="36" src="/logo.jpg" alt="User" />
-    </div>
+    <button class="user-info rounded-full overflow-auto">
+        <img  width="28" src="/logo.jpg" alt="User" />
+    </button>
 </template>
 
 <script setup></script>
 
 <style scoped>
-.user-info {
-    img {
-        background-color: var(--background);
-        border: 4px solid transparent;
-    }
-    img:active {
-        border-color: var(--border);
-    }
+.user-info:focus {
+    box-shadow: 0 0 0 4px var(--border);
 }
 </style>

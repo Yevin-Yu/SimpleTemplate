@@ -7,7 +7,6 @@
             <div class="title pl-4">SimpleTemplate</div>
         </div>
         <div class="flex justify-between items-center">
-            <!-- 鼠标小手 -->
             <UserModule />
         </div>
     </div>
