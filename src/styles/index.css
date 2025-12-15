@@ -18,3 +18,9 @@ body,
     width: 100%;
     font-weight: 500;
 }
+
+/* 全局滚动条样式 */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
