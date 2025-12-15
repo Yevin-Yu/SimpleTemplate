@@ -29,8 +29,8 @@ defineProps({
     justify-content: center;
     padding: 0px 10px;
     cursor: pointer;
-    border: 1px solid var(--border);
-    color: var(--text);
+    border: 1px solid transparent;
+    color: var(--foreground);
     line-height: 32px;
     font-family: Geist, sans-serif;
     vertical-align: middle;
@@ -39,6 +39,7 @@ defineProps({
 .ui-button-default {
     background-color: var(--white);
     box-shadow: var(--shadow-xs);
+    border: 1px solid var(--border);
     &:hover {
         background-color: var(--accent);
     }
@@ -46,6 +47,7 @@ defineProps({
 
 .ui-button-primary {
     background-color: var(--primary);
+    color: var(--primary-foreground);
     &:hover {
         background-color: var(--pr imary);
         filter: brightness(1.05);
@@ -54,7 +56,6 @@ defineProps({
 
 .ui-button-blank {
     background-color: transparent;
-    border: none;
     &:hover {
         background-color: var(--accent);
     }

@@ -9,6 +9,14 @@
         </div>
         <!-- user & link -->
         <div class="flex justify-between items-center gap-1">
+            <ui-switch v-model="isDark" @change="toggleTheme">
+                <template #thumb-on>
+                    <SwitchOffIcon />
+                </template>
+                <template #thumb-off>
+                    <SwitchOnIcon />
+                </template>
+            </ui-switch>
             <div class="line"></div>
             <ui-button @click="goGithub" type="blank" size="small">
                 <template #icon>
@@ -22,13 +30,24 @@
 </template>
 
 <script setup>
-import UiButton from '../ui/ui-button.vue'
+import UiButton from '@/components/ui/ui-button.vue'
+import uiSwitch from '@/components/ui/ui-switch.vue'
 import UserModule from '@/components/module/UserModule.vue'
-import { GitHubIcon } from '@/components/icons'
+import { GitHubIcon,SwitchOnIcon, SwitchOffIcon  } from '@/components/icons'
+import { ref, watch } from 'vue'
 
+// Github跳转
 const goGithub = () => {
     window.open('https://github.com/yevin-yu/simpletemplate', '_blank')
 }
+
+// 主题切换
+import { useTheme } from '@/hooks/useTheme'
+const { currentTheme, toggleTheme } = useTheme()
+const isDark = ref(false)
+watch(currentTheme, (newVal) => {
+    isDark.value = newVal === 'dark'
+})
 </script>
 
 <style scoped lang="less">
@@ -38,6 +57,7 @@ const goGithub = () => {
     padding: 0 16px;
     color: var(--foreground);
 }
+
 .line {
     width: 0px;
     height: 32px;

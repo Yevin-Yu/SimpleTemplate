@@ -3,6 +3,8 @@ export { default as SettingsIcon } from './SettingsIcon.vue'
 export { default as LogOutIcon } from './LogOutIcon.vue'
 export { default as ShareIcon } from './ShareIcon.vue'
 export { default as GitHubIcon } from './GitHubIcon.vue'
+export { default as SwitchOnIcon } from './SwitchOnIcon.vue'
+export { default as SwitchOffIcon } from './SwitchOffIcon.vue'
 
 // 图标类型定义
 export interface IconProps {
@@ -12,7 +14,7 @@ export interface IconProps {
 }
 
 // 图标名称类型
-export type IconName = 'settings' | 'logOut' | 'share' | 'github'
+export type IconName = 'settings' | 'logOut' | 'share' | 'github' | 'switchOn' | 'switchOff'
 
 // 图标映射
 export const iconMap: Record<IconName, () => Promise<unknown>> = {
@@ -20,6 +22,8 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     logOut: () => import('./LogOutIcon.vue'),
     share: () => import('./ShareIcon.vue'),
     github: () => import('./GitHubIcon.vue'),
+    switchOn: () => import('./SwitchOnIcon.vue'),
+    switchOff: () => import('./SwitchOffIcon.vue'),
 }
 
 // 动态加载图标
