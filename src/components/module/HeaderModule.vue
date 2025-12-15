@@ -33,7 +33,7 @@
 import UiButton from '@/components/ui/ui-button.vue'
 import uiSwitch from '@/components/ui/ui-switch.vue'
 import UserModule from '@/components/module/UserModule.vue'
-import { GitHubIcon,SwitchOnIcon, SwitchOffIcon  } from '@/components/icons'
+import { GitHubIcon, SwitchOnIcon, SwitchOffIcon } from '@/components/icons'
 import { ref, watch } from 'vue'
 
 // Github跳转
@@ -45,7 +45,7 @@ const goGithub = () => {
 import { useTheme } from '@/hooks/useTheme'
 const { currentTheme, toggleTheme } = useTheme()
 const isDark = ref(false)
-watch(currentTheme, (newVal) => {
+watch(currentTheme, newVal => {
     isDark.value = newVal === 'dark'
 })
 </script>

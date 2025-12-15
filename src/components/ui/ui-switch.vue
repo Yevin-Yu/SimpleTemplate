@@ -10,13 +10,7 @@
         @keydown.space.prevent="handleToggle"
         @keydown.enter.prevent="handleToggle"
     >
-        <input
-            class="ui-switch__input"
-            type="checkbox"
-            :checked="checked"
-            :disabled="disabled"
-            @change="handleChange"
-        />
+        <input class="ui-switch__input" type="checkbox" :checked="checked" :disabled="disabled" @change="handleChange" />
         <span class="ui-switch__track">
             <span class="ui-switch__thumb">
                 <slot name="thumb-on" v-if="checked"></slot>
@@ -45,9 +39,7 @@ const emit = defineEmits<{
 }>()
 
 const checked = computed(() => props.modelValue ?? false)
-const switchClasses = computed(() => [
-    { 'is-checked': checked.value, 'is-disabled': props.disabled },
-])
+const switchClasses = computed(() => [{ 'is-checked': checked.value, 'is-disabled': props.disabled }])
 
 const emitChange = (next: boolean) => {
     emit('update:modelValue', next)
@@ -128,10 +120,7 @@ const handleChange = (event: Event) => {
 }
 
 .ui-switch.is-checked .ui-switch__thumb {
-    transform: translate(
-        calc(var(--switch-width) - var(--switch-thumb-size) - 4px),
-        -50%
-    );
+    transform: translate(calc(var(--switch-width) - var(--switch-thumb-size) - 4px), -50%);
 }
 
 .ui-switch:focus-visible .ui-switch__track {

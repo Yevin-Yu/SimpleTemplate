@@ -48,4 +48,3 @@ defineProps({
     vertical-align: middle;
 }
 </style>
-
