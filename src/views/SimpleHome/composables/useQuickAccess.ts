@@ -36,9 +36,14 @@ export function useQuickAccess() {
 
     function reorder(fromIndex: number, toIndex: number) {
         const sites = quickAccessSites.value
+        if (fromIndex < 0 || fromIndex >= sites.length) {
+            return
+        }
         const [removed] = sites.splice(fromIndex, 1)
-        sites.splice(toIndex, 0, removed)
-        saveSites()
+        if (removed) {
+            sites.splice(toIndex, 0, removed)
+            saveSites()
+        }
     }
 
     return {
