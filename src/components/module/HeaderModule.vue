@@ -2,11 +2,11 @@
     <div class="header flex justify-between items-center">
         <!-- logo & title -->
         <div class="flex items-center">
-            <div class="logo">
+            <div class="logo" aria-label="Site logo">
                 <img class="rounded-sm" width="24" src="/logo.jpg" alt="Logo" />
             </div>
             <div class="line line-left"></div>
-            <div class="logo-title ">Welcome to Yevin's Home</div>
+            <div class="logo-title">Welcome to Yevin's Home</div>
         </div>
         <!-- user & link -->
         <div class="flex justify-between items-center gap-1">
@@ -14,14 +14,14 @@
                 :options="projectOptions" placeholder="选择项目" @change="goProject">
                 <template #selected="{ option }">
                     <div v-if="option" class="project-selected">
-                        <component :is="iconMap[(option as ProjectOption).icon] || DefaultIcon" class="project-icon" />
+                        <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="project-icon" />
                         <span>{{ (option as ProjectOption).label }}</span>
                     </div>
                     <span v-else class="placeholder">选择项目</span>
                 </template>
                 <template #option="{ option, selected }">
                     <div class="project-option" :class="{ selected }">
-                        <component :is="iconMap[(option as ProjectOption).icon] || DefaultIcon" class="project-icon" />
+                        <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="project-icon" />
                         <span>{{ (option as ProjectOption).label }}</span>
                     </div>
                 </template>
@@ -94,7 +94,7 @@ const iconMap: Record<string, Component> = {
     home: HomeIcon,
     template: DashboardIcon,
 }
-const DefaultIcon = HomeIcon
+const defaultIcon = HomeIcon
 </script>
 
 <style scoped lang="less">
