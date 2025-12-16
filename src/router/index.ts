@@ -4,7 +4,19 @@ import Home from '@/views/Home.vue'
 const routes = [
     {
         path: '/',
-        redirect: '/home',
+        redirect: '/simple-home',
+        name: 'BlankLayout',
+        component: () => import('@/layout/BlankLayout.vue'),
+        children: [
+            {
+                path: '/simple-home',
+                name: 'SimpleHome',
+                component: () => import('@/views/SimpleHome/index.vue'),
+            },
+        ],
+    },
+    {
+        path: '/home',
         name: 'DefaultLayout',
         component: () => import('@/layout/DefaultLayout.vue'),
         children: [
