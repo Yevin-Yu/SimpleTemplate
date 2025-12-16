@@ -48,7 +48,6 @@ interface MenuItem {
 const router = useRouter()
 const route = useRoute()
 
-// 这里可以根据你的实际业务路由结构进行扩展
 const menu = computed<MenuItem[]>(() => [
     {
         key: 'home',
@@ -206,19 +205,19 @@ const onItemClick = (item: MenuItem) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 14px;
-    border-radius: 4px;
+    padding: 10px 16px;
     color: var(--foreground);
     cursor: pointer;
     position: relative;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(0);
+    border: 1px solid transparent;
     overflow: hidden;
 
     &::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: 5px;
         top: 50%;
         transform: translateY(-50%) scaleY(0);
         width: 3px;
@@ -229,10 +228,9 @@ const onItemClick = (item: MenuItem) => {
     }
 
     &:hover {
-        background-color: var(--surface);
-        color: var(--foreground);
         transform: translateX(2px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        box-shadow: var(--shadow-xs);
+        border: 1px solid var(--border);
 
         &::before {
             transform: translateY(-50%) scaleY(1);
@@ -241,20 +239,14 @@ const onItemClick = (item: MenuItem) => {
     }
 
     &.active {
-        background: linear-gradient(90deg, var(--primary-soft) 0%, var(--surface) 100%);
-        color: var(--primary-foreground);
-        font-weight: 600;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-xs);
+        border: 1px solid var(--border);
 
         &::before {
             transform: translateY(-50%) scaleY(1);
             height: 70%;
             background: var(--primary);
         }
-    }
-
-    &.has-children {
-        font-weight: 500;
     }
 
     &.is-open {
@@ -279,7 +271,7 @@ const onItemClick = (item: MenuItem) => {
     justify-content: center;
     width: 18px;
     height: 18px;
-    color: var(--foreground-muted);
+    color: var(--foreground);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
     flex-shrink: 0;
@@ -296,32 +288,15 @@ const onItemClick = (item: MenuItem) => {
 }
 
 .menu-item-label:hover .arrow {
-    color: var(--foreground);
     transform: scale(1.1);
 }
 
 .submenu {
     list-style: none;
-    margin: 6px 0 0 0;
-    padding-left: 20px;
-    border-left: 2px solid var(--border-subtle);
+    margin: 6px 0 0 4px;
+    padding-left: 16px;
+    border-left: 1px dashed var(--border);
     position: relative;
-
-    &::before {
-        content: '';
-        position: absolute;
-        left: -2px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(180deg, var(--primary-soft), transparent);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-}
-
-.menu-item.is-open .submenu::before {
-    opacity: 0.3;
 }
 
 .submenu-item {
@@ -336,9 +311,8 @@ const onItemClick = (item: MenuItem) => {
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    border-radius: 6px;
     font-size: 13px;
-    color: var(--foreground-muted);
+    color: var(--foreground);
     cursor: pointer;
     position: relative;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -353,13 +327,12 @@ const onItemClick = (item: MenuItem) => {
         width: 2px;
         height: 0;
         background: var(--primary);
-        border-radius: 0 1px 1px 0;
+        border-radius: 0 2px 2px 0;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &:hover {
-        background-color: var(--surface);
-        color: var(--foreground);
+        color: var(--primary);
         padding-left: 16px;
         transform: translateX(2px);
 
@@ -375,10 +348,9 @@ const onItemClick = (item: MenuItem) => {
     }
 
     &.active {
-        background-color: var(--primary-soft);
-        color: var(--primary-foreground);
-        font-weight: 600;
-        padding-left: 16px;
+        color: var(--primary);
+        font-size: 15px;
+        padding-left: 14px;
 
         &::after {
             transform: translateY(-50%) translateX(0);
@@ -388,7 +360,6 @@ const onItemClick = (item: MenuItem) => {
         .submenu-indicator {
             opacity: 1;
             transform: scale(1);
-            background: var(--primary);
         }
     }
 }
@@ -397,7 +368,7 @@ const onItemClick = (item: MenuItem) => {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--foreground-muted);
+    background: var(--primary);
     margin-right: 10px;
     opacity: 0;
     transform: scale(0);
