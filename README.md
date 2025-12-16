@@ -1,125 +1,243 @@
-# Vue 3 + TypeScript + Vite 项目模板
+<div align="center">
 
-这是一个现代化的 Vue 3 单页应用模板，集成了 TypeScript、Vite、Vue Router、Pinia、Tailwind CSS、ESLint 和 Prettier，旨在为快速启动新项目提供最佳实践和开发体验。
+# 🚀 Simple Template
 
-## 技术栈
+**一个现代化的 Vue 3 项目模板，开箱即用，助您快速启动新项目**
 
-- **Vue 3** – 渐进式 JavaScript 框架
-- **TypeScript** – 类型安全的 JavaScript 超集
-- **Vite** – 下一代前端构建工具，极速热更新
-- **Vue Router** – 官方路由管理器
-- **Pinia** – 直观的 Vue 状态管理库
-- **Tailwind CSS** – 实用优先的 CSS 框架
-- **ESLint** – 代码质量检查
-- **Prettier** – 代码格式化工具
-- **PostCSS** – CSS 处理工具
-- **Autoprefixer** – 自动添加 CSS 前缀
+[![Vue](https://img.shields.io/badge/Vue-3.5.24-4FC08D?style=flat-square&logo=vue.js)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-## 项目结构
+[特性](#-特性) • [快速开始](#-快速开始) • [项目结构](#-项目结构) • [文档](#-文档)
 
-```
-.
-├── public/                 # 静态资源（如图标）
-├── src/
-│   ├── App.vue            # 根组件
-│   ├── main.ts            # 应用入口
-│   ├── router/            # 路由配置
-│   │   └── index.ts
-│   ├── stores/            # Pinia 状态管理
-│   │   └── counter.ts
-│   ├── styles/            # 全局样式
-│   │   ├── index.css      # 主样式文件（引入 Tailwind）
-│   │   └── normalize.css  # 样式重置
-│   ├── theme/             # 主题变量（预留）
-│   └── views/             # 页面组件
-│       ├── Home.vue
-│       └── About.vue
-├── index.html             # HTML 入口
-├── package.json           # 项目依赖和脚本
-├── vite.config.ts         # Vite 配置
-├── tailwind.config.js     # Tailwind 配置
-├── postcss.config.js      # PostCSS 配置
-├── eslint.config.js       # ESLint 配置
-├── .prettierrc            # Prettier 配置
-├── tsconfig.json          # TypeScript 配置
-└── README.md              # 项目说明
+</div>
+
+---
+
+## ✨ 特性
+
+- ⚡ **极速开发** - Vite 构建工具，毫秒级热更新
+- 🎨 **主题系统** - 内置明暗主题切换，Pinia 状态管理，自动持久化
+- 📦 **组件库** - 8+ 开箱即用的 UI 组件（按钮、卡片、开关、选择器等）
+- 🏠 **双模块** - Simple Home（个人主页）和 Simple Template（模板展示）
+- 🔍 **搜索功能** - 搜索框、历史记录、书签管理、快速访问
+- 📊 **示例页面** - 表单、表格、卡片、仪表盘等完整示例
+- 💾 **状态管理** - Pinia 状态管理，支持 localStorage 持久化
+- 🎯 **类型安全** - 100% TypeScript，完整的类型定义
+- 📱 **响应式** - 完美适配移动端和桌面端
+- 🛠️ **开发体验** - ESLint + Prettier，代码质量保障
+
+## 🚀 快速开始
+
+### 安装
+
+```bash
+# 克隆项目
+git clone <repository-url>
+cd SimpleTemplate
+
+# 安装依赖
+npm install
 ```
 
-## 主要文件说明
+### 开发
 
-- **`src/App.vue`** – 应用根组件，包含导航、路由视图和 Pinia 计数器示例。
-- **`src/main.ts`** – 应用初始化，注册 Pinia、Router 和全局样式。
-- **`src/router/index.ts`** – 定义路由（Home 和 About 页面）。
-- **`src/stores/counter.ts`** – Pinia store 示例，演示状态管理。
-- **`src/styles/index.css`** – 引入 Tailwind CSS 的基础层、组件层和工具层。
-- **`vite.config.ts`** – Vite 配置，包含 Vue 插件和路径别名 `@` 指向 `src`。
-- **`tailwind.config.js`** – Tailwind 配置，指定内容文件路径。
-- **`eslint.config.js`** – ESLint 配置，集成 Vue 和 TypeScript 规则。
-- **`.prettierrc`** – Prettier 配置，确保代码风格统一。
+```bash
+# 启动开发服务器
+npm run dev
+```
 
-## 运行命令
+访问 [http://localhost:5173](http://localhost:5173)
 
-在项目根目录下执行以下命令：
+### 构建
 
-| 命令                   | 描述                               |
-| ---------------------- | ---------------------------------- |
-| `npm install`          | 安装项目依赖                       |
-| `npm run dev`          | 启动开发服务器（默认端口 5173）    |
-| `npm run build`        | 构建生产版本（输出到 `dist` 目录） |
-| `npm run preview`      | 预览生产构建                       |
-| `npm run lint`         | 运行 ESLint 检查代码问题           |
-| `npm run format`       | 使用 Prettier 格式化所有文件       |
-| `npm run format:check` | 检查代码格式是否符合 Prettier 规则 |
+```bash
+# 构建生产版本
+npm run build
 
-## 快速开始
+# 预览生产构建
+npm run preview
+```
 
-1. **克隆或下载本项目**
+## 📁 项目结构
 
-    ```bash
-    git clone <repository-url>
-    cd simple-template
-    ```
+```
+src/
+├── components/          # 组件库
+│   ├── icons/          # 图标组件
+│   ├── module/         # 模块组件（Header、Sidebar、User）
+│   └── ui/             # UI 组件（Button、Card、Switch 等）
+├── hooks/              # 组合式函数
+├── layout/             # 布局组件
+├── router/             # 路由配置
+│   └── modules/        # 路由模块
+├── stores/             # Pinia 状态管理
+│   ├── theme.ts        # 主题管理
+│   └── project.ts      # 项目切换
+├── styles/             # 全局样式
+├── theme/              # 主题配置
+└── views/              # 页面组件
+    ├── demo/           # 示例页面
+    ├── example/        # 组件示例
+    └── SimpleHome/     # Simple Home 模块
+```
 
-2. **安装依赖**
+## 🎯 核心功能
 
-    ```bash
-    npm install
-    ```
+### 主题切换
 
-3. **启动开发服务器**
+使用 Pinia 管理主题状态，支持明暗主题切换，自动保存到 localStorage。
 
-    ```bash
-    npm run dev
-    ```
+```typescript
+import { useThemeStore } from '@/stores/theme'
 
-    打开浏览器访问 [http://localhost:5173](http://localhost:5173)。
+const themeStore = useThemeStore()
 
-4. **开始开发**
-    - 修改 `src/views/` 下的页面组件。
-    - 在 `src/stores/` 中创建新的 Pinia store。
-    - 通过 `src/router/index.ts` 添加路由。
-    - 使用 Tailwind CSS 类名快速样式化。
+// 切换主题
+themeStore.toggleTheme()
 
-## 配置说明
+// 设置特定主题
+themeStore.setTheme('dark')
 
-### TypeScript
+// 检查是否为暗色主题
+const isDark = themeStore.isDark
+```
 
-- `tsconfig.json` 和 `tsconfig.app.json` 提供了严格的类型检查配置，支持 Vue 单文件组件。
+### 项目切换
 
-### 路径别名
+支持在 Simple Home 和 Simple Template 两个模块之间切换。
 
-- 在代码中可以使用 `@` 代表 `src` 目录，例如 `import '@/styles/index.css'`。
+```typescript
+import { useProjectStore } from '@/stores/project'
 
-### 代码质量
+const projectStore = useProjectStore()
 
-- ESLint 配置了 Vue 3 推荐规则和 TypeScript 规则，确保代码规范。
-- Prettier 与 ESLint 集成，保存时自动格式化（需编辑器支持）。
+// 设置选中的项目
+projectStore.setSelectedProject('/simple-home')
 
-### 样式
+// 获取项目路由
+const route = projectStore.getProjectRoute()
+```
 
-- Tailwind CSS 已完全配置，可直接使用其工具类。
-- 通过 `src/styles/index.css` 可以添加自定义 CSS。
+### UI 组件使用
 
-## 许可证
+```vue
+<template>
+    <ui-button type="primary" @click="handleClick"> 点击我 </ui-button>
 
-MIT
+    <ui-card>
+        <h3>卡片标题</h3>
+        <p>卡片内容</p>
+    </ui-card>
+
+    <ui-switch v-model="enabled" />
+</template>
+```
+
+## 📚 文档
+
+### 路由配置
+
+路由采用模块化设计，在 `src/router/modules/` 目录下管理：
+
+- `simpleHome.ts` - Simple Home 模块路由
+- `simpleTemplate.ts` - Simple Template 模块路由
+
+### 状态管理
+
+使用 Pinia 进行状态管理，所有 store 位于 `src/stores/` 目录：
+
+- `theme.ts` - 主题管理（存储键：`simple-app-theme`）
+- `project.ts` - 项目切换（存储键：`simple-template-selected-project`）
+
+### 组件库
+
+内置 UI 组件位于 `src/components/ui/`：
+
+| 组件            | 说明                         |
+| --------------- | ---------------------------- |
+| `ui-button`     | 按钮组件，支持多种类型和尺寸 |
+| `ui-card`       | 卡片组件，用于内容展示       |
+| `ui-switch`     | 开关组件，支持自定义图标     |
+| `ui-select`     | 选择器组件，支持自定义渲染   |
+| `ui-code-block` | 代码块组件，支持语法高亮     |
+
+## 🛠️ 技术栈
+
+| 分类         | 技术                       |
+| ------------ | -------------------------- |
+| **框架**     | Vue 3.5.24                 |
+| **语言**     | TypeScript 5.9.3           |
+| **构建工具** | Vite 7.2.4                 |
+| **路由**     | Vue Router 4.6.3           |
+| **状态管理** | Pinia 3.0.4                |
+| **样式**     | Tailwind CSS 4.1.17 + Less |
+| **代码质量** | ESLint + Prettier          |
+| **工具库**   | @vueuse/core, shiki        |
+
+## 📦 可用命令
+
+| 命令                   | 说明             |
+| ---------------------- | ---------------- |
+| `npm run dev`          | 启动开发服务器   |
+| `npm run build`        | 构建生产版本     |
+| `npm run preview`      | 预览生产构建     |
+| `npm run lint`         | 运行 ESLint 检查 |
+| `npm run format`       | 格式化代码       |
+| `npm run format:check` | 检查代码格式     |
+
+## 🎨 主题定制
+
+项目使用 CSS 变量实现主题系统，主题配置位于 `src/theme/` 目录。
+
+### 修改主题变量
+
+编辑 `src/theme/CrafterStation.css` 文件，修改 CSS 变量：
+
+```css
+:root {
+    --primary: #your-color;
+    --background: #your-color;
+    /* ... */
+}
+```
+
+### 添加新主题
+
+1. 在 `src/stores/theme.ts` 中添加新主题类型
+2. 在 `src/theme/` 目录下创建主题 CSS 文件
+3. 在 `themes.css` 中导入新主题
+
+## 🌟 示例页面
+
+项目包含以下示例页面，可直接查看源码学习：
+
+- 📝 **表单示例** (`/form-example`) - 完整的表单组件示例
+- 📊 **表格示例** (`/table-example`) - 数据表格展示
+- 🎴 **卡片示例** (`/card-example`) - 卡片布局示例
+- 📈 **仪表盘示例** (`/dashboard-example`) - 数据可视化仪表盘
+- 🧩 **组件示例** (`/base-components`, `/form-components`) - UI 组件使用示例
+
+## 📄 许可证
+
+本项目采用 [MIT](LICENSE) 许可证。
+
+## 🙏 致谢
+
+感谢以下优秀的开源项目：
+
+- [Vue.js](https://vuejs.org/) - 渐进式 JavaScript 框架
+- [Vite](https://vitejs.dev/) - 下一代前端构建工具
+- [Pinia](https://pinia.vuejs.org/) - Vue 状态管理库
+- [Tailwind CSS](https://tailwindcss.com/) - 实用优先的 CSS 框架
+
+---
+
+<div align="center">
+
+**Made with ❤️ by Yevin**
+
+⭐ 如果这个项目对你有帮助，请给个 Star！
+
+</div>
