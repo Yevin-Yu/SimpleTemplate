@@ -5,7 +5,8 @@
             <div class="logo">
                 <img class="rounded-sm" width="24" src="/logo.jpg" alt="Logo" />
             </div>
-            <div class="title pl-4">SimpleTemplate</div>
+            <div class="line line-left"></div>
+            <div class="title">SimpleTemplate</div>
         </div>
         <!-- user & link -->
         <div class="flex justify-between items-center gap-1">
@@ -63,5 +64,10 @@ watch(currentTheme, newVal => {
     height: 32px;
     border-left: 1px solid var(--border);
     margin: 0 4.5px;
+}
+
+.line-left {
+    height: 24px;
+    margin: 0 12px;
 }
 </style>

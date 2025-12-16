@@ -7,16 +7,14 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
 
     const filteredHistory = computed(() => {
         if (!searchQuery.value) return []
-        return history.filter(item =>
-            item.query.toLowerCase().includes(searchQuery.value.toLowerCase())
-        )
+        return history.filter(item => item.query.toLowerCase().includes(searchQuery.value.toLowerCase()))
     })
 
     const filteredBookmarks = computed(() => {
         if (!searchQuery.value) return []
-        return bookmarks.filter(item =>
-            item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-            item.url.toLowerCase().includes(searchQuery.value.toLowerCase())
+        return bookmarks.filter(
+            item =>
+                item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) || item.url.toLowerCase().includes(searchQuery.value.toLowerCase())
         )
     })
 
@@ -49,7 +47,7 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
     const performSearch = (query: string, onHistoryAdd?: (item: SearchHistoryItem) => void) => {
         const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`
         window.open(searchUrl, '_blank')
-        
+
         if (onHistoryAdd) {
             const newHistoryItem: SearchHistoryItem = {
                 id: Date.now().toString(),
@@ -64,13 +62,13 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
         if (!searchQuery.value.trim()) return
 
         const query = searchQuery.value.trim()
-        
+
         if (isUrl(query)) {
             openUrl(query)
         } else {
             performSearch(query, onHistoryAdd)
         }
-        
+
         showSuggestions.value = false
     }
 
@@ -92,4 +90,3 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
         openUrl,
     }
 }
-

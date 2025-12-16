@@ -53,16 +53,26 @@ const emit = defineEmits<{
 }>()
 
 const wrapperRef = ref<HTMLElement>()
-const { searchQuery, showSuggestions, filteredHistory, filteredBookmarks, onSearchInput, clearSearch, handleSearch: performSearch, selectSuggestion: selectSuggestionBase, openUrl } = useSearch(props.history, props.bookmarks)
+const {
+    searchQuery,
+    showSuggestions,
+    filteredHistory,
+    filteredBookmarks,
+    onSearchInput,
+    clearSearch,
+    handleSearch: performSearch,
+    selectSuggestion: selectSuggestionBase,
+    openUrl,
+} = useSearch(props.history, props.bookmarks)
 
 const handleSearch = () => {
-    performSearch((item) => {
+    performSearch(item => {
         emit('search', item.query)
     })
 }
 
 const selectSuggestion = (query: string) => {
-    selectSuggestionBase(query, (item) => {
+    selectSuggestionBase(query, item => {
         emit('select-history', item.query)
     })
 }
@@ -153,4 +163,3 @@ onUnmounted(() => {
     }
 }
 </style>
-

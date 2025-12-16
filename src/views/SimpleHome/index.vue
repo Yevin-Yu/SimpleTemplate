@@ -2,8 +2,7 @@
     <div class="simple-home">
         <div class="home-container">
             <!-- 搜索框 -->
-            <SearchBox :history="searchHistory" :bookmarks="bookmarks" @search="handleSearchAdd"
-                @select-history="handleHistorySelect" />
+            <SearchBox :history="searchHistory" :bookmarks="bookmarks" @search="handleSearchAdd" @select-history="handleHistorySelect" />
 
             <!-- 常用网站 -->
             <QuickAccess :sites="quickAccessSites" @open-url="openUrl" @reorder="handleSiteReorder" />
@@ -12,13 +11,11 @@
             <Bookmarks :bookmarks="bookmarks" @add-bookmark="showAddBookmarkDialog = true" @open-url="openUrl" />
 
             <!-- 搜索记录 -->
-            <SearchHistory :history="searchHistory" :format-time="formatTime" @select-history="handleHistorySelect"
-                @delete-history="deleteHistory" />
+            <SearchHistory :history="searchHistory" :format-time="formatTime" @select-history="handleHistorySelect" @delete-history="deleteHistory" />
         </div>
 
         <!-- 添加书签对话框 -->
-        <AddBookmarkDialog :visible="showAddBookmarkDialog" @close="showAddBookmarkDialog = false"
-            @submit="handleAddBookmark" />
+        <AddBookmarkDialog :visible="showAddBookmarkDialog" @close="showAddBookmarkDialog = false" @submit="handleAddBookmark" />
     </div>
 </template>
 
@@ -63,7 +60,6 @@ const handleAddBookmark = (data: { title: string; url: string }) => {
 const handleSiteReorder = (fromIndex: number, toIndex: number) => {
     reorderSite(fromIndex, toIndex)
 }
-
 </script>
 
 <style scoped lang="less">

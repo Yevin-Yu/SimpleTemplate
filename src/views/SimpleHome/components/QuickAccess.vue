@@ -1,12 +1,20 @@
 <template>
     <div class="quick-access-section">
         <div class="quick-access-grid">
-            <div v-for="(site, index) in sites" :key="site.id" class="quick-access-item"
-                :class="{ 'dragging': draggedIndex === index, 'drag-over': dragOverIndex === index }" draggable="true"
-                @dragstart="handleDragStart(index, $event)" @dragend="handleDragEnd"
-                @dragover.prevent="handleDragOver(index, $event)" @dragenter.prevent="handleDragEnter(index)"
-                @dragleave="handleDragLeave" @drop.prevent="handleDrop(index, $event)"
-                @click="$emit('open-url', site.url)">
+            <div
+                v-for="(site, index) in sites"
+                :key="site.id"
+                class="quick-access-item"
+                :class="{ dragging: draggedIndex === index, 'drag-over': dragOverIndex === index }"
+                draggable="true"
+                @dragstart="handleDragStart(index, $event)"
+                @dragend="handleDragEnd"
+                @dragover.prevent="handleDragOver(index, $event)"
+                @dragenter.prevent="handleDragEnter(index)"
+                @dragleave="handleDragLeave"
+                @drop.prevent="handleDrop(index, $event)"
+                @click="$emit('open-url', site.url)"
+            >
                 <div class="site-icon" :style="{ backgroundColor: site.color }">
                     {{ site.icon }}
                 </div>
@@ -28,7 +36,7 @@ defineProps<Props>()
 
 const emit = defineEmits<{
     'open-url': [url: string]
-    'reorder': [fromIndex: number, toIndex: number]
+    reorder: [fromIndex: number, toIndex: number]
 }>()
 
 const draggedIndex = ref<number | null>(null)
@@ -127,7 +135,6 @@ const handleDrop = (toIndex: number, event: DragEvent) => {
     &.drag-over {
         transform: scale(1.05);
     }
-
 }
 
 .site-icon {
@@ -155,7 +162,6 @@ const handleDrop = (toIndex: number, event: DragEvent) => {
     text-align: center;
     word-break: break-word;
 }
-
 
 @media (max-width: 768px) {
     .quick-access-grid {

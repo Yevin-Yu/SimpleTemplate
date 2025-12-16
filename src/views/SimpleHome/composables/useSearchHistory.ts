@@ -34,22 +34,20 @@ export function useSearchHistory() {
 
     function addHistory(query: string) {
         // 去除重复：移除已存在的相同查询
-        searchHistory.value = searchHistory.value.filter(item => 
-            item.query.toLowerCase() !== query.toLowerCase()
-        )
-        
+        searchHistory.value = searchHistory.value.filter(item => item.query.toLowerCase() !== query.toLowerCase())
+
         const newHistoryItem: SearchHistoryItem = {
             id: Date.now().toString(),
             query,
             timestamp: Date.now(),
         }
         searchHistory.value.unshift(newHistoryItem)
-        
+
         // 限制历史记录数量
         if (searchHistory.value.length > MAX_HISTORY) {
             searchHistory.value = searchHistory.value.slice(0, MAX_HISTORY)
         }
-        
+
         saveHistory()
     }
 
@@ -75,4 +73,3 @@ export function useSearchHistory() {
         formatTime,
     }
 }
-

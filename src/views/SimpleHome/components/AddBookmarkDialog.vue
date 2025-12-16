@@ -38,11 +38,14 @@ const emit = defineEmits<Emits>()
 
 const formData = ref({ title: '', url: '' })
 
-watch(() => props.visible, (newVal) => {
-    if (!newVal) {
-        formData.value = { title: '', url: '' }
+watch(
+    () => props.visible,
+    newVal => {
+        if (!newVal) {
+            formData.value = { title: '', url: '' }
+        }
     }
-})
+)
 
 const handleSubmit = () => {
     if (!formData.value.title || !formData.value.url) return
