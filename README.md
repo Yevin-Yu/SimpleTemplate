@@ -78,9 +78,11 @@ src/
 ├── styles/             # 全局样式
 ├── theme/              # 主题配置
 └── views/              # 页面组件
-    ├── demo/           # 示例页面
-    ├── example/        # 组件示例
-    └── SimpleHome/     # Simple Home 模块
+    ├── SimpleHome/     # Simple Home 模块
+    └── SimpleTemplate/ # Simple Template 模块
+        ├── Home.vue     # 首页
+        ├── demo/        # 示例页面
+        └── example/     # 组件示例
 ```
 
 ## 🎯 核心功能

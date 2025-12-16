@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import Home from '@/views/Home.vue'
+import Home from '@/views/SimpleTemplate/Home.vue'
 
 export const simpleTemplateRoutes: RouteRecordRaw[] = [
     {
@@ -10,32 +10,32 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
     {
         path: '/form-example',
         name: 'FormDemo',
-        component: () => import('@/views/demo/FormDemo.vue'),
+        component: () => import('@/views/SimpleTemplate/demo/FormDemo.vue'),
     },
     {
         path: '/table-example',
         name: 'TableDemo',
-        component: () => import('@/views/demo/TableDemo.vue'),
+        component: () => import('@/views/SimpleTemplate/demo/TableDemo.vue'),
     },
     {
         path: '/card-example',
         name: 'CardDemo',
-        component: () => import('@/views/demo/CardDemo.vue'),
+        component: () => import('@/views/SimpleTemplate/demo/CardDemo.vue'),
     },
     {
         path: '/dashboard-example',
         name: 'DashboardDemo',
-        component: () => import('@/views/demo/DashboardDemo.vue'),
+        component: () => import('@/views/SimpleTemplate/demo/DashboardDemo.vue'),
     },
     {
         path: '/base-components',
         name: 'BaseComponents',
-        component: () => import('@/views/example/BaseComponents.vue'),
+        component: () => import('@/views/SimpleTemplate/example/BaseComponents.vue'),
     },
     {
         path: '/form-components',
         name: 'FormComponents',
-        component: () => import('@/views/example/FormComponents.vue'),
+        component: () => import('@/views/SimpleTemplate/example/FormComponents.vue'),
     },
 ]
 
