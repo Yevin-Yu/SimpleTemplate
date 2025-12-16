@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-interface ProjectOption {
+export interface ProjectOption extends Record<string, unknown> {
     label: string
     value: string
     icon: string

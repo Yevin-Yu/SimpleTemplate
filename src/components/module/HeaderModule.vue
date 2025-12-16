@@ -13,15 +13,16 @@
             <ui-select class="project-select" option-label="label" option-value="value" v-model="selectedProject"
                 :options="projectOptions" placeholder="选择项目" @change="goProject">
                 <template #selected="{ option }">
-                    <div class="project-selected">
-                        <component :is="iconMap[(option as any).icon] || DefaultIcon" class="project-icon" />
-                        <span>{{ (option as any).label }}</span>
+                    <div v-if="option" class="project-selected">
+                        <component :is="iconMap[(option as ProjectOption).icon] || DefaultIcon" class="project-icon" />
+                        <span>{{ (option as ProjectOption).label }}</span>
                     </div>
+                    <span v-else class="placeholder">选择项目</span>
                 </template>
                 <template #option="{ option, selected }">
                     <div class="project-option" :class="{ selected }">
-                        <component :is="iconMap[(option as any).icon] || DefaultIcon" class="project-icon" />
-                        <span>{{ (option as any).label }}</span>
+                        <component :is="iconMap[(option as ProjectOption).icon] || DefaultIcon" class="project-icon" />
+                        <span>{{ (option as ProjectOption).label }}</span>
                     </div>
                 </template>
             </ui-select>
@@ -56,6 +57,7 @@ import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/project'
 import type { Component } from 'vue'
+import type { ProjectOption } from '@/stores/project'
 
 // Github跳转
 const goGithub = () => {
@@ -73,13 +75,15 @@ watch(currentTheme, newVal => {
 // 项目切换
 const projectStore = useProjectStore()
 const router = useRouter()
-const selectedProject = computed({
+const selectedProject = computed<string>({
     get: () => projectStore.selectedProject,
-    set: (value) => {
+    set: value => {
         projectStore.setSelectedProject(value)
     },
 })
-const projectOptions = computed(() => projectStore.projectOptions)
+
+const projectOptions = computed<ProjectOption[]>(() => projectStore.projectOptions)
+
 const goProject = (value: string | number | null) => {
     if (typeof value !== 'string') return
     projectStore.setSelectedProject(value)
