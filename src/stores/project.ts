@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 interface ProjectOption {
     label: string
     value: string
+    icon: string
 }
 
 const STORAGE_KEY = 'simple-template-selected-project'
@@ -10,8 +11,8 @@ const STORAGE_KEY = 'simple-template-selected-project'
 export const useProjectStore = defineStore('project', {
     state: () => {
         const defaultOptions: ProjectOption[] = [
-            { label: 'Simple Home', value: '/simple-home' },
-            { label: 'Simple Template', value: '/home' },
+            { label: 'Simple Home', value: '/simple-home', icon: 'home' },
+            { label: 'Simple Template', value: '/home', icon: 'template' },
         ]
 
         // 从 localStorage 读取保存的项目路由（value）

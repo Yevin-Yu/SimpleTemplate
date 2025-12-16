@@ -2,7 +2,11 @@
     <div class="ui-select-wrapper" :class="{ 'is-open': isOpen, 'is-disabled': disabled }" ref="wrapperRef">
         <div class="ui-select-trigger" @click="toggleDropdown" :class="{ 'is-focused': isOpen }">
             <div class="select-value">
-                <span v-if="selectedOption" class="value-text">{{ getOptionLabel(selectedOption) }}</span>
+                <template v-if="selectedOption">
+                    <slot name="selected" :option="selectedOption">
+                        <span class="value-text">{{ getOptionLabel(selectedOption) }}</span>
+                    </slot>
+                </template>
                 <span v-else class="placeholder">{{ placeholder }}</span>
             </div>
             <div class="select-icon" :class="{ 'is-open': isOpen }">

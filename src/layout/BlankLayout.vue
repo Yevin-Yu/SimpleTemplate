@@ -1,19 +1,17 @@
 <template>
     <div class="blank-layout">
-        <HeaderModule />
         <div class="default-layout-content">
             <router-view />
         </div>
     </div>
 </template>
 <script setup>
-import HeaderModule from '@/components/module/HeaderModule.vue'
 </script>
 <style scoped lang="less">
 .blank-layout {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: var(--background);
     overflow: hidden;

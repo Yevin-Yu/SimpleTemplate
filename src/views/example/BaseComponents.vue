@@ -119,13 +119,8 @@
                         <h3 class="h-title text-lg font-medium mb-3">对象数组</h3>
                         <div class="flex flex-wrap gap-4">
                             <div class="w-64">
-                                <ui-select
-                                    v-model="selectValue2"
-                                    :options="userOptions"
-                                    option-label="name"
-                                    option-value="id"
-                                    placeholder="选择用户"
-                                />
+                                <ui-select v-model="selectValue2" :options="userOptions" option-label="name"
+                                    option-value="id" placeholder="选择用户" />
                                 <div class="text-sm text-gray-600 mt-2">选中ID: {{ selectValue2 || '无' }}</div>
                             </div>
                         </div>
@@ -135,17 +130,45 @@
                         <h3 class="h-title text-lg font-medium mb-3">自定义选项渲染</h3>
                         <div class="flex flex-wrap gap-4">
                             <div class="w-70">
-                                <ui-select v-model="selectValue3" :options="userOptions" option-label="name" option-value="id" placeholder="选择用户">
+                                <ui-select v-model="selectValue3" :options="userOptions" option-label="name"
+                                    option-value="id" placeholder="选择用户">
                                     <template #option="{ option, selected }">
-                                        <div class="flex items-center justify-between" :class="{ 'font-semibold': selected }">
+                                        <div class="flex items-center justify-between"
+                                            :class="{ 'font-semibold': selected }">
                                             <div>
                                                 <!-- 图标  -->
-                                                <div class="font-medium">{{ (option as unknown as UserOption).name }}</div>
+                                                <div class="font-medium">{{ (option as unknown as UserOption).name }}
+                                                </div>
                                             </div>
                                         </div>
                                     </template>
                                 </ui-select>
-                                <div class="text-sm text-gray-600 mt-2">选中用户: {{ getSelectedUserName(selectValue3) || '无' }}</div>
+                                <div class="text-sm text-gray-600 mt-2">选中用户: {{ getSelectedUserName(selectValue3) ||
+                                    '无' }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="h-title text-lg font-medium mb-3">带图标的选项</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="w-64">
+                                <ui-select v-model="selectValueIcon" :options="iconOptions" option-label="label"
+                                    option-value="value" placeholder="选择项目">
+                                    <template #selected="{ option }">
+                                        <div class="flex items-center gap-2">
+                                            <component :is="(option as unknown as IconOption).icon" class="w-4 h-4" />
+                                            <span>{{ (option as unknown as IconOption).label }}</span>
+                                        </div>
+                                    </template>
+                                    <template #option="{ option, selected }">
+                                        <div class="flex items-center gap-2" :class="{ 'font-semibold': selected }">
+                                            <component :is="(option as unknown as IconOption).icon" class="w-4 h-4" />
+                                            <span>{{ (option as unknown as IconOption).label }}</span>
+                                        </div>
+                                    </template>
+                                </ui-select>
+                                <div class="text-sm text-gray-600 mt-2">选中项目: {{ selectValueIcon || '无' }}</div>
                             </div>
                         </div>
                     </div>
@@ -246,12 +269,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type Component } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiSwitch from '@/components/ui/ui-switch.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
-import { SettingsIcon, LogOutIcon, ShareIcon, SwitchOnIcon, SwitchOffIcon } from '@/components/icons'
+import { SettingsIcon, LogOutIcon, ShareIcon, SwitchOnIcon, SwitchOffIcon, HomeIcon, DashboardIcon } from '@/components/icons'
 
 const switchValue1 = ref(false)
 const switchValue2 = ref(true)
@@ -265,6 +288,7 @@ const selectValue1 = ref<string | number | null>(null)
 const selectValue2 = ref<string | number | null>(null)
 const selectValue3 = ref<string | number | null>(null)
 const selectValue4 = ref<string | number | null>(null)
+const selectValueIcon = ref<string | number | null>(null)
 
 interface UserOption extends Record<string, unknown> {
     id: number
@@ -280,6 +304,17 @@ const userOptions: UserOption[] = [
     { id: 2, name: '李四', email: 'li@example.com', role: '用户' },
     { id: 3, name: '王五', email: 'wang@example.com', role: '用户' },
     { id: 4, name: '赵六', email: 'zhao@example.com', role: '编辑' },
+]
+
+interface IconOption {
+    label: string
+    value: string
+    icon: Component
+    [key: string]: unknown
+}
+const iconOptions: IconOption[] = [
+    { label: 'Simple Home', value: '/simple-home', icon: HomeIcon },
+    { label: 'Simple Template', value: '/home', icon: DashboardIcon },
 ]
 
 const getSelectedUserName = (id: string | number | null): string | null => {

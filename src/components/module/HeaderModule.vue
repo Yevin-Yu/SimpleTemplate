@@ -11,7 +11,20 @@
         <!-- user & link -->
         <div class="flex justify-between items-center gap-1">
             <ui-select class="project-select" option-label="label" option-value="value" v-model="selectedProject"
-                :options="versionOptions" placeholder="选择版本" @change="goProject" />
+                :options="projectOptions" placeholder="选择项目" @change="goProject">
+                <template #selected="{ option }">
+                    <div class="project-selected">
+                        <component :is="iconMap[(option as any).icon] || DefaultIcon" class="project-icon" />
+                        <span>{{ (option as any).label }}</span>
+                    </div>
+                </template>
+                <template #option="{ option, selected }">
+                    <div class="project-option" :class="{ selected }">
+                        <component :is="iconMap[(option as any).icon] || DefaultIcon" class="project-icon" />
+                        <span>{{ (option as any).label }}</span>
+                    </div>
+                </template>
+            </ui-select>
             <div class="line"></div>
             <ui-switch v-model="isDark" @change="toggleTheme">
                 <template #thumb-on>
@@ -33,15 +46,16 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import UiButton from '@/components/ui/ui-button.vue'
 import uiSwitch from '@/components/ui/ui-switch.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
 import UserModule from '@/components/module/UserModule.vue'
-import { GitHubIcon, SwitchOnIcon, SwitchOffIcon } from '@/components/icons'
+import { GitHubIcon, SwitchOnIcon, SwitchOffIcon, HomeIcon, DashboardIcon } from '@/components/icons'
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/project'
+import type { Component } from 'vue'
 
 // Github跳转
 const goGithub = () => {
@@ -59,20 +73,24 @@ watch(currentTheme, newVal => {
 // 项目切换
 const projectStore = useProjectStore()
 const router = useRouter()
-
 const selectedProject = computed({
     get: () => projectStore.selectedProject,
     set: (value) => {
         projectStore.setSelectedProject(value)
     },
 })
-
-const versionOptions = computed(() => projectStore.projectOptions)
-
-const goProject = (value) => {
+const projectOptions = computed(() => projectStore.projectOptions)
+const goProject = (value: string | number | null) => {
+    if (typeof value !== 'string') return
     projectStore.setSelectedProject(value)
     router.push(value)
 }
+
+const iconMap: Record<string, Component> = {
+    home: HomeIcon,
+    template: DashboardIcon,
+}
+const DefaultIcon = HomeIcon
 </script>
 
 <style scoped lang="less">
@@ -84,6 +102,29 @@ const goProject = (value) => {
 
     .project-select {
         width: 200px;
+    }
+
+    .project-selected {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--foreground);
+    }
+
+    .project-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--foreground);
+
+        .project-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        &.selected {
+            font-weight: 600;
+        }
     }
 
     .logo-title {

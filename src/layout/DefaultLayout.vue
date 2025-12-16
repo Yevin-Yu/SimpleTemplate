@@ -1,6 +1,5 @@
 <template>
     <div class="default-layout">
-        <HeaderModule />
         <div class="default-layout-content">
             <div class="content-left">
                 <SidebarModule />
@@ -12,14 +11,13 @@
     </div>
 </template>
 <script setup>
-import HeaderModule from '@/components/module/HeaderModule.vue'
 import SidebarModule from '@/components/module/SidebarModule.vue'
 </script>
 <style scoped lang="less">
 .default-layout {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: var(--background);
     overflow: hidden;
