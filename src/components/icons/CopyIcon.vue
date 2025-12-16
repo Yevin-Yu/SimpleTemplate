@@ -9,13 +9,12 @@
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="base-icon"
+        class="copy-icon"
         :class="customClass"
         :aria-hidden="ariaHidden ? 'true' : undefined"
     >
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-        <line x1="12" x2="12" y1="22.08" y2="12" />
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2" />
     </svg>
 </template>
 
@@ -41,7 +40,7 @@ defineProps({
 </script>
 
 <style scoped>
-.base-icon {
+.copy-icon {
     display: inline-block;
     vertical-align: middle;
 }

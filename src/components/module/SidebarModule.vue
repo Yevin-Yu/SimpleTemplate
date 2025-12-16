@@ -3,19 +3,28 @@
         <nav class="sidebar-inner">
             <ul class="menu">
                 <li v-for="item in menu" :key="item.key" class="menu-item">
-                    <div class="menu-item-label" :class="{
-                        active: isActive(item),
-                        'has-children': item.children,
-                        'is-open': isOpen(item)
-                    }" @click="onItemClick(item)">
+                    <div
+                        class="menu-item-label"
+                        :class="{
+                            active: isActive(item),
+                            'has-children': item.children,
+                            'is-open': isOpen(item),
+                        }"
+                        @click="onItemClick(item)"
+                    >
                         <span v-if="item.icon" class="menu-item-icon">
                             <component :is="item.icon" :size="16" />
                         </span>
                         <span class="menu-item-text">{{ item.label }}</span>
                         <span v-if="item.children" class="arrow" :class="{ open: isOpen(item) }">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M3 4.5L6 7.5L9 4.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
                             </svg>
                         </span>
                     </div>
@@ -23,8 +32,7 @@
                     <transition name="submenu">
                         <ul v-if="item.children && isOpen(item)" class="submenu">
                             <li v-for="child in item.children" :key="child.key" class="submenu-item">
-                                <div class="submenu-item-label" :class="{ active: isActive(child) }"
-                                    @click.stop="onItemClick(child)">
+                                <div class="submenu-item-label" :class="{ active: isActive(child) }" @click.stop="onItemClick(child)">
                                     <span class="submenu-indicator"></span>
                                     <span v-if="child.icon" class="submenu-item-icon">
                                         <component :is="child.icon" :size="16" />
@@ -43,16 +51,7 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect, type Component } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import {
-    HomeIcon,
-    ExampleIcon,
-    FormIcon,
-    TableIcon,
-    CardIcon,
-    DashboardIcon,
-    ComponentsIcon,
-    BaseIcon
-} from '@/components/icons'
+import { HomeIcon, ExampleIcon, FormIcon, TableIcon, CardIcon, DashboardIcon, ComponentsIcon, BaseIcon } from '@/components/icons'
 
 interface MenuItem {
     key: string
@@ -121,7 +120,7 @@ const menu = computed<MenuItem[]>(() => [
                 icon: DashboardIcon,
             },
         ],
-    }
+    },
 ])
 
 const openKeys = ref<Set<string>>(new Set(['example', 'components']))
@@ -223,7 +222,7 @@ const onItemClick = (item: MenuItem) => {
 .menu-item {
     position: relative;
 
-    &+.menu-item {
+    & + .menu-item {
         margin-top: 6px;
     }
 }
@@ -350,7 +349,7 @@ const onItemClick = (item: MenuItem) => {
 .submenu-item {
     position: relative;
 
-    &+.submenu-item {
+    & + .submenu-item {
         margin-top: 4px;
     }
 }

@@ -10,7 +10,7 @@
                     设置
                 </ui-button>
             </div>
-            
+
             <!-- 统计卡片 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <ui-card class="p-5 hover:shadow-lg transition-shadow">
@@ -184,4 +184,3 @@ const notices = ref([
     background-color: var(--background);
 }
 </style>
-

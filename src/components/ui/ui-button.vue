@@ -1,11 +1,12 @@
 <template>
-    <button class="ui-button gap-2" :class="[`ui-button-${type}`, { 'only-icon': !$slots.default }]">
+    <button class="ui-button gap-2" :class="[`ui-button-${type}`, { 'only-icon': !$slots.default }, { 'is-disabled': disabled }]">
         <div class="icon" v-if="$slots.icon">
             <slot name="icon"></slot>
         </div>
         <div class="content" v-if="$slots.default">
             <slot></slot>
         </div>
+        <div class="disabled-overlay" v-if="disabled"></div>
     </button>
 </template>
 <script setup>
@@ -19,6 +20,10 @@ defineProps({
     size: {
         type: String,
         default: 'medium',
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
     },
 })
 </script>
@@ -63,6 +68,12 @@ defineProps({
 
 .ui-button.only-icon {
     padding: 8px;
+}
+
+.ui-button.is-disabled {
+    background-color: var(--muted);
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
 .icon {

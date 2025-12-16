@@ -2,7 +2,7 @@
     <div class="form-demo-container h-full w-full p-6 overflow-auto">
         <div class="max-w-4xl mx-auto">
             <h1 class="text-3xl font-bold mb-6">表单组件示例</h1>
-            
+
             <ui-card class="p-6 mb-6">
                 <h2 class="text-xl font-semibold mb-4">基础表单</h2>
                 <form @submit.prevent="handleSubmit" class="space-y-4">
@@ -78,4 +78,3 @@ const handleReset = () => {
     background-color: var(--background);
 }
 </style>
-

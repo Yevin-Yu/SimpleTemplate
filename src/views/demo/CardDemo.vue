@@ -2,7 +2,7 @@
     <div class="card-demo-container h-full w-full p-6 overflow-auto">
         <div class="max-w-6xl mx-auto">
             <h1 class="text-3xl font-bold mb-6">卡片组件示例</h1>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 <ui-card class="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer">
                     <div class="text-4xl mb-4">📊</div>
@@ -30,16 +30,10 @@
                 <h2 class="text-xl font-semibold mb-4">带图片的卡片</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <ui-card class="overflow-hidden">
-                        <img
-                            src="/logo.jpg"
-                            alt="示例图片"
-                            class="w-full h-48 object-cover"
-                        />
+                        <img src="/logo.jpg" alt="示例图片" class="w-full h-48 object-cover" />
                         <div class="p-4">
                             <h3 class="font-semibold mb-2">卡片标题</h3>
-                            <p class="text-sm text-gray-600 mb-4">
-                                这是一张带图片的卡片示例，展示了如何在卡片中嵌入图片内容。
-                            </p>
+                            <p class="text-sm text-gray-600 mb-4">这是一张带图片的卡片示例，展示了如何在卡片中嵌入图片内容。</p>
                             <div class="flex gap-2">
                                 <ui-button type="primary" size="small">了解更多</ui-button>
                                 <ui-button type="blank" size="small">分享</ui-button>
@@ -50,19 +44,13 @@
                     <ui-card class="overflow-hidden">
                         <div class="p-4">
                             <h3 class="font-semibold mb-2">卡片标题</h3>
-                            <p class="text-sm text-gray-600 mb-4">
-                                这是一张带图片的卡片示例，展示了如何在卡片中嵌入图片内容。
-                            </p>
+                            <p class="text-sm text-gray-600 mb-4">这是一张带图片的卡片示例，展示了如何在卡片中嵌入图片内容。</p>
                             <div class="flex gap-2">
                                 <ui-button type="primary" size="small">了解更多</ui-button>
                                 <ui-button type="blank" size="small">分享</ui-button>
                             </div>
                         </div>
-                        <img
-                            src="/logo.jpg"
-                            alt="示例图片"
-                            class="w-full h-48 object-cover"
-                        />
+                        <img src="/logo.jpg" alt="示例图片" class="w-full h-48 object-cover" />
                     </ui-card>
                 </div>
             </ui-card>
@@ -102,4 +90,3 @@ import uiButton from '@/components/ui/ui-button.vue'
     background-color: var(--background);
 }
 </style>
-

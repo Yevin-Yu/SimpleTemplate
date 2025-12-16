@@ -67,7 +67,7 @@
                         <h3 class="text-lg font-medium mb-3">按钮状态</h3>
                         <div class="flex flex-wrap gap-3">
                             <ui-button @click="handleClick">可点击</ui-button>
-                            <ui-button type="blank" class="opacity-50 cursor-not-allowed">禁用状态</ui-button>
+                            <ui-button type="blank" disabled>禁用状态</ui-button>
                             <ui-button type="primary" @click="handleClick">主要按钮</ui-button>
                         </div>
                     </div>
@@ -183,7 +183,9 @@
                 <div class="space-y-4">
                     <div>
                         <h3 class="text-lg font-medium mb-2">按钮组件</h3>
-                        <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>&lt;ui-button type="primary"&gt;主要按钮&lt;/ui-button&gt;
+                        <pre
+                            class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"
+                        ><code>&lt;ui-button type="primary"&gt;主要按钮&lt;/ui-button&gt;
 &lt;ui-button&gt;
     &lt;template #icon&gt;
         &lt;SettingsIcon size="16" /&gt;
@@ -233,4 +235,3 @@ const handleClick = () => {
     background-color: var(--background);
 }
 </style>
-

@@ -2,7 +2,7 @@
     <div class="table-demo-container h-full w-full p-6 overflow-auto">
         <div class="max-w-6xl mx-auto">
             <h1 class="text-3xl font-bold mb-6">表格组件示例</h1>
-            
+
             <ui-card class="p-6 mb-6">
                 <h2 class="text-xl font-semibold mb-4">数据表格</h2>
                 <div class="overflow-x-auto">
@@ -18,11 +18,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="item in tableData"
-                                :key="item.id"
-                                class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                            >
+                            <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                 <td class="px-4 py-3">{{ item.id }}</td>
                                 <td class="px-4 py-3">{{ item.name }}</td>
                                 <td class="px-4 py-3">{{ item.email }}</td>
@@ -49,11 +45,7 @@
             <ui-card class="p-6">
                 <h2 class="text-xl font-semibold mb-4">卡片式列表</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <ui-card
-                        v-for="item in tableData"
-                        :key="item.id"
-                        class="p-4 hover:shadow-lg transition-shadow cursor-pointer"
-                    >
+                    <ui-card v-for="item in tableData" :key="item.id" class="p-4 hover:shadow-lg transition-shadow cursor-pointer">
                         <h3 class="font-semibold mb-2">{{ item.name }}</h3>
                         <p class="text-sm text-gray-600 mb-2">{{ item.email }}</p>
                         <div class="flex items-center justify-between">
@@ -87,4 +79,3 @@ const tableData = ref([
     background-color: var(--background);
 }
 </style>
-

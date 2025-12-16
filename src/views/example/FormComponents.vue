@@ -72,16 +72,14 @@
 
                 <form @submit.prevent="handleValidateSubmit" class="space-y-6">
                     <div>
-                        <label class="block mb-2 text-sm font-medium">
-                            邮箱 <span class="text-red-500">*</span>
-                        </label>
+                        <label class="block mb-2 text-sm font-medium"> 邮箱 <span class="text-red-500">*</span> </label>
                         <input
                             v-model="validateForm.email"
                             type="email"
                             placeholder="请输入邮箱"
                             :class="[
                                 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all',
-                                errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500',
                             ]"
                             @blur="validateEmail"
                         />
@@ -89,16 +87,14 @@
                     </div>
 
                     <div>
-                        <label class="block mb-2 text-sm font-medium">
-                            密码 <span class="text-red-500">*</span>
-                        </label>
+                        <label class="block mb-2 text-sm font-medium"> 密码 <span class="text-red-500">*</span> </label>
                         <input
                             v-model="validateForm.password"
                             type="password"
                             placeholder="请输入密码（至少6位）"
                             :class="[
                                 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all',
-                                errors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                errors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500',
                             ]"
                             @blur="validatePassword"
                         />
@@ -345,4 +341,3 @@ const handleComplexReset = () => {
     background-color: var(--background);
 }
 </style>
-
