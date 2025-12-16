@@ -53,9 +53,10 @@ import uiSwitch from '@/components/ui/ui-switch.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
 import UserModule from '@/components/module/UserModule.vue'
 import { GitHubIcon, SwitchOnIcon, SwitchOffIcon, HomeIcon, DashboardIcon } from '@/components/icons'
-import { ref, computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/project'
+import { useThemeStore } from '@/stores/theme'
 import type { Component } from 'vue'
 import type { ProjectOption } from '@/stores/project'
 
@@ -65,12 +66,11 @@ const goGithub = () => {
 }
 
 // 主题切换
-import { useTheme } from '@/hooks/useTheme'
-const { currentTheme, toggleTheme } = useTheme()
-const isDark = ref(false)
-watch(currentTheme, newVal => {
-    isDark.value = newVal === 'dark'
-})
+const themeStore = useThemeStore()
+const isDark = computed(() => themeStore.isDark)
+const toggleTheme = () => {
+    themeStore.toggleTheme()
+}
 
 // 项目切换
 const projectStore = useProjectStore()
