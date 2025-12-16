@@ -6,10 +6,13 @@
                 <img class="rounded-sm" width="24" src="/logo.jpg" alt="Logo" />
             </div>
             <div class="line line-left"></div>
-            <div class="title">SimpleTemplate</div>
+            <div class="logo-title ">Welcome to Yevin's Home</div>
         </div>
         <!-- user & link -->
         <div class="flex justify-between items-center gap-1">
+            <ui-select class="project-select" option-label="label" option-value="value" v-model="selectedProject"
+                :options="versionOptions" placeholder="选择版本" @change="goProject" />
+            <div class="line"></div>
             <ui-switch v-model="isDark" @change="toggleTheme">
                 <template #thumb-on>
                     <SwitchOffIcon />
@@ -33,9 +36,12 @@
 <script setup>
 import UiButton from '@/components/ui/ui-button.vue'
 import uiSwitch from '@/components/ui/ui-switch.vue'
+import uiSelect from '@/components/ui/ui-select.vue'
 import UserModule from '@/components/module/UserModule.vue'
 import { GitHubIcon, SwitchOnIcon, SwitchOffIcon } from '@/components/icons'
-import { ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useProjectStore } from '@/stores/project'
 
 // Github跳转
 const goGithub = () => {
@@ -49,6 +55,24 @@ const isDark = ref(false)
 watch(currentTheme, newVal => {
     isDark.value = newVal === 'dark'
 })
+
+// 项目切换
+const projectStore = useProjectStore()
+const router = useRouter()
+
+const selectedProject = computed({
+    get: () => projectStore.selectedProject,
+    set: (value) => {
+        projectStore.setSelectedProject(value)
+    },
+})
+
+const versionOptions = computed(() => projectStore.projectOptions)
+
+const goProject = (value) => {
+    projectStore.setSelectedProject(value)
+    router.push(value)
+}
 </script>
 
 <style scoped lang="less">
@@ -57,6 +81,59 @@ watch(currentTheme, newVal => {
     height: 48px;
     padding: 0 16px;
     color: var(--foreground);
+
+    .project-select {
+        width: 200px;
+    }
+
+    .logo-title {
+        font-size: 18px;
+        font-weight: 600;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease infinite;
+        position: relative;
+        letter-spacing: 0.5px;
+        text-shadow: 0 0 20px rgba(226, 169, 25, 0.3);
+        transition: all 0.3s ease;
+
+        &::before {
+            content: "Yevin's Home";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(8px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+            animation-duration: 1.5s;
+        }
+    }
+
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 }
 
 .line {
