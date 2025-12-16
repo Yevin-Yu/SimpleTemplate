@@ -1,8 +1,10 @@
 <template>
     <div class="history-section">
         <div v-if="history.length > 0" class="history-list">
-            <div v-for="item in history" :key="item.id" class="history-item" @click="$emit('select-history', item.query)">
-                <svg class="history-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div v-for="item in history" :key="item.id" class="history-item"
+                @click="$emit('select-history', item.query)">
+                <svg class="history-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
@@ -30,9 +32,9 @@ interface Props {
     formatTime: (timestamp: number) => string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
-const emit = defineEmits<{
+defineEmits<{
     'select-history': [query: string]
     'delete-history': [id: string]
 }>()
