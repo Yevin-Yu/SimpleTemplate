@@ -5,6 +5,14 @@ export { default as ShareIcon } from './ShareIcon.vue'
 export { default as GitHubIcon } from './GitHubIcon.vue'
 export { default as SwitchOnIcon } from './SwitchOnIcon.vue'
 export { default as SwitchOffIcon } from './SwitchOffIcon.vue'
+export { default as HomeIcon } from './HomeIcon.vue'
+export { default as ExampleIcon } from './ExampleIcon.vue'
+export { default as FormIcon } from './FormIcon.vue'
+export { default as TableIcon } from './TableIcon.vue'
+export { default as CardIcon } from './CardIcon.vue'
+export { default as DashboardIcon } from './DashboardIcon.vue'
+export { default as ComponentsIcon } from './ComponentsIcon.vue'
+export { default as BaseIcon } from './BaseIcon.vue'
 
 // 图标类型定义
 export interface IconProps {
@@ -14,7 +22,7 @@ export interface IconProps {
 }
 
 // 图标名称类型
-export type IconName = 'settings' | 'logOut' | 'share' | 'github' | 'switchOn' | 'switchOff'
+export type IconName = 'settings' | 'logOut' | 'share' | 'github' | 'switchOn' | 'switchOff' | 'home' | 'example' | 'form' | 'table' | 'card' | 'dashboard' | 'components' | 'base'
 
 // 图标映射
 export const iconMap: Record<IconName, () => Promise<unknown>> = {
@@ -24,6 +32,14 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     github: () => import('./GitHubIcon.vue'),
     switchOn: () => import('./SwitchOnIcon.vue'),
     switchOff: () => import('./SwitchOffIcon.vue'),
+    home: () => import('./HomeIcon.vue'),
+    example: () => import('./ExampleIcon.vue'),
+    form: () => import('./FormIcon.vue'),
+    table: () => import('./TableIcon.vue'),
+    card: () => import('./CardIcon.vue'),
+    dashboard: () => import('./DashboardIcon.vue'),
+    components: () => import('./ComponentsIcon.vue'),
+    base: () => import('./BaseIcon.vue'),
 }
 
 // 动态加载图标

@@ -8,6 +8,9 @@
                         'has-children': item.children,
                         'is-open': isOpen(item)
                     }" @click="onItemClick(item)">
+                        <span v-if="item.icon" class="menu-item-icon">
+                            <component :is="item.icon" :size="16" />
+                        </span>
                         <span class="menu-item-text">{{ item.label }}</span>
                         <span v-if="item.children" class="arrow" :class="{ open: isOpen(item) }">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -23,6 +26,9 @@
                                 <div class="submenu-item-label" :class="{ active: isActive(child) }"
                                     @click.stop="onItemClick(child)">
                                     <span class="submenu-indicator"></span>
+                                    <span v-if="child.icon" class="submenu-item-icon">
+                                        <component :is="child.icon" :size="16" />
+                                    </span>
                                     <span class="submenu-item-text">{{ child.label }}</span>
                                 </div>
                             </li>
@@ -35,13 +41,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect, type Component } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {
+    HomeIcon,
+    ExampleIcon,
+    FormIcon,
+    TableIcon,
+    CardIcon,
+    DashboardIcon,
+    ComponentsIcon,
+    BaseIcon
+} from '@/components/icons'
 
 interface MenuItem {
     key: string
     label: string
     path?: string
+    icon?: Component
     children?: MenuItem[]
 }
 
@@ -53,52 +70,61 @@ const menu = computed<MenuItem[]>(() => [
         key: 'home',
         label: '首页',
         path: '/home',
-    },
-    {
-        key: 'example',
-        label: '示例演示',
-        children: [
-            {
-                key: 'form',
-                label: '表单示例',
-                path: '/form-example',
-            },
-            {
-                key: 'table',
-                label: '表格示例',
-                path: '/table-example',
-            },
-            {
-                key: 'card',
-                label: '卡片示例',
-                path: '/card-example',
-            },
-            {
-                key: 'dashboard',
-                label: '仪表盘示例',
-                path: '/dashboard-example',
-            },
-        ],
+        icon: HomeIcon,
     },
     {
         key: 'components',
         label: '组件示例',
+        icon: ComponentsIcon,
         children: [
             {
                 key: 'base',
                 label: '基础组件',
                 path: '/base-components',
+                icon: BaseIcon,
             },
             {
                 key: 'form',
                 label: '表单组件',
                 path: '/form-components',
+                icon: FormIcon,
             },
         ],
     },
+    {
+        key: 'example',
+        label: '示例演示',
+        icon: ExampleIcon,
+        children: [
+            {
+                key: 'form',
+                label: '表单示例',
+                path: '/form-example',
+                icon: FormIcon,
+            },
+            {
+                key: 'table',
+                label: '表格示例',
+                path: '/table-example',
+                icon: TableIcon,
+            },
+            {
+                key: 'card',
+                label: '卡片示例',
+                path: '/card-example',
+                icon: CardIcon,
+            },
+            {
+                key: 'dashboard',
+                label: '仪表盘示例',
+                path: '/dashboard-example',
+                icon: DashboardIcon,
+            },
+        ],
+    }
 ])
 
-const openKeys = ref<Set<string>>(new Set(['demos', 'components']))
+const openKeys = ref<Set<string>>(new Set(['example', 'components']))
 
 // 自动展开包含激活子菜单的父菜单
 watchEffect(() => {
@@ -178,6 +204,7 @@ const onItemClick = (item: MenuItem) => {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    user-select: none;
 }
 
 .sidebar-inner {
@@ -231,6 +258,7 @@ const onItemClick = (item: MenuItem) => {
         transform: translateX(2px);
         box-shadow: var(--shadow-xs);
         border: 1px solid var(--border);
+        color: var(--primary);
 
         &::before {
             transform: translateY(-50%) scaleY(1);
@@ -241,6 +269,7 @@ const onItemClick = (item: MenuItem) => {
     &.active {
         box-shadow: var(--shadow-xs);
         border: 1px solid var(--border);
+        color: var(--primary);
 
         &::before {
             transform: translateY(-50%) scaleY(1);
@@ -254,6 +283,25 @@ const onItemClick = (item: MenuItem) => {
             color: var(--primary);
         }
     }
+}
+
+.menu-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: var(--foreground);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-item-label:hover .menu-item-icon {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.menu-item-label.active .menu-item-icon {
+    color: var(--primary);
 }
 
 .menu-item-text {
@@ -310,7 +358,7 @@ const onItemClick = (item: MenuItem) => {
 .submenu-item-label {
     display: flex;
     align-items: center;
-    padding: 8px 12px;
+    padding: 8px 10px;
     font-size: 13px;
     color: var(--foreground);
     cursor: pointer;
@@ -333,12 +381,11 @@ const onItemClick = (item: MenuItem) => {
 
     &:hover {
         color: var(--primary);
-        padding-left: 16px;
         transform: translateX(2px);
 
         &::after {
             transform: translateY(-50%) translateX(0);
-            height: 60%;
+            height: 55%;
         }
 
         .submenu-indicator {
@@ -350,11 +397,10 @@ const onItemClick = (item: MenuItem) => {
     &.active {
         color: var(--primary);
         font-size: 15px;
-        padding-left: 14px;
 
         &::after {
             transform: translateY(-50%) translateX(0);
-            height: 70%;
+            height: 60%;
         }
 
         .submenu-indicator {
@@ -369,11 +415,30 @@ const onItemClick = (item: MenuItem) => {
     height: 6px;
     border-radius: 50%;
     background: var(--primary);
-    margin-right: 10px;
+    margin-right: 8px;
     opacity: 0;
     transform: scale(0);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
+}
+
+.submenu-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: var(--foreground);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submenu-item-label:hover .submenu-item-icon {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.submenu-item-label.active .submenu-item-icon {
+    color: var(--primary);
 }
 
 .submenu-item-text {
