@@ -82,4 +82,28 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/SimpleTemplate/example/SelectComponents.vue'),
     },
+    {
+        path: ROUTE_PATHS.SWITCH_COMPONENTS,
+        name: 'SwitchComponents',
+        meta: {
+            title: '开关组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/SwitchComponents.vue'),
+    },
+    {
+        path: ROUTE_PATHS.CODE_BLOCK_COMPONENTS,
+        name: 'CodeBlockComponents',
+        meta: {
+            title: '代码块组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/CodeBlockComponents.vue'),
+    },
+    {
+        path: ROUTE_PATHS.CONTEXT_MENU_COMPONENTS,
+        name: 'ContextMenuComponents',
+        meta: {
+            title: '右键菜单组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/ContextMenuComponents.vue'),
+    },
 ]

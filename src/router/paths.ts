@@ -21,4 +21,7 @@ export const ROUTE_PATHS = {
     TAG_COMPONENTS: '/tag-components',
     CARD_COMPONENTS: '/card-components',
     SELECT_COMPONENTS: '/select-components',
+    SWITCH_COMPONENTS: '/switch-components',
+    CODE_BLOCK_COMPONENTS: '/code-block-components',
+    CONTEXT_MENU_COMPONENTS: '/context-menu-components',
 } as const

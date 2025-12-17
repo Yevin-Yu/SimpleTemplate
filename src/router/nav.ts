@@ -12,6 +12,9 @@ import {
     ButtonIcon,
     TagIcon,
     SelectIcon,
+    SwitchIcon,
+    CodeBlockIcon,
+    ContextMenuIcon,
 } from '@/components/icons'
 
 /**
@@ -67,6 +70,21 @@ export const SIDEBAR_NAV: NavItem[] = [
                 key: 'select-components',
                 path: ROUTE_PATHS.SELECT_COMPONENTS,
                 icon: SelectIcon,
+            },
+            {
+                key: 'switch-components',
+                path: ROUTE_PATHS.SWITCH_COMPONENTS,
+                icon: SwitchIcon,
+            },
+            {
+                key: 'code-block-components',
+                path: ROUTE_PATHS.CODE_BLOCK_COMPONENTS,
+                icon: CodeBlockIcon,
+            },
+            {
+                key: 'context-menu-components',
+                path: ROUTE_PATHS.CONTEXT_MENU_COMPONENTS,
+                icon: ContextMenuIcon,
             },
             {
                 key: 'tag',
