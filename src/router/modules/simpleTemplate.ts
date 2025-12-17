@@ -58,4 +58,12 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/SimpleTemplate/example/FormComponents.vue'),
     },
+    {
+        path: ROUTE_PATHS.BUTTON_COMPONENTS,
+        name: 'ButtonComponents',
+        meta: {
+            title: '按钮组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/ButtonComponents.vue'),
+    },
 ]

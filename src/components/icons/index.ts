@@ -13,6 +13,7 @@ export { default as CardIcon } from './CardIcon.vue'
 export { default as DashboardIcon } from './DashboardIcon.vue'
 export { default as ComponentsIcon } from './ComponentsIcon.vue'
 export { default as BaseIcon } from './BaseIcon.vue'
+export { default as ButtonIcon } from './ButtonIcon.vue'
 export { default as CopyIcon } from './CopyIcon.vue'
 export { default as CheckIcon } from './CheckIcon.vue'
 export { default as EditIcon } from './EditIcon.vue'
@@ -41,6 +42,7 @@ export type IconName =
     | 'dashboard'
     | 'components'
     | 'base'
+    | 'button'
     | 'copy'
     | 'check'
     | 'edit'
@@ -62,6 +64,7 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     dashboard: () => import('./DashboardIcon.vue'),
     components: () => import('./ComponentsIcon.vue'),
     base: () => import('./BaseIcon.vue'),
+    button: () => import('./ButtonIcon.vue'),
     copy: () => import('./CopyIcon.vue'),
     check: () => import('./CheckIcon.vue'),
     edit: () => import('./EditIcon.vue'),
