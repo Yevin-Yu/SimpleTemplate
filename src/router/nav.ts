@@ -1,6 +1,6 @@
 import type { Component } from 'vue'
 import { ROUTE_PATHS } from '@/router/paths'
-import { HomeIcon, ExampleIcon, FormIcon, TableIcon, CardIcon, DashboardIcon, ComponentsIcon, BaseIcon, ButtonIcon, TagIcon } from '@/components/icons'
+import { HomeIcon, ExampleIcon, FormIcon, TableIcon, CardIcon, DashboardIcon, ComponentsIcon, BaseIcon, ButtonIcon, TagIcon, SelectIcon } from '@/components/icons'
 
 /**
  * 侧边栏导航菜单（Single Source of Truth）
@@ -47,14 +47,19 @@ export const SIDEBAR_NAV: NavItem[] = [
                 icon: ButtonIcon,
             },
             {
+                key: 'card-components',
+                path: ROUTE_PATHS.CARD_COMPONENTS,
+                icon: CardIcon,
+            },
+            {
+                key: 'select-components',
+                path: ROUTE_PATHS.SELECT_COMPONENTS,
+                icon: SelectIcon,
+            },
+            {
                 key: 'tag',
                 path: ROUTE_PATHS.TAG_COMPONENTS,
                 icon: TagIcon,
-            },
-            {
-                key: 'form',
-                path: ROUTE_PATHS.FORM_COMPONENTS,
-                icon: FormIcon,
             },
         ],
     },

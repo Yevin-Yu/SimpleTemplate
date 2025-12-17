@@ -51,14 +51,6 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/SimpleTemplate/example/BaseComponents.vue'),
     },
     {
-        path: ROUTE_PATHS.FORM_COMPONENTS,
-        name: 'FormComponents',
-        meta: {
-            title: '表单组件',
-        },
-        component: () => import('@/views/SimpleTemplate/example/FormComponents.vue'),
-    },
-    {
         path: ROUTE_PATHS.BUTTON_COMPONENTS,
         name: 'ButtonComponents',
         meta: {
@@ -73,5 +65,21 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
             title: '标签组件',
         },
         component: () => import('@/views/SimpleTemplate/example/TagComponents.vue'),
+    },
+    {
+        path: ROUTE_PATHS.CARD_COMPONENTS,
+        name: 'CardComponents',
+        meta: {
+            title: '卡片组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/CardComponents.vue'),
+    },
+    {
+        path: ROUTE_PATHS.SELECT_COMPONENTS,
+        name: 'SelectComponents',
+        meta: {
+            title: '下拉菜单组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/SelectComponents.vue'),
     },
 ]

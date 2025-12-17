@@ -15,6 +15,7 @@ export { default as ComponentsIcon } from './ComponentsIcon.vue'
 export { default as BaseIcon } from './BaseIcon.vue'
 export { default as ButtonIcon } from './ButtonIcon.vue'
 export { default as TagIcon } from './TagIcon.vue'
+export { default as SelectIcon } from './SelectIcon.vue'
 export { default as CopyIcon } from './CopyIcon.vue'
 export { default as CheckIcon } from './CheckIcon.vue'
 export { default as EditIcon } from './EditIcon.vue'
@@ -45,6 +46,7 @@ export type IconName =
     | 'base'
     | 'button'
     | 'tag'
+    | 'select'
     | 'copy'
     | 'check'
     | 'edit'
@@ -68,6 +70,7 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     base: () => import('./BaseIcon.vue'),
     button: () => import('./ButtonIcon.vue'),
     tag: () => import('./TagIcon.vue'),
+    select: () => import('./SelectIcon.vue'),
     copy: () => import('./CopyIcon.vue'),
     check: () => import('./CheckIcon.vue'),
     edit: () => import('./EditIcon.vue'),

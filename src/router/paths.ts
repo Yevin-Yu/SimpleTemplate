@@ -17,7 +17,8 @@ export const ROUTE_PATHS = {
 
     // examples
     BASE_COMPONENTS: '/base-components',
-    FORM_COMPONENTS: '/form-components',
     BUTTON_COMPONENTS: '/button-components',
     TAG_COMPONENTS: '/tag-components',
+    CARD_COMPONENTS: '/card-components',
+    SELECT_COMPONENTS: '/select-components',
 } as const

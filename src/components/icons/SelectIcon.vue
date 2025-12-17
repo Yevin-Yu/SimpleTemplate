@@ -1,4 +1,9 @@
 <template>
+    <!--
+        SelectIcon
+        - 表达“下拉菜单/选择器”：一个触发框 + 下拉箭头
+        - 风格对齐现有 icon：stroke=currentColor，支持 size/color/customClass/ariaHidden
+    -->
     <svg
         xmlns="http://www.w3.org/2000/svg"
         :width="size"
@@ -9,13 +14,13 @@
         stroke-width="2.2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="card-icon"
+        class="select-icon"
         :class="customClass"
         :aria-hidden="ariaHidden ? 'true' : undefined"
     >
-        <rect x="2.5" y="2.5" width="19" height="19" rx="2" ry="2" />
-        <line x1="2.5" x2="21.5" y1="8.8" y2="8.8" />
-        <line x1="8.8" x2="8.8" y1="21.5" y2="8.8" />
+        <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+        <path d="M6.6 10h9.2" />
+        <path d="M15.6 10l2.2 2.2 2.2-2.2" />
     </svg>
 </template>
 
@@ -41,8 +46,10 @@ defineProps({
 </script>
 
 <style scoped>
-.card-icon {
+.select-icon {
     display: inline-block;
     vertical-align: middle;
 }
 </style>
+
+
