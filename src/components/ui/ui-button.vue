@@ -19,7 +19,7 @@
  * Button（基础按钮）
  *
  * Props
- * - variant: 视觉样式（default/primary/blank）
+ * - variant: 视觉样式（default/primary/blank/station/danger）
  * - size: 尺寸（small/medium）
  * - disabled: 禁用（会透传到原生 disabled，并阻止 click emit）
  * - nativeType: 原生 button type（button/submit/reset）
@@ -32,7 +32,7 @@
  * - click: 用户点击（disabled 时不会触发）
  */
 
-export type UiButtonVariant = 'default' | 'primary' | 'blank'
+export type UiButtonVariant = 'default' | 'primary' | 'blank' | 'station' | 'danger'
 export type UiButtonSize = 'small' | 'medium'
 export type UiButtonNativeType = 'button' | 'submit' | 'reset'
 
@@ -78,6 +78,7 @@ const onClick = (event: MouseEvent) => {
     background-color: var(--white);
     box-shadow: var(--shadow-xs);
     border: 1px solid var(--border);
+
     &:hover {
         background-color: var(--accent);
     }
@@ -85,15 +86,41 @@ const onClick = (event: MouseEvent) => {
 
 .ui-button-primary {
     background-color: var(--primary);
+    box-shadow: var(--shadow-xs);
     color: var(--primary-foreground);
+
     &:hover {
         background-color: var(--primary);
-        filter: brightness(1.05);
+        filter: brightness(0.9);
+    }
+}
+
+.ui-button-station {
+    background-color: var(--accent);
+    box-shadow: var(--shadow-xs);
+    color: var(--foreground);
+    border: 1px solid color-mix(in srgb, var(--accent) 70%, var(--border));
+
+    &:hover {
+        background-color: var(--accent);
+        filter: brightness(0.9);
+    }
+}
+
+.ui-button-danger {
+    background-color: var(--destructive);
+    box-shadow: var(--shadow-xs);
+    color: var(--destructive-foreground);
+
+    &:hover {
+        background-color: var(--destructive);
+        filter: brightness(0.9);
     }
 }
 
 .ui-button-blank {
     background-color: transparent;
+
     &:hover {
         background-color: var(--accent);
     }

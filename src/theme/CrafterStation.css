@@ -34,7 +34,7 @@
     --radius: 0rem;
     --letter-spacing: 0em;
     --font-sans: Geist, sans-serif;
-    --font-mono: 'Geist Mono', monospace;
+    --font-mono: Consolas, 'Courier New', monospace;
     --font-serif: Merriweather, serif;
     --shadow-color: #e1dfda;
     --shadow-opacity: 1;
@@ -88,7 +88,7 @@
     --radius: 0rem;
     --letter-spacing: 0em;
     --font-sans: Geist, sans-serif;
-    --font-mono: 'Geist Mono', monospace;
+    --font-mono: Consolas, 'Courier New', monospace;
     --font-serif: Merriweather, serif;
     --shadow-color: #222223;
     --shadow-opacity: 1;

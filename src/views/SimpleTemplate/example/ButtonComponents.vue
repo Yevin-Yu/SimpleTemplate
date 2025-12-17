@@ -27,6 +27,27 @@
             </ui-card>
 
             <!-- =========================
+                模块：主题色（station / danger）
+            ========================== -->
+            <ui-card class="p-6 mb-6">
+                <div class="mb-4">
+                    <h2 class="h-title text-2xl font-semibold">主题色</h2>
+                    <p class="text-gray-600 mt-1">
+                        参考 <ui-tag>ui-tag</ui-tag> 的主题色命名，按钮也提供 <ui-tag>station</ui-tag> / <ui-tag>danger</ui-tag> 两个主题 variant。
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <ui-button variant="station">Station</ui-button>
+                    <ui-button variant="danger">Danger</ui-button>
+                    <ui-button variant="station" size="small">Small Station</ui-button>
+                    <ui-button variant="danger" size="small">Small Danger</ui-button>
+                </div>
+
+                <ui-code-block title="示例代码" language="vue" :code="codeTheme" />
+            </ui-card>
+
+            <!-- =========================
                 模块：尺寸（size）
             ========================== -->
             <ui-card class="p-6 mb-6">
@@ -196,6 +217,13 @@ const codeVariant = `<template>
     <ui-button>默认按钮</ui-button>
     <ui-button variant="primary">主要按钮</ui-button>
     <ui-button variant="blank">空白按钮</ui-button>
+<\/template>`
+
+const codeTheme = `<template>
+    <ui-button variant="station">Station</ui-button>
+    <ui-button variant="danger">Danger</ui-button>
+    <ui-button variant="station" size="small">Small Station</ui-button>
+    <ui-button variant="danger" size="small">Small Danger</ui-button>
 <\/template>`
 
 const codeSize = `<template>

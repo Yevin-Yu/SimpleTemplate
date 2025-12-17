@@ -65,8 +65,30 @@
                         <td class="px-4 py-3">{{ formatDate(r.createdAt) }}</td>
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-2">
-                                <ui-button variant="blank" size="small" :disabled="loading" @click="emit('edit', r)">修改</ui-button>
-                                <ui-button variant="blank" size="small" :disabled="loading" @click="emit('delete', r)">删除</ui-button>
+                                <!--
+                                    操作按钮语义约定（最佳实践）：
+                                    - “修改”是主操作 => primary
+                                    - “删除”是破坏性操作 => danger
+                                    统一在脚本中集中配置，避免散落 magic string，便于后续全局调整。
+                                -->
+                                <ui-button
+                                    :variant="ROW_ACTIONS.edit.variant"
+                                    size="small"
+                                    :disabled="loading"
+                                    :aria-label="`修改：${r.name}`"
+                                    @click="emit('edit', r)"
+                                >
+                                    修改
+                                </ui-button>
+                                <ui-button
+                                    :variant="ROW_ACTIONS.delete.variant"
+                                    size="small"
+                                    :disabled="loading"
+                                    :aria-label="`删除：${r.name}`"
+                                    @click="emit('delete', r)"
+                                >
+                                    删除
+                                </ui-button>
                             </div>
                         </td>
                     </tr>
@@ -92,9 +114,9 @@
                 <span class="text-sm text-[var(--muted-foreground)] mr-2">条</span>
 
                 <ui-button variant="blank" size="small" :disabled="loading || page <= 1" @click="emit('pageChange', page - 1)">上一页</ui-button>
-                <ui-button variant="blank" size="small" :disabled="loading || page >= totalPages" @click="emit('pageChange', page + 1)"
-                    >下一页</ui-button
-                >
+                <ui-button variant="blank" size="small" :disabled="loading || page >= totalPages" @click="emit('pageChange', page + 1)">
+                    下一页
+                </ui-button>
             </div>
         </div>
     </ui-card>
@@ -107,6 +129,7 @@ import uiButton from '@/components/ui/ui-button.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
 import UiTag from '@/components/ui/ui-tag.vue'
 import type { TableUserRow, UserRole, UserStatus } from '../types'
+import type { UiButtonVariant } from '@/components/ui/ui-button.vue'
 
 /**
  * DataTable（表格展示区）
@@ -133,7 +156,17 @@ const props = defineProps<{
  * - 角色：soft（弱强调）
  * - 状态：active => station（强调），非 active => danger（告警）
  */
-const statusTagVariant = (status: UserStatus) => (status === 'active' ? 'station' : 'danger')
+const statusTagVariant = (status: UserStatus): 'station' | 'danger' => (status === 'active' ? 'station' : 'danger')
+
+/**
+ * 行内“操作按钮”集中配置（模块化、可维护）：
+ * - 这里的 variant 只描述语义，不绑定具体颜色；颜色由 ui-button + 当前主题统一决定
+ * - 如需全局更换操作按钮风格，只改这一处即可
+ */
+const ROW_ACTIONS = {
+    edit: { variant: 'primary' },
+    delete: { variant: 'danger' },
+} as const satisfies Record<'edit' | 'delete', { variant: UiButtonVariant }>
 
 const emit = defineEmits<{
     add: []

@@ -23,4 +23,4 @@
 
 ### 迁移提示（Breaking Change）
 
-- **`ui-button`**：props `type` 已规范为 **`variant`**（`default/primary/blank`）。
+- **`ui-button`**：props `type` 已规范为 **`variant`**（`default/primary/blank/station/danger`）。
