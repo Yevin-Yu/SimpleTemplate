@@ -66,4 +66,12 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/SimpleTemplate/example/ButtonComponents.vue'),
     },
+    {
+        path: ROUTE_PATHS.TAG_COMPONENTS,
+        name: 'TagComponents',
+        meta: {
+            title: '标签组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/TagComponents.vue'),
+    },
 ]
