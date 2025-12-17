@@ -3,7 +3,7 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">开关组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-switch</ui-tag-button> 的常用能力与推荐用法（v-model、禁用态、自定义 thumb 图标）。
+                这里聚焦展示 <ui-tag>ui-switch</ui-tag> 的常用能力与推荐用法（v-model、禁用态、自定义 thumb 图标）。
             </p>
 
             <!-- =========================
@@ -12,7 +12,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">基础用法</h2>
-                    <p class="text-gray-600 mt-1">使用 <ui-tag-button>v-model</ui-tag-button> 绑定布尔值。</p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>v-model</ui-tag> 绑定布尔值。</p>
                 </div>
 
                 <div class="flex items-center gap-4 mb-4">
@@ -32,9 +32,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">自定义图标</h2>
-                    <p class="text-gray-600 mt-1">
-                        使用 <ui-tag-button>#thumb-on</ui-tag-button> / <ui-tag-button>#thumb-off</ui-tag-button> 自定义 thumb 内容。
-                    </p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>#thumb-on</ui-tag> / <ui-tag>#thumb-off</ui-tag> 自定义 thumb 内容。</p>
                 </div>
 
                 <div class="flex items-center gap-4 mb-4">
@@ -61,7 +59,7 @@
             <ui-card class="p-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">禁用状态</h2>
-                    <p class="text-gray-600 mt-1">使用 <ui-tag-button>disabled</ui-tag-button> 禁用交互。</p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>disabled</ui-tag> 禁用交互。</p>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-6 mb-4">
@@ -87,13 +85,13 @@
  *
  * 页面目标：
  * - 覆盖 ui-switch 的核心能力：v-model / slots / disabled
- * - 示例中 ui-tag-button 仅用于说明文字里的 token
+ * - 示例中 ui-tag 仅用于说明文字里的 token
  */
 import { ref } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiSwitch from '@/components/ui/ui-switch.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
-import UiTagButton from '@/components/ui/ui-tag-button.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 import { SwitchOnIcon, SwitchOffIcon } from '@/components/icons'
 
 const value1 = ref(false)

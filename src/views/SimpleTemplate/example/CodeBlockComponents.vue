@@ -3,7 +3,7 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">代码块组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-code-block</ui-tag-button> 的常用能力与推荐用法（语言高亮、复制、标题、主题切换）。
+                这里聚焦展示 <ui-tag>ui-code-block</ui-tag> 的常用能力与推荐用法（语言高亮、复制、标题、主题切换）。
             </p>
 
             <!-- =========================
@@ -12,9 +12,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">基础用法</h2>
-                    <p class="text-gray-600 mt-1">
-                        通过 <ui-tag-button>language</ui-tag-button> 指定语言，通过 <ui-tag-button>code</ui-tag-button> 传入代码文本。
-                    </p>
+                    <p class="text-gray-600 mt-1">通过 <ui-tag>language</ui-tag> 指定语言，通过 <ui-tag>code</ui-tag> 传入代码文本。</p>
                 </div>
 
                 <ui-code-block title="示例代码" language="vue" :code="codeVueSnippet" />
@@ -38,7 +36,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">复制按钮控制</h2>
-                    <p class="text-gray-600 mt-1">使用 <ui-tag-button>showCopy</ui-tag-button> 控制是否展示复制按钮（例如：只读展示场景）。</p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>showCopy</ui-tag> 控制是否展示复制按钮（例如：只读展示场景）。</p>
                 </div>
 
                 <ui-code-block title="不展示复制按钮" language="json" :code="codeJsonSnippet" :show-copy="false" />
@@ -55,8 +53,7 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">主题</h2>
                     <p class="text-gray-600 mt-1">
-                        默认 <ui-tag-button>theme="auto"</ui-tag-button>：会根据 <ui-tag-button>html.dark</ui-tag-button> 或系统主题自动切换。
-                        也可显式指定 Shiki 主题。
+                        默认 <ui-tag>theme="auto"</ui-tag>：会根据 <ui-tag>html.dark</ui-tag> 或系统主题自动切换。 也可显式指定 Shiki 主题。
                     </p>
                 </div>
 
@@ -80,11 +77,11 @@
  *
  * 页面目标：
  * - 覆盖 ui-code-block 的核心能力：语法高亮、复制、标题、主题
- * - 示例中 ui-tag-button 仅用于说明文字里的 token
+ * - 示例中 ui-tag 仅用于说明文字里的 token
  */
 import uiCard from '@/components/ui/ui-card.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
-import UiTagButton from '@/components/ui/ui-tag-button.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 
 // 展示用：更贴近实际的片段（tab=4）
 const codeVueSnippet = `<template>

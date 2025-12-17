@@ -3,8 +3,8 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">右键菜单组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-context-menu</ui-tag-button> 的推荐用法：页面只挂载一个实例，通过 ref 调用
-                <ui-tag-button>openWithEvent</ui-tag-button> / <ui-tag-button>openAt</ui-tag-button> 打开。
+                这里聚焦展示 <ui-tag>ui-context-menu</ui-tag> 的推荐用法：页面只挂载一个实例，通过 ref 调用 <ui-tag>openWithEvent</ui-tag> /
+                <ui-tag>openAt</ui-tag> 打开。
             </p>
 
             <!-- =========================
@@ -13,7 +13,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">基础用法</h2>
-                    <p class="text-gray-600 mt-1">在触发元素上监听 <ui-tag-button>@contextmenu.prevent</ui-tag-button>，并传入菜单项。</p>
+                    <p class="text-gray-600 mt-1">在触发元素上监听 <ui-tag>@contextmenu.prevent</ui-tag>，并传入菜单项。</p>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -67,7 +67,7 @@ import uiButton from '@/components/ui/ui-button.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
 import uiContextMenu from '@/components/ui/ui-context-menu.vue'
 import type { ContextMenuItem } from '@/components/ui/ui-context-menu.vue'
-import UiTagButton from '@/components/ui/ui-tag-button.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 import { CopyIcon, EditIcon, TrashIcon } from '@/components/icons'
 
 const menuRef = ref<InstanceType<typeof uiContextMenu> | null>(null)

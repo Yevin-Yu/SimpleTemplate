@@ -51,6 +51,7 @@
     --shadow-xl: 4px 4px 0px 0px hsl(42.86 10.45% 86.86% / 1), 4px 8px 10px -1px hsl(42.86 10.45% 86.86% / 1);
     --shadow-2xl: 4px 4px 0px 0px hsl(42.86 10.45% 86.86% / 2.5);
 }
+
 .dark {
     --background: #0a0a0a;
     --foreground: #f3f3f5;

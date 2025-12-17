@@ -3,7 +3,7 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">按钮组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-button</ui-tag-button> 的常用能力与推荐用法，并提供可复制的代码示例。
+                这里聚焦展示 <ui-tag>ui-button</ui-tag> 的常用能力与推荐用法，并提供可复制的代码示例。
             </p>
 
             <!-- =========================
@@ -13,7 +13,7 @@
                 <div class="flex items-start justify-between gap-4 mb-4">
                     <div>
                         <h2 class="h-title text-2xl font-semibold">基础用法</h2>
-                        <p class="text-gray-600 mt-1">通过 <ui-tag-button>variant</ui-tag-button> 选择不同视觉样式。</p>
+                        <p class="text-gray-600 mt-1">通过 <ui-tag>variant</ui-tag> 选择不同视觉样式。</p>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">尺寸</h2>
-                    <p class="text-gray-600 mt-1">通过 <ui-tag-button>size</ui-tag-button> 选择按钮尺寸（small / medium）。</p>
+                    <p class="text-gray-600 mt-1">通过 <ui-tag>size</ui-tag> 选择按钮尺寸（small / medium）。</p>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -51,9 +51,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">带图标 / 仅图标</h2>
-                    <p class="text-gray-600 mt-1">
-                        使用 <ui-tag-button>#icon</ui-tag-button> 插槽传入图标。若没有默认插槽文案，将自动表现为“仅图标按钮”。
-                    </p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>#icon</ui-tag> 插槽传入图标。若没有默认插槽文案，将自动表现为“仅图标按钮”。</p>
                 </div>
 
                 <div class="flex flex-wrap gap-3 mb-4">
@@ -105,8 +103,8 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">禁用状态</h2>
                     <p class="text-gray-600 mt-1">
-                        <ui-tag-button>disabled</ui-tag-button> 会透传到原生
-                        <ui-tag-button>&lt;button disabled&gt;</ui-tag-button>，并且组件内部会阻止 click emit（符合最佳实践）。
+                        <ui-tag>disabled</ui-tag> 会透传到原生 <ui-tag>&lt;button disabled&gt;</ui-tag>，并且组件内部会阻止 click
+                        emit（符合最佳实践）。
                     </p>
                 </div>
 
@@ -130,7 +128,7 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">表单场景（推荐）</h2>
                     <p class="text-gray-600 mt-1">
-                        在表单内请优先用 <ui-tag-button>nativeType="submit"</ui-tag-button> 触发表单提交（而不是在按钮 click 里手动调用提交逻辑）。
+                        在表单内请优先用 <ui-tag>nativeType="submit"</ui-tag> 触发表单提交（而不是在按钮 click 里手动调用提交逻辑）。
                     </p>
                 </div>
 
@@ -165,7 +163,7 @@ import { ref } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
-import UiTagButton from '@/components/ui/ui-tag-button.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 import { SettingsIcon, ShareIcon, LogOutIcon } from '@/components/icons'
 
 // =========================

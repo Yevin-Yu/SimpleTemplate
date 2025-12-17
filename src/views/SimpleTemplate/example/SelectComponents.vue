@@ -3,8 +3,7 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">下拉菜单组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-select</ui-tag-button> 的常用能力与推荐用法（字符串数组 / 对象数组 / 自定义渲染 / 带图标选项 /
-                禁用态）。
+                这里聚焦展示 <ui-tag>ui-select</ui-tag> 的常用能力与推荐用法（字符串数组 / 对象数组 / 自定义渲染 / 带图标选项 / 禁用态）。
             </p>
 
             <!-- =========================
@@ -13,9 +12,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">基础用法</h2>
-                    <p class="text-gray-600 mt-1">
-                        使用 <ui-tag-button>v-model</ui-tag-button> 绑定选中值；options 支持 <ui-tag-button>string/number</ui-tag-button>。
-                    </p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>v-model</ui-tag> 绑定选中值；options 支持 <ui-tag>string/number</ui-tag>。</p>
                 </div>
 
                 <div class="flex flex-wrap gap-4 mb-4">
@@ -35,8 +32,7 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">对象数组</h2>
                     <p class="text-gray-600 mt-1">
-                        当 options 是对象数组时，使用 <ui-tag-button>optionLabel</ui-tag-button> /
-                        <ui-tag-button>optionValue</ui-tag-button> 显式声明字段。
+                        当 options 是对象数组时，使用 <ui-tag>optionLabel</ui-tag> / <ui-tag>optionValue</ui-tag> 显式声明字段。
                     </p>
                 </div>
 
@@ -57,7 +53,7 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">自定义选项渲染</h2>
                     <p class="text-gray-600 mt-1">
-                        使用 <ui-tag-button>#option</ui-tag-button> 自定义下拉项展示；需要更强类型提示时，可在模板中将 option 断言为具体类型。
+                        使用 <ui-tag>#option</ui-tag> 自定义下拉项展示；需要更强类型提示时，可在模板中将 option 断言为具体类型。
                     </p>
                 </div>
 
@@ -83,9 +79,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">带图标的选项</h2>
-                    <p class="text-gray-600 mt-1">
-                        通过 <ui-tag-button>#selected</ui-tag-button> / <ui-tag-button>#option</ui-tag-button> 自定义展示图标与文案。
-                    </p>
+                    <p class="text-gray-600 mt-1">通过 <ui-tag>#selected</ui-tag> / <ui-tag>#option</ui-tag> 自定义展示图标与文案。</p>
                 </div>
 
                 <div class="flex flex-wrap gap-4 mb-4">
@@ -117,7 +111,7 @@
             <ui-card class="p-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">禁用状态</h2>
-                    <p class="text-gray-600 mt-1">使用 <ui-tag-button>disabled</ui-tag-button> 禁用交互。</p>
+                    <p class="text-gray-600 mt-1">使用 <ui-tag>disabled</ui-tag> 禁用交互。</p>
                 </div>
 
                 <div class="flex flex-wrap gap-4 mb-4">
@@ -141,13 +135,13 @@
  *
  * 页面目标：
  * - 展示 Select 组件的多种用法：基础用法 / 对象数组 / 自定义渲染 / 图标选项 / 禁用态
- * - 示例中"交互动作"统一使用 ui-button；ui-tag-button 仅用于说明文字里的 token
+ * - 示例中"交互动作"统一使用 ui-button；ui-tag 仅用于说明文字里的 token
  */
 import { markRaw, ref, type Component } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
-import UiTagButton from '@/components/ui/ui-tag-button.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 import { HomeIcon, DashboardIcon } from '@/components/icons'
 
 // =========================

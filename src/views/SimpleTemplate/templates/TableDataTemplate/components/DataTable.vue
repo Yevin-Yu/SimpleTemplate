@@ -53,12 +53,14 @@
                         <td class="px-4 py-3">{{ r.name }}</td>
                         <td class="px-4 py-3">{{ r.email }}</td>
                         <td class="px-4 py-3">
-                            <span class="badge badge-role">{{ roleLabel(r.role) }}</span>
+                            <ui-tag :title="roleLabel(r.role)">
+                                {{ roleLabel(r.role) }}
+                            </ui-tag>
                         </td>
                         <td class="px-4 py-3">
-                            <span class="badge" :class="r.status === 'active' ? 'badge-success' : 'badge-muted'">
+                            <ui-tag :variant="statusTagVariant(r.status)" :title="statusLabel(r.status)">
                                 {{ statusLabel(r.status) }}
-                            </span>
+                            </ui-tag>
                         </td>
                         <td class="px-4 py-3">{{ formatDate(r.createdAt) }}</td>
                         <td class="px-4 py-3">
@@ -103,6 +105,7 @@ import { computed } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 import type { TableUserRow, UserRole, UserStatus } from '../types'
 
 /**
@@ -124,6 +127,13 @@ const props = defineProps<{
     roleLabel: (role: UserRole) => string
     statusLabel: (status: UserStatus) => string
 }>()
+
+/**
+ * 表格内的 tag 风格映射：
+ * - 角色：soft（弱强调）
+ * - 状态：active => station（强调），非 active => danger（告警）
+ */
+const statusTagVariant = (status: UserStatus) => (status === 'active' ? 'station' : 'danger')
 
 const emit = defineEmits<{
     add: []
@@ -200,33 +210,5 @@ const formatDate = (iso: string): string => {
 
 .state-empty {
     background: rgba(148, 163, 184, 0.08);
-}
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-    height: 22px;
-    padding: 0 8px;
-    border-radius: 999px;
-    font-size: 12px;
-    border: 1px solid var(--border);
-}
-
-.badge-role {
-    background: rgba(59, 130, 246, 0.12);
-    color: rgba(30, 64, 175, 0.95);
-    border-color: rgba(59, 130, 246, 0.25);
-}
-
-.badge-success {
-    background: rgba(34, 197, 94, 0.12);
-    color: rgba(22, 101, 52, 0.95);
-    border-color: rgba(34, 197, 94, 0.25);
-}
-
-.badge-muted {
-    background: rgba(148, 163, 184, 0.18);
-    color: rgba(51, 65, 85, 0.9);
-    border-color: rgba(148, 163, 184, 0.35);
 }
 </style>

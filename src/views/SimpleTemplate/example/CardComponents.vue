@@ -4,7 +4,7 @@
             <h1 class="h-title text-3xl font-bold mb-2">卡片组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
                 这里聚焦展示
-                <ui-tag-button>ui-card</ui-tag-button>
+                <ui-tag>ui-card</ui-tag>
                 的常用能力与推荐用法。卡片组件仅负责“容器外观”，布局（padding/header/footer）建议由业务层组合完成。
             </p>
 
@@ -14,7 +14,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">基础用法</h2>
-                    <p class="text-gray-600 mt-1">通过 <ui-tag-button>variant</ui-tag-button> 选择默认阴影或轻量阴影。</p>
+                    <p class="text-gray-600 mt-1">通过 <ui-tag>variant</ui-tag> 选择默认阴影或轻量阴影。</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -38,9 +38,7 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">推荐结构</h2>
-                    <p class="text-gray-600 mt-1">
-                        <ui-tag-button>ui-card</ui-tag-button> 建议保持“薄封装”，在卡片内部用语义化结构分区，便于复用与维护。
-                    </p>
+                    <p class="text-gray-600 mt-1"><ui-tag>ui-card</ui-tag> 建议保持“薄封装”，在卡片内部用语义化结构分区，便于复用与维护。</p>
                 </div>
 
                 <ui-card class="p-5">
@@ -73,9 +71,7 @@
             <ui-card class="p-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">列表场景</h2>
-                    <p class="text-gray-600 mt-1">
-                        在列表/表单分组等场景推荐使用 <ui-tag-button>variant="light"</ui-tag-button>，并用更紧凑的 padding。
-                    </p>
+                    <p class="text-gray-600 mt-1">在列表/表单分组等场景推荐使用 <ui-tag>variant="light"</ui-tag>，并用更紧凑的 padding。</p>
                 </div>
 
                 <div class="grid gap-3 mb-4">
@@ -118,7 +114,7 @@ import { ref } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
-import UiTagButton from '@/components/ui/ui-tag-button.vue'
+import UiTag from '@/components/ui/ui-tag.vue'
 
 const lastActionText = ref('无')
 
