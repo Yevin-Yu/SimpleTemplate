@@ -17,13 +17,13 @@
     >
         <!-- tag outline -->
         <path
-            d="M3.5 10.2V5.6C3.5 4.72 4.22 4 5.1 4H9.7c.5 0 .98.2 1.33.55l8.42 8.42c.73.73.73 1.92 0 2.65l-4.4 4.4c-.73.73-1.92.73-2.65 0l-8.42-8.42A1.87 1.87 0 0 1 3.5 10.2Z"
+            d="M2.8 10.6V5.4C2.8 4.3 3.7 3.4 4.8 3.4H10c.62 0 1.21.25 1.65.68l8.75 8.75c.85.85.85 2.23 0 3.08l-4.56 4.56c-.85.85-2.23.85-3.08 0L3.48 12.25A2.2 2.2 0 0 1 2.8 10.6Z"
             stroke="currentColor"
-            stroke-width="1.9"
+            stroke-width="2.2"
             stroke-linejoin="round"
         />
         <!-- hole -->
-        <circle cx="7.2" cy="7.2" r="1.2" fill="currentColor" />
+        <circle cx="7.4" cy="7.1" r="1.4" fill="currentColor" />
     </svg>
 </template>
 
