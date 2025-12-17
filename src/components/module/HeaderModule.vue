@@ -43,7 +43,7 @@
                 </template>
             </ui-switch>
             <div class="line"></div>
-            <ui-button @click="goGithub" type="blank" size="small">
+            <ui-button @click="goGithub" variant="blank" size="small">
                 <template #icon>
                     <GitHubIcon size="24" />
                 </template>
@@ -56,8 +56,8 @@
 
 <script setup lang="ts">
 import UiButton from '@/components/ui/ui-button.vue'
-import uiSwitch from '@/components/ui/ui-switch.vue'
-import uiSelect from '@/components/ui/ui-select.vue'
+import UiSwitch from '@/components/ui/ui-switch.vue'
+import UiSelect from '@/components/ui/ui-select.vue'
 import UserModule from '@/components/module/UserModule.vue'
 import { GitHubIcon, SwitchOnIcon, SwitchOffIcon, HomeIcon, DashboardIcon } from '@/components/icons'
 import { computed } from 'vue'

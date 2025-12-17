@@ -11,7 +11,7 @@
                     一个现代化的 Vue 3 单页应用模板，集成了 TypeScript、Vite、Vue Router、Pinia、Tailwind CSS 等最佳实践工具，助您快速启动新项目。
                 </p>
                 <div class="hero-actions">
-                    <ui-button type="primary" @click="scrollToFeatures">
+                    <ui-button variant="primary" @click="scrollToFeatures">
                         <template #icon>
                             <ExampleIcon :size="16" />
                         </template>

@@ -59,8 +59,8 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <ui-button type="primary" @click="handleSubmit">提交</ui-button>
-                        <ui-button type="blank" @click="handleReset">重置</ui-button>
+                        <ui-button variant="primary" @click="handleSubmit">提交</ui-button>
+                        <ui-button variant="blank" @click="handleReset">重置</ui-button>
                     </div>
                 </form>
             </ui-card>
@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <ui-button type="primary" @click="handleValidateSubmit">提交验证</ui-button>
+                        <ui-button variant="primary" @click="handleValidateSubmit">提交验证</ui-button>
                     </div>
                 </form>
             </ui-card>
@@ -211,8 +211,8 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <ui-button type="primary" @click="handleComplexSubmit">创建项目</ui-button>
-                        <ui-button type="blank" @click="handleComplexReset">取消</ui-button>
+                        <ui-button variant="primary" @click="handleComplexSubmit">创建项目</ui-button>
+                        <ui-button variant="blank" @click="handleComplexReset">取消</ui-button>
                     </div>
                 </form>
             </ui-card>

@@ -4,7 +4,7 @@
             <span class="code-block-title">{{ title }}</span>
         </div>
         <div class="code-block-container" :class="{ 'with-header': title }">
-            <ui-button v-if="showCopy" type="default" class="copy-button" @click="copyCode" :title="copied ? '已复制' : '复制代码'">
+            <ui-button v-if="showCopy" variant="default" class="copy-button" @click="copyCode" :title="copied ? '已复制' : '复制代码'">
                 <template #icon>
                     <CopyIcon v-if="!copied" :size="16" />
                     <CheckIcon v-else :size="16" />
@@ -16,12 +16,24 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * CodeBlock（代码块）
+ *
+ * Props
+ * - code: 代码文本
+ * - language: Shiki 语言名（默认 bash）。若传入未知语言，内部会回退为原始文本。
+ * - title: 可选标题（显示在顶部）
+ * - showCopy: 是否展示复制按钮
+ * - theme: Shiki 主题（默认 github-light）
+ *
+ * Slots
+ * - 无（目前只提供 Props 配置；后续若要自定义 header 可再扩展 slot）
+ */
 import { ref, onMounted, watch } from 'vue'
 import { codeToHtml } from 'shiki'
 import type { BundledLanguage, BundledTheme } from 'shiki'
-import uiButton from '@/components/ui/ui-button.vue'
-import CopyIcon from '@/components/icons/CopyIcon.vue'
-import CheckIcon from '@/components/icons/CheckIcon.vue'
+import UiButton from '@/components/ui/ui-button.vue'
+import { CopyIcon, CheckIcon } from '@/components/icons'
 
 interface Props {
     code: string
@@ -89,7 +101,7 @@ watch(
 <style scoped lang="less">
 .code-block-wrapper {
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius, 0px);
     overflow: hidden;
     background: var(--card);
     box-shadow: var(--shadow-xs);

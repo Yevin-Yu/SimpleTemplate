@@ -1,50 +1,30 @@
 import { defineStore } from 'pinia'
+import { STORAGE_KEYS, safeGetItem, safeSetItem } from '@/shared'
+import { ROUTE_PATHS } from '@/router/paths'
+import { DEFAULT_PROJECT_OPTIONS, DEFAULT_SELECTED_PROJECT, normalizeSelectedProject, type ProjectOption } from '@/features/project/projectSelection'
 
-export interface ProjectOption extends Record<string, unknown> {
-    label: string
-    value: string
-    icon: string
-}
-
-const STORAGE_KEY = 'simple-template-selected-project'
+// 对外保持导出名不变（历史兼容）；真实类型来自 features 层
+export type { ProjectOption }
 
 export const useProjectStore = defineStore('project', {
     state: () => {
-        const defaultOptions: ProjectOption[] = [
-            { label: 'Simple Home', value: '/simple-home', icon: 'home' },
-            { label: 'Simple Template', value: '/home', icon: 'template' },
-        ]
-
-        // 从 localStorage 读取保存的项目路由（value）
-        let savedRoute = '/home'
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY)
-            if (stored) {
-                // 兼容旧数据：如果是 label，转换为 value
-                const option = defaultOptions.find(opt => opt.label === stored || opt.value === stored)
-                savedRoute = option?.value || stored
-            }
-        } catch (error) {
-            console.error('Failed to load saved project:', error)
-        }
+        // 从 localStorage 读取保存的项目路由（value），并兼容旧数据（label）
+        const stored = safeGetItem(STORAGE_KEYS.SELECTED_PROJECT)
+        const savedRoute = normalizeSelectedProject(stored) || DEFAULT_SELECTED_PROJECT
 
         return {
             selectedProject: savedRoute, // 保存的是 value（路由路径）
-            projectOptions: defaultOptions,
+            projectOptions: DEFAULT_PROJECT_OPTIONS,
         }
     },
     actions: {
         setSelectedProject(route: string) {
             this.selectedProject = route
             // 保存到 localStorage
-            try {
-                localStorage.setItem(STORAGE_KEY, route)
-            } catch (error) {
-                console.error('Failed to save project:', error)
-            }
+            safeSetItem(STORAGE_KEYS.SELECTED_PROJECT, route)
         },
         getProjectRoute(): string {
-            return this.selectedProject || '/home'
+            return this.selectedProject || ROUTE_PATHS.SIMPLE_TEMPLATE_HOME
         },
     },
 })

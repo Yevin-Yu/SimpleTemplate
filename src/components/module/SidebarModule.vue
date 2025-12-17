@@ -15,7 +15,7 @@
                         <span v-if="item.icon" class="menu-item-icon">
                             <component :is="item.icon" :size="16" />
                         </span>
-                        <span class="menu-item-text">{{ item.label }}</span>
+                        <span class="menu-item-text">{{ getLabel(item) }}</span>
                         <span v-if="item.children" class="arrow" :class="{ open: isOpen(item) }">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                 <path
@@ -37,7 +37,7 @@
                                     <span v-if="child.icon" class="submenu-item-icon">
                                         <component :is="child.icon" :size="16" />
                                     </span>
-                                    <span class="submenu-item-text">{{ child.label }}</span>
+                                    <span class="submenu-item-text">{{ getLabel(child) }}</span>
                                 </div>
                             </li>
                         </ul>
@@ -49,86 +49,39 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect, type Component } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { HomeIcon, ExampleIcon, FormIcon, TableIcon, CardIcon, DashboardIcon, ComponentsIcon, BaseIcon } from '@/components/icons'
-
-interface MenuItem {
-    key: string
-    label: string
-    path?: string
-    icon?: Component
-    children?: MenuItem[]
-}
+import { SIDEBAR_NAV, type NavItem } from '@/router/nav'
 
 const router = useRouter()
 const route = useRoute()
 
-const menu = computed<MenuItem[]>(() => [
-    {
-        key: 'home',
-        label: '首页',
-        path: '/home',
-        icon: HomeIcon,
-    },
-    {
-        key: 'components',
-        label: '组件示例',
-        icon: ComponentsIcon,
-        children: [
-            {
-                key: 'base',
-                label: '基础组件',
-                path: '/base-components',
-                icon: BaseIcon,
-            },
-            {
-                key: 'form',
-                label: '表单组件',
-                path: '/form-components',
-                icon: FormIcon,
-            },
-        ],
-    },
-    {
-        key: 'example',
-        label: '示例演示',
-        icon: ExampleIcon,
-        children: [
-            {
-                key: 'form',
-                label: '表单示例',
-                path: '/form-example',
-                icon: FormIcon,
-            },
-            {
-                key: 'table',
-                label: '表格示例',
-                path: '/table-example',
-                icon: TableIcon,
-            },
-            {
-                key: 'card',
-                label: '卡片示例',
-                path: '/card-example',
-                icon: CardIcon,
-            },
-            {
-                key: 'dashboard',
-                label: '仪表盘示例',
-                path: '/dashboard-example',
-                icon: DashboardIcon,
-            },
-        ],
-    },
-])
+const menu = computed<NavItem[]>(() => SIDEBAR_NAV)
+
+/**
+ * 叶子节点文案：优先使用路由 meta.title，避免菜单与标题不一致。
+ * 分组节点（无 path）仍使用 nav.ts 里手写的 label。
+ */
+const titleByPath = computed<Record<string, string>>(() => {
+    const map: Record<string, string> = {}
+    for (const r of router.getRoutes()) {
+        const title = typeof r.meta?.title === 'string' ? r.meta.title : undefined
+        if (title) map[r.path] = title
+    }
+    return map
+})
+
+const getLabel = (item: NavItem): string => {
+    if (item.path) return titleByPath.value[item.path] ?? item.label ?? item.path
+    return item.label ?? item.key
+}
 
 const openKeys = ref<Set<string>>(new Set(['example', 'components']))
 
 // 自动展开包含激活子菜单的父菜单
 watchEffect(() => {
     const newOpenKeys = new Set(openKeys.value)
-    const checkAndOpen = (items: MenuItem[]): void => {
+    const checkAndOpen = (items: NavItem[]): void => {
         items.forEach(item => {
             if (item.children && item.children.length > 0) {
                 // 检查是否有子菜单项被激活
@@ -150,9 +103,9 @@ watchEffect(() => {
     openKeys.value = newOpenKeys
 })
 
-const isOpen = (item: MenuItem) => openKeys.value.has(item.key)
+const isOpen = (item: NavItem) => openKeys.value.has(item.key)
 
-const toggleOpen = (item: MenuItem) => {
+const toggleOpen = (item: NavItem) => {
     if (!item.children) return
     const next = new Set(openKeys.value)
     if (next.has(item.key)) {
@@ -163,7 +116,7 @@ const toggleOpen = (item: MenuItem) => {
     openKeys.value = next
 }
 
-const isActive = (item: MenuItem): boolean => {
+const isActive = (item: NavItem): boolean => {
     // 如果菜单项有子菜单，检查是否有子菜单项被激活
     if (item.children && item.children.length > 0) {
         return item.children.some(child => isActive(child))
@@ -179,7 +132,7 @@ const isActive = (item: MenuItem): boolean => {
     return route.path === pathWithoutHash || route.path === item.path || (route.fullPath?.startsWith(pathWithoutHash) ?? false)
 }
 
-const onItemClick = (item: MenuItem) => {
+const onItemClick = (item: NavItem) => {
     if (item.children && !item.path) {
         toggleOpen(item)
         return

@@ -32,8 +32,8 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex gap-2">
-                                        <ui-button type="blank" size="small">编辑</ui-button>
-                                        <ui-button type="blank" size="small">删除</ui-button>
+                                        <ui-button variant="blank" size="small">编辑</ui-button>
+                                        <ui-button variant="blank" size="small">删除</ui-button>
                                     </div>
                                 </td>
                             </tr>

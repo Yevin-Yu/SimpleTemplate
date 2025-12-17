@@ -15,8 +15,8 @@
                         <h3 class="h-title text-lg font-medium mb-3">基础用法</h3>
                         <div class="flex flex-wrap gap-3">
                             <ui-button>默认按钮</ui-button>
-                            <ui-button type="primary">主要按钮</ui-button>
-                            <ui-button type="blank">空白按钮</ui-button>
+                            <ui-button variant="primary">主要按钮</ui-button>
+                            <ui-button variant="blank">空白按钮</ui-button>
                         </div>
                     </div>
 
@@ -29,13 +29,13 @@
                                 </template>
                                 设置
                             </ui-button>
-                            <ui-button type="primary">
+                            <ui-button variant="primary">
                                 <template #icon>
                                     <ShareIcon size="16" />
                                 </template>
                                 分享
                             </ui-button>
-                            <ui-button type="blank">
+                            <ui-button variant="blank">
                                 <template #icon>
                                     <LogOutIcon size="16" />
                                 </template>
@@ -52,12 +52,12 @@
                                     <SettingsIcon size="16" />
                                 </template>
                             </ui-button>
-                            <ui-button type="primary">
+                            <ui-button variant="primary">
                                 <template #icon>
                                     <ShareIcon size="16" />
                                 </template>
                             </ui-button>
-                            <ui-button type="blank">
+                            <ui-button variant="blank">
                                 <template #icon>
                                     <LogOutIcon size="16" />
                                 </template>
@@ -69,8 +69,8 @@
                         <h3 class="h-title text-lg font-medium mb-3">按钮状态</h3>
                         <div class="flex flex-wrap gap-3">
                             <ui-button @click="handleClick">可点击</ui-button>
-                            <ui-button type="blank" disabled>禁用状态</ui-button>
-                            <ui-button type="primary" @click="handleClick">主要按钮</ui-button>
+                            <ui-button variant="blank" disabled>禁用状态</ui-button>
+                            <ui-button variant="primary" @click="handleClick">主要按钮</ui-button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <ui-card class="p-4 hover:shadow-lg transition-shadow">
                         <h3 class="h-title font-semibold mb-2">带操作卡片</h3>
                         <p class="text-sm text-gray-600 mb-3">卡片可以包含操作按钮。</p>
-                        <ui-button type="primary" size="small">查看详情</ui-button>
+                        <ui-button variant="primary" size="small">查看详情</ui-button>
                     </ui-card>
 
                     <ui-card variant="light" class="p-4 hover:shadow-lg transition-shadow">

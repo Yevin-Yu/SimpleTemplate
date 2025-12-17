@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold">仪表盘示例</h1>
-                <ui-button type="primary">
+                <ui-button variant="primary">
                     <template #icon>
                         <SettingsIcon size="16" />
                     </template>
@@ -85,19 +85,19 @@
                     <ui-card class="p-6">
                         <h2 class="text-xl font-semibold mb-4">快速操作</h2>
                         <div class="grid grid-cols-2 gap-4">
-                            <ui-button type="primary" class="h-20 flex flex-col items-center justify-center">
+                            <ui-button variant="primary" class="h-20 flex flex-col items-center justify-center">
                                 <span class="text-2xl mb-2">➕</span>
                                 <span>新建项目</span>
                             </ui-button>
-                            <ui-button type="blank" class="h-20 flex flex-col items-center justify-center">
+                            <ui-button variant="blank" class="h-20 flex flex-col items-center justify-center">
                                 <span class="text-2xl mb-2">📁</span>
                                 <span>文件管理</span>
                             </ui-button>
-                            <ui-button type="blank" class="h-20 flex flex-col items-center justify-center">
+                            <ui-button variant="blank" class="h-20 flex flex-col items-center justify-center">
                                 <span class="text-2xl mb-2">⚙️</span>
                                 <span>系统设置</span>
                             </ui-button>
-                            <ui-button type="primary" class="h-20 flex flex-col items-center justify-center">
+                            <ui-button variant="primary" class="h-20 flex flex-col items-center justify-center">
                                 <span class="text-2xl mb-2">📊</span>
                                 <span>数据分析</span>
                             </ui-button>

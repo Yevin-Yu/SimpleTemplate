@@ -14,7 +14,7 @@
             </div>
             <div class="dialog-actions">
                 <ui-button @click="$emit('close')">取消</ui-button>
-                <ui-button type="primary" @click="handleSubmit">添加</ui-button>
+                <ui-button variant="primary" @click="handleSubmit">添加</ui-button>
             </div>
         </div>
     </div>

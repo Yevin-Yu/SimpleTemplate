@@ -34,8 +34,8 @@
                         />
                     </div>
                     <div class="flex items-center gap-4">
-                        <ui-button type="primary" @click="handleSubmit">提交</ui-button>
-                        <ui-button type="blank" @click="handleReset">重置</ui-button>
+                        <ui-button variant="primary" @click="handleSubmit">提交</ui-button>
+                        <ui-button variant="blank" @click="handleReset">重置</ui-button>
                     </div>
                 </form>
             </ui-card>

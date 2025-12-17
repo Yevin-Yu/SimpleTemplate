@@ -1,31 +1,64 @@
 <template>
-    <button class="ui-button gap-2" :class="[`ui-button-${type}`, { 'only-icon': !$slots.default }, { 'is-disabled': disabled }]">
-        <div class="icon" v-if="$slots.icon">
-            <slot name="icon"></slot>
-        </div>
-        <div class="content" v-if="$slots.default">
-            <slot></slot>
-        </div>
-        <div class="disabled-overlay" v-if="disabled"></div>
+    <button
+        class="ui-button gap-2"
+        :class="[`ui-button-${variant}`, `ui-button-size-${size}`, { 'only-icon': !$slots.default }, { 'is-disabled': disabled }]"
+        :type="nativeType"
+        :disabled="disabled"
+        @click="onClick"
+    >
+        <span class="icon" v-if="$slots.icon" aria-hidden="true">
+            <slot name="icon" />
+        </span>
+        <span class="content" v-if="$slots.default">
+            <slot />
+        </span>
     </button>
 </template>
-<script setup>
-// 接受参数
-defineProps({
-    // primary, default, blank
-    type: {
-        type: String,
-        default: 'default',
-    },
-    size: {
-        type: String,
-        default: 'medium',
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-})
+<script setup lang="ts">
+/**
+ * Button（基础按钮）
+ *
+ * Props
+ * - variant: 视觉样式（default/primary/blank）
+ * - size: 尺寸（small/medium）
+ * - disabled: 禁用（会透传到原生 disabled，并阻止 click emit）
+ * - nativeType: 原生 button type（button/submit/reset）
+ *
+ * Slots
+ * - default: 文案
+ * - icon: 左侧图标（无文案时会自动变为仅图标按钮）
+ *
+ * Emits
+ * - click: 用户点击（disabled 时不会触发）
+ */
+
+export type UiButtonVariant = 'default' | 'primary' | 'blank'
+export type UiButtonSize = 'small' | 'medium'
+export type UiButtonNativeType = 'button' | 'submit' | 'reset'
+
+const props = withDefaults(
+    defineProps<{
+        variant?: UiButtonVariant
+        size?: UiButtonSize
+        disabled?: boolean
+        nativeType?: UiButtonNativeType
+    }>(),
+    {
+        variant: 'default',
+        size: 'medium',
+        disabled: false,
+        nativeType: 'button',
+    }
+)
+
+const emit = defineEmits<{
+    click: [event: MouseEvent]
+}>()
+
+const onClick = (event: MouseEvent) => {
+    if (props.disabled) return
+    emit('click', event)
+}
 </script>
 <style scoped>
 .ui-button {
@@ -37,7 +70,7 @@ defineProps({
     border: 1px solid transparent;
     color: var(--foreground);
     line-height: 32px;
-    font-family: Geist, sans-serif;
+    font-family: var(--font-sans);
     vertical-align: middle;
 }
 
@@ -54,7 +87,7 @@ defineProps({
     background-color: var(--primary);
     color: var(--primary-foreground);
     &:hover {
-        background-color: var(--pr imary);
+        background-color: var(--primary);
         filter: brightness(1.05);
     }
 }
@@ -64,6 +97,18 @@ defineProps({
     &:hover {
         background-color: var(--accent);
     }
+}
+
+.ui-button-size-small {
+    padding: 0 8px;
+    line-height: 28px;
+    height: 28px;
+}
+
+.ui-button-size-medium {
+    padding: 0 10px;
+    line-height: 32px;
+    height: 32px;
 }
 
 .ui-button.only-icon {

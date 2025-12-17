@@ -41,13 +41,31 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+/**
+ * ContextMenu（右键菜单）
+ *
+ * Props
+ * - items: 默认菜单项（也可在 openAt/openWithEvent 时动态传入）
+ * - offset: 菜单与 viewport 边缘的最小间距（防止贴边）
+ *
+ * Emits
+ * - open: 打开（返回坐标）
+ * - select: 选择某项
+ * - close: 关闭
+ *
+ * Expose
+ * - openWithEvent(e, items?): 常见用法：在 @contextmenu 里传入 MouseEvent
+ * - openAt(x, y, items?): 按坐标打开
+ * - close(): 主动关闭
+ */
+import { nextTick, onMounted, onUnmounted, ref, type Component } from 'vue'
 
 export interface ContextMenuItem {
     key?: string | number
     label?: string
     shortcut?: string
-    icon?: unknown
+    /** 左侧图标组件（建议传入 Vue Component） */
+    icon?: Component
     disabled?: boolean
     variant?: 'danger'
     type?: 'divider'

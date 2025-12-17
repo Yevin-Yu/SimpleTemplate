@@ -68,13 +68,17 @@ src/
 │   ├── icons/          # 图标组件
 │   ├── module/         # 模块组件（Header、Sidebar、User）
 │   └── ui/             # UI 组件（Button、Card、Switch 等）
-├── hooks/              # 组合式函数
 ├── layout/             # 布局组件
 ├── router/             # 路由配置
 │   └── modules/        # 路由模块
+│   ├── paths.ts        # 路由 path 常量（避免字符串散落）
+│   └── nav.ts          # 侧边栏导航（单一数据源）
+├── features/           # 按业务域组织的纯逻辑/模型（推荐）
+│   └── project/        # 项目选择：默认选项/兼容旧数据规范化
 ├── stores/             # Pinia 状态管理
 │   ├── theme.ts        # 主题管理
 │   └── project.ts      # 项目切换
+├── shared/             # 跨域共享（storage keys、safe storage 等）
 ├── styles/             # 全局样式
 ├── theme/              # 主题配置
 └── views/              # 页面组件
@@ -126,7 +130,7 @@ const route = projectStore.getProjectRoute()
 
 ```vue
 <template>
-    <ui-button type="primary" @click="handleClick"> 点击我 </ui-button>
+    <ui-button variant="primary" @click="handleClick"> 点击我 </ui-button>
 
     <ui-card>
         <h3>卡片标题</h3>
@@ -145,6 +149,12 @@ const route = projectStore.getProjectRoute()
 
 - `simpleHome.ts` - Simple Home 模块路由
 - `simpleTemplate.ts` - Simple Template 模块路由
+
+补充约定：
+
+- **路由 path 常量**：统一在 `src/router/paths.ts`（避免字符串散落）
+- **路由 meta.title**：统一维护页面标题（自动同步到 `document.title`，并可被菜单/下拉派生文案）
+- **侧边栏导航**：结构在 `src/router/nav.ts`，叶子节点文案优先派生自路由 `meta.title`
 
 ### 状态管理
 

@@ -15,7 +15,7 @@
         </div>
         <div v-else class="empty-state">
             <p>还没有书签</p>
-            <ui-button type="blank" @click="$emit('add-bookmark')" class="add-bookmark-btn">
+            <ui-button variant="blank" @click="$emit('add-bookmark')" class="add-bookmark-btn">
                 <template #icon>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="12" y1="5" x2="12" y2="19"></line>

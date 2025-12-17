@@ -8,21 +8,21 @@
                     <div class="text-4xl mb-4">📊</div>
                     <h3 class="text-xl font-semibold mb-2">数据统计</h3>
                     <p class="text-gray-600 mb-4">查看详细的数据统计信息和图表分析</p>
-                    <ui-button type="primary">查看详情</ui-button>
+                    <ui-button variant="primary">查看详情</ui-button>
                 </ui-card>
 
                 <ui-card class="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer">
                     <div class="text-4xl mb-4">⚙️</div>
                     <h3 class="text-xl font-semibold mb-2">系统设置</h3>
                     <p class="text-gray-600 mb-4">配置系统参数和个性化设置</p>
-                    <ui-button type="blank">进入设置</ui-button>
+                    <ui-button variant="blank">进入设置</ui-button>
                 </ui-card>
 
                 <ui-card class="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer">
                     <div class="text-4xl mb-4">👥</div>
                     <h3 class="text-xl font-semibold mb-2">用户管理</h3>
                     <p class="text-gray-600 mb-4">管理用户账户和权限设置</p>
-                    <ui-button type="primary">管理用户</ui-button>
+                    <ui-button variant="primary">管理用户</ui-button>
                 </ui-card>
             </div>
 
@@ -35,8 +35,8 @@
                             <h3 class="font-semibold mb-2">卡片标题</h3>
                             <p class="text-sm text-gray-600 mb-4">这是一张带图片的卡片示例，展示了如何在卡片中嵌入图片内容。</p>
                             <div class="flex gap-2">
-                                <ui-button type="primary" size="small">了解更多</ui-button>
-                                <ui-button type="blank" size="small">分享</ui-button>
+                                <ui-button variant="primary" size="small">了解更多</ui-button>
+                                <ui-button variant="blank" size="small">分享</ui-button>
                             </div>
                         </div>
                     </ui-card>
@@ -46,8 +46,8 @@
                             <h3 class="font-semibold mb-2">卡片标题</h3>
                             <p class="text-sm text-gray-600 mb-4">这是一张带图片的卡片示例，展示了如何在卡片中嵌入图片内容。</p>
                             <div class="flex gap-2">
-                                <ui-button type="primary" size="small">了解更多</ui-button>
-                                <ui-button type="blank" size="small">分享</ui-button>
+                                <ui-button variant="primary" size="small">了解更多</ui-button>
+                                <ui-button variant="blank" size="small">分享</ui-button>
                             </div>
                         </div>
                         <img src="/logo.jpg" alt="示例图片" class="w-full h-48 object-cover" />

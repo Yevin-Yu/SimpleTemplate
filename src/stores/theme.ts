@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
+import { STORAGE_KEYS, safeGetItem, safeSetItem } from '@/shared'
 
 export type Theme = 'default' | 'dark'
-
-const THEME_STORAGE_KEY = 'simple-app-theme'
 
 const themes: Theme[] = ['default', 'dark']
 
@@ -28,14 +27,8 @@ export function applyTheme(theme: Theme) {
  * 从 localStorage 读取保存的主题，如果没有则返回默认主题
  */
 function getSavedTheme(): Theme {
-    try {
-        const saved = localStorage.getItem(THEME_STORAGE_KEY)
-        if (saved && themes.includes(saved as Theme)) {
-            return saved as Theme
-        }
-    } catch (error) {
-        console.error('Failed to load saved theme:', error)
-    }
+    const saved = safeGetItem(STORAGE_KEYS.THEME)
+    if (saved && themes.includes(saved as Theme)) return saved as Theme
     return 'default'
 }
 
@@ -68,11 +61,7 @@ export const useThemeStore = defineStore('theme', {
             this.currentTheme = theme
             applyTheme(theme)
             // 保存到 localStorage
-            try {
-                localStorage.setItem(THEME_STORAGE_KEY, theme)
-            } catch (error) {
-                console.error('Failed to save theme:', error)
-            }
+            safeSetItem(STORAGE_KEYS.THEME, theme)
         },
         /**
          * 切换主题
