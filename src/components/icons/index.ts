@@ -15,6 +15,8 @@ export { default as ComponentsIcon } from './ComponentsIcon.vue'
 export { default as BaseIcon } from './BaseIcon.vue'
 export { default as CopyIcon } from './CopyIcon.vue'
 export { default as CheckIcon } from './CheckIcon.vue'
+export { default as EditIcon } from './EditIcon.vue'
+export { default as TrashIcon } from './TrashIcon.vue'
 
 // 图标类型定义
 export interface IconProps {
@@ -41,6 +43,8 @@ export type IconName =
     | 'base'
     | 'copy'
     | 'check'
+    | 'edit'
+    | 'trash'
 
 // 图标映射
 export const iconMap: Record<IconName, () => Promise<unknown>> = {
@@ -60,6 +64,8 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     base: () => import('./BaseIcon.vue'),
     copy: () => import('./CopyIcon.vue'),
     check: () => import('./CheckIcon.vue'),
+    edit: () => import('./EditIcon.vue'),
+    trash: () => import('./TrashIcon.vue'),
 }
 
 // 动态加载图标

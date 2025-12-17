@@ -263,6 +263,10 @@ const onItemClick = (item: MenuItem) => {
             transform: translateY(-50%) scaleY(1);
             height: 60%;
         }
+
+        .arrow {
+            color: var(--primary);
+        }
     }
 
     &.active {
@@ -275,9 +279,7 @@ const onItemClick = (item: MenuItem) => {
             height: 70%;
             background: var(--primary);
         }
-    }
 
-    &.is-open {
         .arrow {
             color: var(--primary);
         }

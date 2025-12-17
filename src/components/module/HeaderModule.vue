@@ -10,8 +10,15 @@
         </div>
         <!-- user & link -->
         <div class="flex justify-between items-center gap-1">
-            <ui-select class="project-select" option-label="label" option-value="value" v-model="selectedProject"
-                :options="projectOptions" placeholder="选择项目" @change="goProject">
+            <ui-select
+                class="project-select"
+                option-label="label"
+                option-value="value"
+                v-model="selectedProject"
+                :options="projectOptions"
+                placeholder="选择项目"
+                @change="goProject"
+            >
                 <template #selected="{ option }">
                     <div v-if="option" class="project-selected">
                         <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="project-icon" />

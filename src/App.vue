@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import HeaderModule from './components/module/HeaderModule.vue';
+import HeaderModule from './components/module/HeaderModule.vue'
 </script>
 
 <template>

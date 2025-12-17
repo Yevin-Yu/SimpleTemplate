@@ -17,8 +17,7 @@
             </div>
         </div>
         <!-- 隐藏的测量元素 -->
-        <div ref="measureRef" class="ui-select-dropdown measure-dropdown"
-            style="position: absolute; visibility: hidden; pointer-events: none">
+        <div ref="measureRef" class="ui-select-dropdown measure-dropdown" style="position: absolute; visibility: hidden; pointer-events: none">
             <div class="select-options">
                 <div v-for="option in options" :key="getOptionValue(option)" class="select-option">
                     <slot name="option" :option="option" :selected="false">
@@ -28,12 +27,21 @@
             </div>
         </div>
         <Transition name="dropdown">
-            <div v-if="isOpen" ref="dropdownRef" class="ui-select-dropdown"
-                :style="{ ...dropdownStyle, '--dropdown-height': `${actualHeight || 200}px` }">
+            <div
+                v-if="isOpen"
+                ref="dropdownRef"
+                class="ui-select-dropdown"
+                :style="{ ...dropdownStyle, '--dropdown-height': `${actualHeight || 200}px` }"
+            >
                 <div class="select-options">
-                    <div v-for="(option, index) in options" :key="getOptionValue(option)" class="select-option"
+                    <div
+                        v-for="(option, index) in options"
+                        :key="getOptionValue(option)"
+                        class="select-option"
                         :class="{ 'is-selected': isSelected(option), 'is-hovered': hoveredIndex === index }"
-                        @click="selectOption(option)" @mouseenter="hoveredIndex = index">
+                        @click="selectOption(option)"
+                        @mouseenter="hoveredIndex = index"
+                    >
                         <slot name="option" :option="option" :selected="isSelected(option)">
                             <span>{{ getOptionLabel(option) }}</span>
                         </slot>

@@ -38,4 +38,3 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/SimpleTemplate/example/FormComponents.vue'),
     },
 ]
-

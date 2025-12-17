@@ -7,4 +7,3 @@ export const simpleHomeRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/SimpleHome/index.vue'),
     },
 ]
-
