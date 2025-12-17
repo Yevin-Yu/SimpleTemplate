@@ -86,7 +86,7 @@ export type UiSelectOption = Record<string, unknown> | string | number
 
 interface Props {
     modelValue?: string | number | null
-    options: UiSelectOption[]
+    options: readonly UiSelectOption[]
     optionLabel?: string | ((option: UiSelectOption) => string)
     optionValue?: string | ((option: UiSelectOption) => string | number)
     placeholder?: string

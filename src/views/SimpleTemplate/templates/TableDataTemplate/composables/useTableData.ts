@@ -29,8 +29,9 @@ const seedRows = (): TableUserRow[] => {
     // 这里用确定性数据（不依赖随机），方便演示与测试复现
     return Array.from({ length: 57 }).map((_, idx) => {
         const id = idx + 1
-        const role = roles[id % roles.length]
-        const status = statuses[id % statuses.length]
+        // 在 noUncheckedIndexedAccess 下，数组下标访问会是可选值；这里明确保证存在
+        const role = roles[id % roles.length]!
+        const status = statuses[id % statuses.length]!
         const createdAt = new Date(now - id * 24 * 60 * 60 * 1000).toISOString()
         return {
             id,

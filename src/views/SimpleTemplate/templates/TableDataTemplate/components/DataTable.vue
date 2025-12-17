@@ -99,6 +99,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
@@ -133,13 +134,13 @@ const emit = defineEmits<{
     pageSizeChange: [pageSize: number]
 }>()
 
-const pageSizeModel = {
+const pageSizeModel = computed<string | number | null>({
     get: () => props.pageSize,
-    set: (v: string | number | null) => {
+    set: v => {
         const value = Number(v)
         if (Number.isFinite(value)) emit('pageSizeChange', value)
     },
-}
+})
 
 const pageSizeOptions = [
     { label: '10 条/页', value: 10 },
