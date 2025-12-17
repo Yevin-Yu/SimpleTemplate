@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { SIDEBAR_NAV, type NavItem } from '@/router/nav'
 
@@ -76,32 +76,62 @@ const getLabel = (item: NavItem): string => {
     return item.label ?? item.key
 }
 
-const openKeys = ref<Set<string>>(new Set(['example', 'components']))
+/**
+ * 侧边栏展开策略（模块化约定）
+ * - 默认：全部收起（避免首次进入时信息噪音）
+ * - 自动：仅展开“当前选中路由”对应的父级链路（保证定位感）
+ *
+ * 说明：
+ * - 这里的展开状态不做持久化；若后续需要“记住用户手动展开”，可在此处把 openKeys 与 storage/store 对接。
+ */
+const openKeys = ref<Set<string>>(new Set())
 
-// 自动展开包含激活子菜单的父菜单
-watchEffect(() => {
-    const newOpenKeys = new Set(openKeys.value)
-    const checkAndOpen = (items: NavItem[]): void => {
-        items.forEach(item => {
-            if (item.children && item.children.length > 0) {
-                // 检查是否有子菜单项被激活
-                const hasActiveChild = item.children.some(child => {
-                    if (!child.path) return false
-                    const pathWithoutHash = child.path.split('#')[0]
-                    if (!pathWithoutHash) return false
-                    return route.path === pathWithoutHash || route.path === child.path || (route.fullPath?.startsWith(pathWithoutHash) ?? false)
-                })
-                if (hasActiveChild) {
-                    newOpenKeys.add(item.key)
-                }
-                // 递归检查子菜单
-                checkAndOpen(item.children)
-            }
-        })
+type KeyChain = string[]
+
+const stripHash = (path: string): string => path.split('#')[0] ?? ''
+
+/**
+ * 判断当前路由是否“命中”某个菜单 path：
+ * - 支持 hash（如 /home#buttons）
+ * - 支持更深层子路由（fullPath 前缀匹配）
+ */
+const isRouteMatchPath = (menuPath: string): boolean => {
+    const basePath = stripHash(menuPath)
+    if (!basePath) return false
+    return route.path === basePath || route.path === menuPath || (route.fullPath?.startsWith(basePath) ?? false)
+}
+
+/**
+ * 深度优先遍历菜单，找到“当前选中项”的 key 链路（包含叶子本身）。
+ * 用回溯维护栈，避免递归过程中的数组拷贝，便于在菜单规模增大时保持性能可控。
+ */
+const findActiveKeyChain = (items: NavItem[]): KeyChain => {
+    const stack: string[] = []
+
+    const dfs = (list: NavItem[]): boolean => {
+        for (const item of list) {
+            stack.push(item.key)
+
+            if (item.children?.length && dfs(item.children)) return true
+            if (item.path && isRouteMatchPath(item.path)) return true
+
+            stack.pop()
+        }
+        return false
     }
-    checkAndOpen(menu.value)
-    openKeys.value = newOpenKeys
-})
+
+    return dfs(items) ? [...stack] : []
+}
+
+watch(
+    () => route.fullPath,
+    () => {
+        const chain = findActiveKeyChain(menu.value)
+        // 只展开父级分组：链路最后一段是叶子节点 key，不属于“可展开分组”
+        openKeys.value = new Set(chain.slice(0, -1))
+    },
+    { immediate: true }
+)
 
 const isOpen = (item: NavItem) => openKeys.value.has(item.key)
 
@@ -125,11 +155,8 @@ const isActive = (item: NavItem): boolean => {
     // 如果没有路径，返回 false
     if (!item.path) return false
 
-    // 判断当前路由是否匹配该菜单项
-    // 处理带 hash 的路径（如 /home#buttons）
-    const pathWithoutHash = item.path.split('#')[0]
-    if (!pathWithoutHash) return false
-    return route.path === pathWithoutHash || route.path === item.path || (route.fullPath?.startsWith(pathWithoutHash) ?? false)
+    // 判断当前路由是否匹配该菜单项（处理带 hash 的路径，如 /home#buttons）
+    return isRouteMatchPath(item.path)
 }
 
 const onItemClick = (item: NavItem) => {
