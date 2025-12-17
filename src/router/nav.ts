@@ -114,4 +114,16 @@ export const SIDEBAR_NAV: NavItem[] = [
             },
         ],
     },
+    {
+        key: 'templates',
+        label: '模板演示',
+        icon: ExampleIcon,
+        children: [
+            {
+                key: 'table-data-template',
+                path: ROUTE_PATHS.TABLE_DATA_TEMPLATE,
+                icon: TableIcon,
+            },
+        ],
+    },
 ]

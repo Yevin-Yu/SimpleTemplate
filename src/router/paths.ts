@@ -15,6 +15,9 @@ export const ROUTE_PATHS = {
     CARD_DEMO: '/card-example',
     DASHBOARD_DEMO: '/dashboard-example',
 
+    // templates
+    TABLE_DATA_TEMPLATE: '/table-data-template',
+
     // examples
     BUTTON_COMPONENTS: '/button-components',
     TAG_COMPONENTS: '/tag-components',
