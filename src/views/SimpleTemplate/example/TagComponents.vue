@@ -13,7 +13,8 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">基础展示（推荐默认）</h2>
                     <p class="text-gray-600 mt-1">
-                        默认 <ui-tag-button>clickable=false</ui-tag-button>，渲染为 <ui-tag-button>&lt;span&gt;</ui-tag-button>，语义上是“标签/标记”，而不是按钮。
+                        默认 <ui-tag-button>clickable=false</ui-tag-button>，渲染为
+                        <ui-tag-button>&lt;span&gt;</ui-tag-button>，语义上是“标签/标记”，而不是按钮。
                     </p>
                 </div>
 
@@ -34,7 +35,8 @@
                     <div>
                         <h2 class="h-title text-2xl font-semibold">可点击标签</h2>
                         <p class="text-gray-600 mt-1">
-                            当你确实需要交互时，设置 <ui-tag-button>clickable=true</ui-tag-button>，组件会渲染为原生 <ui-tag-button>&lt;button&gt;</ui-tag-button>。
+                            当你确实需要交互时，设置 <ui-tag-button>clickable=true</ui-tag-button>，组件会渲染为原生
+                            <ui-tag-button>&lt;button&gt;</ui-tag-button>。
                         </p>
                     </div>
                 </div>
@@ -131,5 +133,3 @@ const codeVariant = `<template>
     color: var(--foreground);
 }
 </style>
-
-

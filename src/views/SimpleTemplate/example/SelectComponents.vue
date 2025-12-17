@@ -3,7 +3,8 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">下拉菜单组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-select</ui-tag-button> 的常用能力与推荐用法（字符串数组 / 对象数组 / 自定义渲染 / 带图标选项 / 禁用态）。
+                这里聚焦展示 <ui-tag-button>ui-select</ui-tag-button> 的常用能力与推荐用法（字符串数组 / 对象数组 / 自定义渲染 / 带图标选项 /
+                禁用态）。
             </p>
 
             <!-- =========================
@@ -34,7 +35,8 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">对象数组</h2>
                     <p class="text-gray-600 mt-1">
-                        当 options 是对象数组时，使用 <ui-tag-button>optionLabel</ui-tag-button> / <ui-tag-button>optionValue</ui-tag-button> 显式声明字段。
+                        当 options 是对象数组时，使用 <ui-tag-button>optionLabel</ui-tag-button> /
+                        <ui-tag-button>optionValue</ui-tag-button> 显式声明字段。
                     </p>
                 </div>
 
@@ -158,7 +160,7 @@ const selectValue4 = ref<string | number | null>(null)
 const selectValueIcon = ref<string | number | null>(null)
 
 // 简单数据源：字符串数组（保持可变数组类型，匹配 ui-select props）
-const simpleOptions: Array<string> = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8', '选项9', '选项10']
+const simpleOptions: string[] = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8', '选项9', '选项10']
 
 interface UserOption extends Record<string, unknown> {
     id: number
@@ -265,5 +267,3 @@ const codeDisabled = `<template>
     color: var(--foreground);
 }
 </style>
-
-

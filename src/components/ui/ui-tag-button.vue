@@ -109,5 +109,3 @@ const onClick = (event: MouseEvent) => {
     cursor: not-allowed;
 }
 </style>
-
-

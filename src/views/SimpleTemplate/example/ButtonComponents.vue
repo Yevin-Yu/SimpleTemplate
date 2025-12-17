@@ -105,7 +105,8 @@
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">禁用状态</h2>
                     <p class="text-gray-600 mt-1">
-                        <ui-tag-button>disabled</ui-tag-button> 会透传到原生 <ui-tag-button>&lt;button disabled&gt;</ui-tag-button>，并且组件内部会阻止 click emit（符合最佳实践）。
+                        <ui-tag-button>disabled</ui-tag-button> 会透传到原生
+                        <ui-tag-button>&lt;button disabled&gt;</ui-tag-button>，并且组件内部会阻止 click emit（符合最佳实践）。
                     </p>
                 </div>
 
@@ -253,5 +254,3 @@ const onReset = () => (username.value = '')
     color: var(--foreground);
 }
 </style>
-
-

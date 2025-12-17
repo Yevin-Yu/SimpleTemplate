@@ -36,5 +36,3 @@ withDefaults(defineProps<IconProps>(), {
     customClass: '',
 })
 </script>
-
-

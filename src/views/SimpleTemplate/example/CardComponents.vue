@@ -3,7 +3,9 @@
         <div class="max-w-6xl mx-auto">
             <h1 class="h-title text-3xl font-bold mb-2">卡片组件</h1>
             <p class="text-sm text-[var(--muted-foreground)] mb-6">
-                这里聚焦展示 <ui-tag-button>ui-card</ui-tag-button> 的常用能力与推荐用法。卡片组件仅负责“容器外观”，布局（padding/header/footer）建议由业务层组合完成。
+                这里聚焦展示
+                <ui-tag-button>ui-card</ui-tag-button>
+                的常用能力与推荐用法。卡片组件仅负责“容器外观”，布局（padding/header/footer）建议由业务层组合完成。
             </p>
 
             <!-- =========================
@@ -50,9 +52,7 @@
                         <ui-button variant="blank" size="small" aria-label="操作：编辑" @click="onActionClick('编辑')">编辑</ui-button>
                     </div>
 
-                    <div class="mt-4 text-sm text-[var(--foreground)]">
-                        内容区域：保持排版简单，必要时使用网格/列表承载信息。
-                    </div>
+                    <div class="mt-4 text-sm text-[var(--foreground)]">内容区域：保持排版简单，必要时使用网格/列表承载信息。</div>
 
                     <div class="mt-5 pt-4 border-t border-[var(--border)] flex items-center justify-end gap-2">
                         <ui-button variant="blank" size="small" aria-label="操作：取消" @click="onActionClick('取消')">取消</ui-button>
@@ -177,5 +177,3 @@ const codeList = `<template>
     color: var(--foreground);
 }
 </style>
-
-
