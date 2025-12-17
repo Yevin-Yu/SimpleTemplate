@@ -12,7 +12,6 @@ export { default as TableIcon } from './TableIcon.vue'
 export { default as CardIcon } from './CardIcon.vue'
 export { default as DashboardIcon } from './DashboardIcon.vue'
 export { default as ComponentsIcon } from './ComponentsIcon.vue'
-export { default as BaseIcon } from './BaseIcon.vue'
 export { default as ButtonIcon } from './ButtonIcon.vue'
 export { default as TagIcon } from './TagIcon.vue'
 export { default as SelectIcon } from './SelectIcon.vue'
@@ -46,7 +45,6 @@ export type IconName =
     | 'card'
     | 'dashboard'
     | 'components'
-    | 'base'
     | 'button'
     | 'tag'
     | 'select'
@@ -73,7 +71,6 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     card: () => import('./CardIcon.vue'),
     dashboard: () => import('./DashboardIcon.vue'),
     components: () => import('./ComponentsIcon.vue'),
-    base: () => import('./BaseIcon.vue'),
     button: () => import('./ButtonIcon.vue'),
     tag: () => import('./TagIcon.vue'),
     select: () => import('./SelectIcon.vue'),

@@ -140,8 +140,8 @@
  * SelectComponents（下拉菜单组件示例页）
  *
  * 页面目标：
- * - 参考 BaseComponents 中的 Select 展示方式：基础用法 / 对象数组 / 自定义渲染 / 图标选项 / 禁用态
- * - 示例中“交互动作”统一使用 ui-button；ui-tag-button 仅用于说明文字里的 token
+ * - 展示 Select 组件的多种用法：基础用法 / 对象数组 / 自定义渲染 / 图标选项 / 禁用态
+ * - 示例中"交互动作"统一使用 ui-button；ui-tag-button 仅用于说明文字里的 token
  */
 import { markRaw, ref, type Component } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
@@ -151,7 +151,7 @@ import UiTagButton from '@/components/ui/ui-tag-button.vue'
 import { HomeIcon, DashboardIcon } from '@/components/icons'
 
 // =========================
-// 数据源（与 BaseComponents 的示例一致）
+// 数据源
 // =========================
 const selectValue1 = ref<string | number | null>(null)
 const selectValue2 = ref<string | number | null>(null)
@@ -186,7 +186,7 @@ const iconOptions: IconOption[] = [
     { label: 'Simple Template', value: '/home', icon: markRaw(DashboardIcon) },
 ]
 
-// 与 BaseComponents 一致的辅助方法：根据 id 找用户名称（用于示例回显）
+// 辅助方法：根据 id 找用户名称（用于示例回显）
 const getSelectedUserName = (id: string | number | null): string | null => {
     if (id === null) return null
     const user = userOptions.find(u => u.id === id)

@@ -43,14 +43,6 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/SimpleTemplate/demo/DashboardDemo.vue'),
     },
     {
-        path: ROUTE_PATHS.BASE_COMPONENTS,
-        name: 'BaseComponents',
-        meta: {
-            title: '基础组件',
-        },
-        component: () => import('@/views/SimpleTemplate/example/BaseComponents.vue'),
-    },
-    {
         path: ROUTE_PATHS.BUTTON_COMPONENTS,
         name: 'ButtonComponents',
         meta: {

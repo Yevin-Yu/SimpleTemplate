@@ -8,7 +8,6 @@ import {
     CardIcon,
     DashboardIcon,
     ComponentsIcon,
-    BaseIcon,
     ButtonIcon,
     TagIcon,
     SelectIcon,
@@ -51,11 +50,6 @@ export const SIDEBAR_NAV: NavItem[] = [
         label: '组件示例',
         icon: ComponentsIcon,
         children: [
-            {
-                key: 'base',
-                path: ROUTE_PATHS.BASE_COMPONENTS,
-                icon: BaseIcon,
-            },
             {
                 key: 'button',
                 path: ROUTE_PATHS.BUTTON_COMPONENTS,
