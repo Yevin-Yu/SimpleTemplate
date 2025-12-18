@@ -124,4 +124,3 @@ export function useLoginValidation() {
         VALIDATION_RULES,
     }
 }
-

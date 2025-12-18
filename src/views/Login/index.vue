@@ -17,19 +17,20 @@
                     <!-- 用户名/邮箱输入框 -->
                     <div class="form-group">
                         <label class="form-label" for="username">用户名或邮箱</label>
-                        <input
+                        <ui-input
                             id="username"
+                            name="username"
                             v-model="formData.username"
                             type="text"
-                            class="form-input"
-                            :class="{ 'has-error': errors.username }"
+                            size="large"
                             placeholder="请输入用户名或邮箱"
                             autocomplete="username"
                             :disabled="isLoading"
-                            @input="handleUsernameInput"
+                            :error="errors.username"
+                            clearable
                             @blur="handleUsernameBlur"
+                            @enter="handleSubmit"
                         />
-                        <span v-if="errors.username" class="form-error">{{ errors.username }}</span>
                     </div>
 
                     <!-- 密码输入框组件 -->
@@ -39,29 +40,19 @@
                         placeholder="请输入密码"
                         :disabled="isLoading"
                         @blur="handlePasswordBlur"
+                        @enter="handleSubmit"
                     />
 
                     <!-- 记住我选项 -->
                     <div class="form-options">
                         <label class="checkbox-label">
-                            <input
-                                v-model="formData.rememberMe"
-                                type="checkbox"
-                                class="checkbox-input"
-                                :disabled="isLoading"
-                            />
+                            <input v-model="formData.rememberMe" type="checkbox" class="checkbox-input" :disabled="isLoading" />
                             <span>记住我</span>
                         </label>
                     </div>
 
                     <!-- 提交按钮 -->
-                    <ui-button
-                        type="submit"
-                        variant="primary"
-                        size="medium"
-                        class="login-button"
-                        :disabled="isLoading || !isValid"
-                    >
+                    <ui-button type="submit" variant="primary" size="medium" class="login-button" :disabled="isLoading || !isValid">
                         {{ isLoading ? '登录中...' : '登录' }}
                     </ui-button>
                 </form>
@@ -82,6 +73,7 @@ import PasswordInput from './components/PasswordInput.vue'
 import LoginBackground from './components/LoginBackground.vue'
 import UiCard from '@/components/ui/ui-card.vue'
 import UiButton from '@/components/ui/ui-button.vue'
+import UiInput from '@/components/ui/ui-input.vue'
 
 /**
  * 登录页面组件
@@ -111,18 +103,6 @@ const { formData, errors, isLoading, isValid, handleSubmit } = useLoginForm()
 
 // 使用表单验证 composable（提供验证方法）
 const { validateUsername, validatePassword } = useLoginValidation()
-
-/**
- * 处理用户名输入事件
- */
-const handleUsernameInput = (event: Event) => {
-    const target = event.target as HTMLInputElement
-    formData.username = target.value
-    // 清除错误信息（用户正在输入时）
-    if (errors.username) {
-        errors.username = ''
-    }
-}
 
 /**
  * 处理用户名失焦事件（触发验证）
@@ -274,49 +254,6 @@ const handleForgotPassword = () => {
     letter-spacing: 0.01em;
 }
 
-.form-input {
-    width: 100%;
-    height: 44px;
-    padding: 0 14px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--foreground);
-    font-size: 14px;
-    font-family: var(--font-sans);
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    box-shadow: var(--shadow-xs);
-
-    &.has-error {
-        border-color: var(--destructive);
-    }
-
-    &::placeholder {
-        color: var(--muted-foreground);
-    }
-
-    &:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: var(--shadow-xs), 0 0 0 2px rgba(226, 169, 25, 0.15);
-    }
-
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.65;
-        background-color: var(--muted);
-    }
-}
-
-.form-error {
-    display: block;
-    font-size: 12px;
-    color: var(--destructive);
-    margin-top: 8px;
-    line-height: 1.4;
-    min-height: 16px;
-}
-
 // 表单选项
 .form-options {
     display: flex;
@@ -408,11 +345,6 @@ const handleForgotPassword = () => {
 
     .login-header {
         margin-bottom: 32px;
-    }
-
-    .form-input {
-        height: 40px;
-        font-size: 16px; // 防止 iOS 自动缩放
     }
 
     .login-button {

@@ -79,7 +79,9 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">输入类型</h2>
-                    <p class="text-gray-600 mt-1">通过 <ui-tag>type</ui-tag> 设置不同的输入类型（text / email / number / tel / url / search / password）。</p>
+                    <p class="text-gray-600 mt-1">
+                        通过 <ui-tag>type</ui-tag> 设置不同的输入类型（text / email / number / tel / url / search / password）。
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -180,7 +182,9 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">清除按钮</h2>
-                    <p class="text-gray-600 mt-1">设置 <ui-tag>clearable</ui-tag> 为 <ui-tag>true</ui-tag> 时，有值且非禁用/只读状态下会显示清除按钮。</p>
+                    <p class="text-gray-600 mt-1">
+                        设置 <ui-tag>clearable</ui-tag> 为 <ui-tag>true</ui-tag> 时，有值且非禁用/只读状态下会显示清除按钮。
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -282,7 +286,9 @@
             <ui-card class="p-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">事件处理</h2>
-                    <p class="text-gray-600 mt-1">组件支持 <ui-tag>focus</ui-tag>、<ui-tag>blur</ui-tag>、<ui-tag>enter</ui-tag>、<ui-tag>clear</ui-tag> 等事件。</p>
+                    <p class="text-gray-600 mt-1">
+                        组件支持 <ui-tag>focus</ui-tag>、<ui-tag>blur</ui-tag>、<ui-tag>enter</ui-tag>、<ui-tag>clear</ui-tag> 等事件。
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -301,7 +307,9 @@
                 </div>
 
                 <div class="text-sm text-[var(--muted-foreground)] mb-4">
-                    <div>最近事件：<span class="font-medium text-[var(--foreground)]">{{ lastEvent }}</span></div>
+                    <div>
+                        最近事件：<span class="font-medium text-[var(--foreground)]">{{ lastEvent }}</span>
+                    </div>
                 </div>
 
                 <ui-code-block title="示例代码" language="vue" :code="codeEvent" />

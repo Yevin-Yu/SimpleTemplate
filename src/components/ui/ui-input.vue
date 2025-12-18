@@ -16,6 +16,8 @@
         </span>
         <input
             ref="inputRef"
+            :id="inputId"
+            :name="name"
             :value="modelValue"
             :type="type"
             :placeholder="placeholder"
@@ -26,28 +28,22 @@
             class="ui-input"
             :class="[`ui-input-size-${size}`, { 'has-prefix': $slots.prefix, 'has-suffix': $slots.suffix || showClear }]"
             :aria-invalid="error ? 'true' : undefined"
+            :aria-describedby="error ? errorId : undefined"
             @input="handleInput"
             @focus="emit('focus', $event)"
             @blur="emit('blur', $event)"
             @keydown="handleKeydown"
         />
-        <span
-            v-if="showClear"
-            class="input-suffix input-clear"
-            @click.stop="handleClear"
-            :title="clearText"
-            aria-label="清除"
-        >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+        <span v-if="showClear" class="input-suffix input-clear" @click.stop="handleClear" :title="clearText" aria-label="清除">
+            <XIcon :size="16" />
         </span>
         <span v-else-if="$slots.suffix" class="input-suffix" aria-hidden="true">
             <slot name="suffix" />
         </span>
     </div>
-    <div v-if="error" class="input-error" role="alert">{{ error }}</div>
+    <transition name="input-error">
+        <div v-if="error" :id="errorId" class="input-error" role="alert">{{ error }}</div>
+    </transition>
 </template>
 
 <script setup lang="ts">
@@ -56,6 +52,8 @@
  *
  * Props
  * - modelValue: 当前值（配合 v-model）
+ * - id: 输入框 ID（用于关联 label，如果不提供则自动生成）
+ * - name: 输入框 name 属性（用于表单提交和自动填充）
  * - type: 输入类型（text/password/email/number/tel/url/search）
  * - size: 尺寸（small: 32px / medium: 36px / large: 42px）
  * - placeholder: 占位文本
@@ -65,7 +63,7 @@
  * - autocomplete: 自动完成（on/off）
  * - clearable: 是否显示清除按钮（有值且非 disabled/readonly 时显示）
  * - clearText: 清除按钮提示文本
- * - error: 错误信息（显示时会改变输入框样式）
+ * - error: 错误信息（显示时会改变输入框样式，并通过 aria-describedby 关联）
  *
  * Slots
  * - prefix: 前置内容（图标等）
@@ -80,12 +78,15 @@
  */
 
 import { ref, computed } from 'vue'
+import { XIcon } from '@/components/icons'
 
 export type UiInputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search'
 export type UiInputSize = 'small' | 'medium' | 'large'
 
 interface Props {
     modelValue?: string | number
+    id?: string
+    name?: string
     type?: UiInputType
     size?: UiInputSize
     placeholder?: string
@@ -119,6 +120,15 @@ const emit = defineEmits<{
 }>()
 
 const inputRef = ref<HTMLInputElement>()
+
+/** 自动生成的唯一 ID（如果没有提供 id prop，只在组件初始化时生成一次） */
+const autoId = ref(`ui-input-${Math.random().toString(36).substring(2, 9)}`)
+
+/** 输入框 ID */
+const inputId = computed(() => props.id || autoId.value)
+
+/** 错误信息元素的 ID */
+const errorId = computed(() => `${inputId.value}-error`)
 
 const showClear = computed(() => {
     if (!props.clearable || props.disabled || props.readonly) return false
@@ -294,6 +304,44 @@ defineExpose({
     font-size: 12px;
     color: var(--destructive);
     line-height: 1.4;
-    min-height: 16px;
+}
+
+/* 错误信息过渡动画 */
+.input-error-enter-active {
+    transition:
+        opacity 0.2s ease,
+        max-height 0.3s ease,
+        margin-top 0.3s ease;
+    overflow: hidden;
+}
+
+.input-error-leave-active {
+    transition:
+        opacity 0.15s ease,
+        max-height 0.25s ease,
+        margin-top 0.25s ease;
+    overflow: hidden;
+}
+
+.input-error-enter-from {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+}
+
+.input-error-enter-to {
+    opacity: 1;
+    max-height: 100px;
+}
+
+.input-error-leave-from {
+    opacity: 1;
+    max-height: 100px;
+}
+
+.input-error-leave-to {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
 }
 </style>

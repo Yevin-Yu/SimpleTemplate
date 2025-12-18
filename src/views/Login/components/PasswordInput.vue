@@ -1,74 +1,47 @@
 <template>
     <div class="form-group">
         <label class="form-label" for="password">密码</label>
-        <div class="password-wrapper">
-            <input
-                id="password"
-                :value="modelValue"
-                :type="isPasswordVisible ? 'text' : 'password'"
-                class="form-input"
-                :class="{ 'has-error': error }"
-                :placeholder="placeholder"
-                autocomplete="current-password"
-                :disabled="disabled"
-                @input="handleInput"
-                @blur="handleBlur"
-            />
-            <button
-                type="button"
-                class="password-toggle"
-                :class="{ 'is-visible': isPasswordVisible }"
-                :disabled="disabled"
-                :aria-label="isPasswordVisible ? '隐藏密码' : '显示密码'"
-                @click="togglePasswordVisibility"
-            >
-                <!-- 密码可见图标 -->
-                <svg
-                    v-if="isPasswordVisible"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
+        <ui-input
+            id="password"
+            name="password"
+            v-model="inputValue"
+            :type="isPasswordVisible ? 'text' : 'password'"
+            size="large"
+            :placeholder="placeholder"
+            autocomplete="current-password"
+            :disabled="disabled"
+            :error="error"
+            @blur="handleBlur"
+            @enter="handleEnter"
+        >
+            <template #suffix>
+                <button
+                    type="button"
+                    class="password-toggle"
+                    :class="{ 'is-visible': isPasswordVisible }"
+                    :disabled="disabled"
+                    :aria-label="isPasswordVisible ? '隐藏密码' : '显示密码'"
+                    @click.stop="togglePasswordVisibility"
                 >
-                    <path
-                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
-                    />
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                </svg>
-                <!-- 密码隐藏图标 -->
-                <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                </svg>
-            </button>
-        </div>
-        <span v-if="error" class="password-input-error">{{ error }}</span>
+                    <!-- 密码可见图标 -->
+                    <EyeOffIcon v-if="isPasswordVisible" :size="20" />
+                    <!-- 密码隐藏图标 -->
+                    <EyeIcon v-else :size="20" />
+                </button>
+            </template>
+        </ui-input>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import UiInput from '@/components/ui/ui-input.vue'
+import { EyeIcon, EyeOffIcon } from '@/components/icons'
 
 /**
  * 密码输入框组件
+ *
+ * 基于 ui-input 组件，通过 suffix slot 添加密码显示/隐藏切换功能
  *
  * Props:
  * - modelValue: 输入框的值（v-model）
@@ -78,6 +51,7 @@ import { ref } from 'vue'
  *
  * Events:
  * - update:modelValue: 值更新事件
+ * - blur: 失焦事件
  */
 
 interface Props {
@@ -94,9 +68,10 @@ interface Props {
 interface Emits {
     (e: 'update:modelValue', value: string): void
     (e: 'blur'): void
+    (e: 'enter', event: KeyboardEvent): void
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
     error: '',
     placeholder: '请输入密码',
     disabled: false,
@@ -107,19 +82,18 @@ const emit = defineEmits<Emits>()
 /** 密码是否可见 */
 const isPasswordVisible = ref(false)
 
+/** 双向绑定的输入值 */
+const inputValue = computed({
+    get: () => props.modelValue,
+    set: (value: string) => emit('update:modelValue', value),
+})
+
 /**
  * 切换密码可见性
  */
 const togglePasswordVisibility = () => {
+    if (props.disabled) return
     isPasswordVisible.value = !isPasswordVisible.value
-}
-
-/**
- * 处理输入事件
- */
-const handleInput = (event: Event) => {
-    const target = event.target as HTMLInputElement
-    emit('update:modelValue', target.value)
 }
 
 /**
@@ -128,10 +102,21 @@ const handleInput = (event: Event) => {
 const handleBlur = () => {
     emit('blur')
 }
+
+/**
+ * 处理 Enter 键事件（传递给父组件）
+ */
+const handleEnter = (event: KeyboardEvent) => {
+    emit('enter', event)
+}
 </script>
 
 <style scoped lang="less">
-// 密码输入框组件的样式
+/**
+ * 密码输入框组件样式
+ * 基于 ui-input 组件，添加密码切换按钮样式
+ */
+
 .form-group {
     margin-bottom: 22px;
 }
@@ -146,59 +131,20 @@ const handleBlur = () => {
     letter-spacing: 0.01em;
 }
 
-.password-wrapper {
-    position: relative;
-}
-
-.form-input {
-    width: 100%;
-    height: 44px;
-    padding: 0 44px 0 14px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--foreground);
-    font-size: 14px;
-    font-family: var(--font-sans);
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    box-shadow: var(--shadow-xs);
-
-    &.has-error {
-        border-color: var(--destructive);
-    }
-
-    &::placeholder {
-        color: var(--muted-foreground);
-    }
-
-    &:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: var(--shadow-xs), 0 0 0 2px rgba(226, 169, 25, 0.15);
-    }
-
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.65;
-        background-color: var(--muted);
-    }
-}
-
 .password-toggle {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
     color: var(--muted-foreground);
-    padding: 6px;
+    padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.15s ease;
-    border-radius: 0;
+    transition: color 0.2s ease;
+    border-radius: 4px;
+    outline: none;
+    margin: 0;
+    line-height: 1;
 
     &:hover:not(:disabled) {
         color: var(--foreground);
@@ -209,6 +155,11 @@ const handleBlur = () => {
         background-color: var(--accent);
     }
 
+    &:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
     &:disabled {
         cursor: not-allowed;
         opacity: 0.6;
@@ -217,15 +168,10 @@ const handleBlur = () => {
     &.is-visible {
         color: var(--primary);
     }
-}
 
-.password-input-error {
-    display: block;
-    font-size: 12px;
-    color: var(--destructive);
-    margin-top: 8px;
-    line-height: 1.4;
-    min-height: 16px;
+    svg {
+        display: block;
+        flex-shrink: 0;
+    }
 }
 </style>
-

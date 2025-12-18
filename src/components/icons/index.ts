@@ -23,6 +23,9 @@ export { default as CopyIcon } from './CopyIcon.vue'
 export { default as CheckIcon } from './CheckIcon.vue'
 export { default as EditIcon } from './EditIcon.vue'
 export { default as TrashIcon } from './TrashIcon.vue'
+export { default as XIcon } from './XIcon.vue'
+export { default as EyeIcon } from './EyeIcon.vue'
+export { default as EyeOffIcon } from './EyeOffIcon.vue'
 
 // 图标类型定义
 export interface IconProps {
@@ -57,6 +60,9 @@ export type IconName =
     | 'check'
     | 'edit'
     | 'trash'
+    | 'x'
+    | 'eye'
+    | 'eyeOff'
 
 // 图标映射
 export const iconMap: Record<IconName, () => Promise<unknown>> = {
@@ -84,6 +90,9 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     check: () => import('./CheckIcon.vue'),
     edit: () => import('./EditIcon.vue'),
     trash: () => import('./TrashIcon.vue'),
+    x: () => import('./XIcon.vue'),
+    eye: () => import('./EyeIcon.vue'),
+    eyeOff: () => import('./EyeOffIcon.vue'),
 }
 
 // 动态加载图标

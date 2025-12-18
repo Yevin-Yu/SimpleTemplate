@@ -35,4 +35,3 @@ export interface LoginPayload {
     /** 是否记住我 */
     rememberMe: boolean
 }
-

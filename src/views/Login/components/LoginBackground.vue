@@ -84,12 +84,18 @@
     right: 0;
     bottom: 0;
     background-image:
-        linear-gradient(rgba(226, 169, 25, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(226, 169, 25, 0.15) 1px, transparent 1px),
-        linear-gradient(rgba(132, 160, 223, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(132, 160, 223, 0.08) 1px, transparent 1px);
-    background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
-    background-position: 0 0, 0 0, 40px 40px, 40px 40px;
+        linear-gradient(rgba(226, 169, 25, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(226, 169, 25, 0.15) 1px, transparent 1px),
+        linear-gradient(rgba(132, 160, 223, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(132, 160, 223, 0.08) 1px, transparent 1px);
+    background-size:
+        80px 80px,
+        80px 80px,
+        20px 20px,
+        20px 20px;
+    background-position:
+        0 0,
+        0 0,
+        40px 40px,
+        40px 40px;
     opacity: 0.4;
     mask-image: radial-gradient(ellipse 90% 90% at center, black 30%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse 90% 90% at center, black 30%, transparent 75%);
@@ -115,4 +121,3 @@
     }
 }
 </style>
-
