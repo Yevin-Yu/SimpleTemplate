@@ -18,6 +18,7 @@ export { default as SelectIcon } from './SelectIcon.vue'
 export { default as SwitchIcon } from './SwitchIcon.vue'
 export { default as CodeBlockIcon } from './CodeBlockIcon.vue'
 export { default as ContextMenuIcon } from './ContextMenuIcon.vue'
+export { default as InputIcon } from './InputIcon.vue'
 export { default as CopyIcon } from './CopyIcon.vue'
 export { default as CheckIcon } from './CheckIcon.vue'
 export { default as EditIcon } from './EditIcon.vue'
@@ -51,6 +52,7 @@ export type IconName =
     | 'switch'
     | 'codeBlock'
     | 'contextMenu'
+    | 'input'
     | 'copy'
     | 'check'
     | 'edit'
@@ -77,6 +79,7 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     switch: () => import('./SwitchIcon.vue'),
     codeBlock: () => import('./CodeBlockIcon.vue'),
     contextMenu: () => import('./ContextMenuIcon.vue'),
+    input: () => import('./InputIcon.vue'),
     copy: () => import('./CopyIcon.vue'),
     check: () => import('./CheckIcon.vue'),
     edit: () => import('./EditIcon.vue'),

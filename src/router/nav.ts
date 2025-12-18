@@ -14,6 +14,7 @@ import {
     SwitchIcon,
     CodeBlockIcon,
     ContextMenuIcon,
+    InputIcon,
 } from '@/components/icons'
 
 /**
@@ -64,6 +65,11 @@ export const SIDEBAR_NAV: NavItem[] = [
                 key: 'select-components',
                 path: ROUTE_PATHS.SELECT_COMPONENTS,
                 icon: SelectIcon,
+            },
+            {
+                key: 'input-components',
+                path: ROUTE_PATHS.INPUT_COMPONENTS,
+                icon: InputIcon,
             },
             {
                 key: 'switch-components',

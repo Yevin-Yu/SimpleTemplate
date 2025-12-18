@@ -106,4 +106,12 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/SimpleTemplate/example/ContextMenuComponents.vue'),
     },
+    {
+        path: ROUTE_PATHS.INPUT_COMPONENTS,
+        name: 'InputComponents',
+        meta: {
+            title: '输入框组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/InputComponents.vue'),
+    },
 ]

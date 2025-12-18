@@ -29,4 +29,5 @@ export const ROUTE_PATHS = {
     SWITCH_COMPONENTS: '/switch-components',
     CODE_BLOCK_COMPONENTS: '/code-block-components',
     CONTEXT_MENU_COMPONENTS: '/context-menu-components',
+    INPUT_COMPONENTS: '/input-components',
 } as const
