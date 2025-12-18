@@ -35,42 +35,36 @@
 
         <!-- Table -->
         <div v-else class="overflow-x-auto">
-            <table class="w-full border-collapse">
+            <table class="data-table w-full border-collapse">
                 <thead>
-                    <tr class="border-b border-gray-200">
-                        <th class="px-4 py-3 text-left font-semibold">ID</th>
-                        <th class="px-4 py-3 text-left font-semibold">姓名</th>
-                        <th class="px-4 py-3 text-left font-semibold">邮箱</th>
-                        <th class="px-4 py-3 text-left font-semibold">角色</th>
-                        <th class="px-4 py-3 text-left font-semibold">状态</th>
-                        <th class="px-4 py-3 text-left font-semibold">创建时间</th>
-                        <th class="px-4 py-3 text-left font-semibold">操作</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>角色</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="r in rows" :key="r.id" class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                        <td class="px-4 py-3">{{ r.id }}</td>
-                        <td class="px-4 py-3">{{ r.name }}</td>
-                        <td class="px-4 py-3">{{ r.email }}</td>
-                        <td class="px-4 py-3">
+                    <tr v-for="r in rows" :key="r.id">
+                        <td>{{ r.id }}</td>
+                        <td>{{ r.name }}</td>
+                        <td>{{ r.email }}</td>
+                        <td>
                             <ui-tag :title="roleLabel(r.role)">
                                 {{ roleLabel(r.role) }}
                             </ui-tag>
                         </td>
-                        <td class="px-4 py-3">
+                        <td>
                             <ui-tag :variant="statusTagVariant(r.status)" :title="statusLabel(r.status)">
                                 {{ statusLabel(r.status) }}
                             </ui-tag>
                         </td>
-                        <td class="px-4 py-3">{{ formatDate(r.createdAt) }}</td>
-                        <td class="px-4 py-3">
+                        <td>{{ formatDate(r.createdAt) }}</td>
+                        <td>
                             <div class="flex items-center gap-2">
-                                <!--
-                                    操作按钮语义约定（最佳实践）：
-                                    - “修改”是主操作 => primary
-                                    - “删除”是破坏性操作 => danger
-                                    统一在脚本中集中配置，避免散落 magic string，便于后续全局调整。
-                                -->
                                 <ui-button
                                     :variant="ROW_ACTIONS.edit.variant"
                                     size="small"
@@ -109,6 +103,7 @@
                         option-value="value"
                         placeholder="条数"
                         :disabled="loading"
+                        size="small"
                     />
                 </div>
                 <span class="text-sm text-[var(--muted-foreground)] mr-2">条</span>
@@ -186,9 +181,9 @@ const pageSizeModel = computed<string | number | null>({
 })
 
 const pageSizeOptions = [
-    { label: '10 条/页', value: 10 },
-    { label: '20 条/页', value: 20 },
-    { label: '50 条/页', value: 50 },
+    { label: '10', value: 10 },
+    { label: '20', value: 20 },
+    { label: '50', value: 50 },
 ] as const
 
 const formatDate = (iso: string): string => {
@@ -216,7 +211,12 @@ const formatDate = (iso: string): string => {
 }
 
 .pager-select {
-    width: 120px;
+    width: 70px;
+}
+
+.pager-select :deep(.ui-select-wrapper) {
+    width: 70px;
+    min-width: 70px;
 }
 
 .pager-select :deep(.ui-select-trigger) {
@@ -243,5 +243,33 @@ const formatDate = (iso: string): string => {
 
 .state-empty {
     background: rgba(148, 163, 184, 0.08);
+}
+
+.data-table {
+    th {
+        padding: 12px 16px;
+        text-align: left;
+        font-weight: 500;
+        color: var(--foreground);
+        border-bottom: 1px solid var(--border);
+    }
+
+    td {
+        padding: 12px 16px;
+        color: var(--foreground);
+        border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--muted);
+        }
+
+        &:last-child td {
+            border-bottom: none;
+        }
+    }
 }
 </style>

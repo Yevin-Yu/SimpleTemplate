@@ -42,7 +42,7 @@
 
                 <div class="flex items-center gap-2">
                     <ui-button variant="primary" :disabled="loading" @click="emit('submit')">查询</ui-button>
-                    <ui-button variant="blank" :disabled="loading" @click="emit('reset')">重置</ui-button>
+                    <ui-button variant="default" :disabled="loading" @click="emit('reset')">重置</ui-button>
                 </div>
             </div>
         </div>
