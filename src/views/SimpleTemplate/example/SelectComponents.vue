@@ -17,8 +17,12 @@
 
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="w-64">
-                        <ui-select v-model="selectValue1" :options="simpleOptions" placeholder="请选择" />
-                        <div class="text-sm text-gray-600 mt-2">选中值: {{ selectValue1 || '无' }}</div>
+                        <ui-select v-model="selectValue1" :options="simpleOptions" placeholder="请选择" size="small" />
+                        <div class="text-sm text-gray-600 mt-2">选中值: {{ selectValue1 || '无' }} (小型)</div>
+                    </div>
+                    <div class="w-64">
+                        <ui-select v-model="selectValue1Medium" :options="simpleOptions" placeholder="请选择" size="medium" />
+                        <div class="text-sm text-gray-600 mt-2">选中值: {{ selectValue1Medium || '无' }} (中型)</div>
                     </div>
                 </div>
 
@@ -38,8 +42,26 @@
 
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="w-64">
-                        <ui-select v-model="selectValue2" :options="userOptions" option-label="name" option-value="id" placeholder="选择用户" />
-                        <div class="text-sm text-gray-600 mt-2">选中ID: {{ selectValue2 || '无' }}</div>
+                        <ui-select
+                            v-model="selectValue2"
+                            :options="userOptions"
+                            option-label="name"
+                            option-value="id"
+                            placeholder="选择用户"
+                            size="small"
+                        />
+                        <div class="text-sm text-gray-600 mt-2">选中ID: {{ selectValue2 || '无' }} (小型)</div>
+                    </div>
+                    <div class="w-64">
+                        <ui-select
+                            v-model="selectValue2Medium"
+                            :options="userOptions"
+                            option-label="name"
+                            option-value="id"
+                            placeholder="选择用户"
+                            size="medium"
+                        />
+                        <div class="text-sm text-gray-600 mt-2">选中ID: {{ selectValue2Medium || '无' }} (中型)</div>
                     </div>
                 </div>
 
@@ -59,14 +81,38 @@
 
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="w-70">
-                        <ui-select v-model="selectValue3" :options="userOptions" option-label="name" option-value="id" placeholder="选择用户">
+                        <ui-select
+                            v-model="selectValue3"
+                            :options="userOptions"
+                            option-label="name"
+                            option-value="id"
+                            placeholder="选择用户"
+                            size="small"
+                        >
                             <template #option="{ option, selected }">
                                 <div class="flex items-center justify-between" :class="{ 'font-semibold': selected }">
                                     <div class="font-medium">{{ (option as unknown as UserOption).name }}</div>
                                 </div>
                             </template>
                         </ui-select>
-                        <div class="text-sm text-gray-600 mt-2">选中用户: {{ getSelectedUserName(selectValue3) || '无' }}</div>
+                        <div class="text-sm text-gray-600 mt-2">选中用户: {{ getSelectedUserName(selectValue3) || '无' }} (小型)</div>
+                    </div>
+                    <div class="w-70">
+                        <ui-select
+                            v-model="selectValue3Medium"
+                            :options="userOptions"
+                            option-label="name"
+                            option-value="id"
+                            placeholder="选择用户"
+                            size="medium"
+                        >
+                            <template #option="{ option, selected }">
+                                <div class="flex items-center justify-between" :class="{ 'font-semibold': selected }">
+                                    <div class="font-medium">{{ (option as unknown as UserOption).name }}</div>
+                                </div>
+                            </template>
+                        </ui-select>
+                        <div class="text-sm text-gray-600 mt-2">选中用户: {{ getSelectedUserName(selectValue3Medium) || '无' }} (中型)</div>
                     </div>
                 </div>
 
@@ -84,7 +130,14 @@
 
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="w-64">
-                        <ui-select v-model="selectValueIcon" :options="iconOptions" option-label="label" option-value="value" placeholder="选择项目">
+                        <ui-select
+                            v-model="selectValueIcon"
+                            :options="iconOptions"
+                            option-label="label"
+                            option-value="value"
+                            placeholder="选择项目"
+                            size="small"
+                        >
                             <template #selected="{ option }">
                                 <div class="flex items-center gap-2">
                                     <component :is="(option as unknown as IconOption).icon" class="w-4 h-4" />
@@ -98,7 +151,31 @@
                                 </div>
                             </template>
                         </ui-select>
-                        <div class="text-sm text-gray-600 mt-2">选中项目: {{ selectValueIcon || '无' }}</div>
+                        <div class="text-sm text-gray-600 mt-2">选中项目: {{ selectValueIcon || '无' }} (小型)</div>
+                    </div>
+                    <div class="w-64">
+                        <ui-select
+                            v-model="selectValueIconMedium"
+                            :options="iconOptions"
+                            option-label="label"
+                            option-value="value"
+                            placeholder="选择项目"
+                            size="medium"
+                        >
+                            <template #selected="{ option }">
+                                <div class="flex items-center gap-2">
+                                    <component :is="(option as unknown as IconOption).icon" class="w-4 h-4" />
+                                    <span>{{ (option as unknown as IconOption).label }}</span>
+                                </div>
+                            </template>
+                            <template #option="{ option, selected }">
+                                <div class="flex items-center gap-2" :class="{ 'font-semibold': selected }">
+                                    <component :is="(option as unknown as IconOption).icon" class="w-4 h-4" />
+                                    <span>{{ (option as unknown as IconOption).label }}</span>
+                                </div>
+                            </template>
+                        </ui-select>
+                        <div class="text-sm text-gray-600 mt-2">选中项目: {{ selectValueIconMedium || '无' }} (中型)</div>
                     </div>
                 </div>
 
@@ -116,10 +193,20 @@
 
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="w-64">
-                        <ui-select v-model="selectValue4" :options="simpleOptions" placeholder="请选择" disabled />
+                        <ui-select v-model="selectValue4" :options="simpleOptions" placeholder="请选择" size="small" disabled />
+                        <div class="text-sm text-gray-600 mt-2">小型禁用</div>
                     </div>
                     <div class="w-64">
-                        <ui-select :model-value="'选项2'" :options="simpleOptions" placeholder="请选择" disabled />
+                        <ui-select :model-value="'选项2'" :options="simpleOptions" placeholder="请选择" size="small" disabled />
+                        <div class="text-sm text-gray-600 mt-2">小型禁用（已选值）</div>
+                    </div>
+                    <div class="w-64">
+                        <ui-select v-model="selectValue4Medium" :options="simpleOptions" placeholder="请选择" size="medium" disabled />
+                        <div class="text-sm text-gray-600 mt-2">中型禁用</div>
+                    </div>
+                    <div class="w-64">
+                        <ui-select :model-value="'选项2'" :options="simpleOptions" placeholder="请选择" size="medium" disabled />
+                        <div class="text-sm text-gray-600 mt-2">中型禁用（已选值）</div>
                     </div>
                 </div>
 
@@ -148,10 +235,15 @@ import { HomeIcon, DashboardIcon } from '@/components/icons'
 // 数据源
 // =========================
 const selectValue1 = ref<string | number | null>(null)
+const selectValue1Medium = ref<string | number | null>(null)
 const selectValue2 = ref<string | number | null>(null)
+const selectValue2Medium = ref<string | number | null>(null)
 const selectValue3 = ref<string | number | null>(null)
+const selectValue3Medium = ref<string | number | null>(null)
 const selectValue4 = ref<string | number | null>(null)
+const selectValue4Medium = ref<string | number | null>(null)
 const selectValueIcon = ref<string | number | null>(null)
+const selectValueIconMedium = ref<string | number | null>(null)
 
 // 简单数据源：字符串数组（保持可变数组类型，匹配 ui-select props）
 const simpleOptions: string[] = ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7', '选项8', '选项9', '选项10']

@@ -1,5 +1,5 @@
 <template>
-    <div class="ui-select-wrapper" :class="{ 'is-open': isOpen, 'is-disabled': disabled }" ref="wrapperRef">
+    <div class="ui-select-wrapper" :class="{ 'is-open': isOpen, 'is-disabled': disabled, [`size-${size}`]: true }" ref="wrapperRef">
         <div class="ui-select-trigger" @click="toggleDropdown" :class="{ 'is-focused': isOpen }">
             <div class="select-value">
                 <template v-if="selectedOption">
@@ -91,12 +91,14 @@ interface Props {
     optionValue?: string | ((option: UiSelectOption) => string | number)
     placeholder?: string
     disabled?: boolean
+    size?: 'small' | 'medium'
 }
 
 const props = withDefaults(defineProps<Props>(), {
     modelValue: null,
     placeholder: '请选择',
     disabled: false,
+    size: 'medium',
 })
 
 const emit = defineEmits<{
@@ -147,8 +149,9 @@ const calculateHeight = (): number => {
     if (measureRef.value) {
         return Math.min(measureRef.value.scrollHeight, 200)
     }
-    // 预估高度：每个选项38px（34px高度+2px上下margin）+ 容器padding 16px
-    return Math.min(props.options.length * 38 + 16, 200)
+    // 预估高度：根据尺寸计算
+    const optionHeight = props.size === 'small' ? 36 : 40 // 32px/36px高度 + 2px上下margin + 2px padding
+    return Math.min(props.options.length * optionHeight + 16, 200)
 }
 
 const toggleDropdown = () => {
@@ -288,8 +291,6 @@ onUnmounted(() => {
     justify-content: space-between;
     width: 100%;
     padding: 0 12px;
-    height: 34px;
-    line-height: 34px;
     border: 1px solid var(--border);
     box-shadow: var(--shadow-xs);
     cursor: pointer;
@@ -300,6 +301,16 @@ onUnmounted(() => {
     &:hover:not(.is-disabled) {
         background-color: var(--accent);
     }
+}
+
+.ui-select-wrapper.size-small .ui-select-trigger {
+    height: 32px;
+    line-height: 32px;
+}
+
+.ui-select-wrapper.size-medium .ui-select-trigger {
+    height: 36px;
+    line-height: 36px;
 }
 
 .select-value {
@@ -370,7 +381,6 @@ onUnmounted(() => {
 
 .select-option {
     padding: 0 12px;
-    height: 34px;
     margin: 2px 0;
     display: flex;
     align-items: center;
@@ -392,6 +402,14 @@ onUnmounted(() => {
         color: var(--primary-foreground);
         font-weight: 500;
     }
+}
+
+.ui-select-wrapper.size-small .select-option {
+    height: 32px;
+}
+
+.ui-select-wrapper.size-medium .select-option {
+    height: 36px;
 }
 
 .select-empty {

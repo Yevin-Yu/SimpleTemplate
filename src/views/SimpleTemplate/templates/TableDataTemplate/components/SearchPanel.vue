@@ -23,6 +23,7 @@
                         option-value="value"
                         placeholder="角色"
                         :disabled="loading"
+                        size="small"
                     />
                 </div>
 
@@ -35,6 +36,7 @@
                         option-value="value"
                         placeholder="状态"
                         :disabled="loading"
+                        size="small"
                     />
                 </div>
 
@@ -150,10 +152,5 @@ watch(
 
 .field-input:focus {
     border-color: var(--primary);
-}
-
-.field :deep(.ui-select-trigger) {
-    height: 32px;
-    line-height: 32px;
 }
 </style>

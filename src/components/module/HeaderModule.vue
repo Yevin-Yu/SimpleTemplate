@@ -17,6 +17,7 @@
                 v-model="selectedProject"
                 :options="projectOptions"
                 placeholder="选择项目"
+                size="small"
                 @change="goProject"
             >
                 <template #selected="{ option }">
