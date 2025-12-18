@@ -53,14 +53,16 @@
             <ui-card class="p-6 mb-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">尺寸</h2>
-                    <p class="text-gray-600 mt-1">通过 <ui-tag>size</ui-tag> 选择按钮尺寸（small / medium）。</p>
+                    <p class="text-gray-600 mt-1">通过 <ui-tag>size</ui-tag> 选择按钮尺寸（small / medium / large）。</p>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 mb-4">
                     <ui-button size="small">Small</ui-button>
                     <ui-button>Medium</ui-button>
+                    <ui-button size="large">Large</ui-button>
                     <ui-button variant="primary" size="small">Small Primary</ui-button>
                     <ui-button variant="primary">Medium Primary</ui-button>
+                    <ui-button variant="primary" size="large">Large Primary</ui-button>
                 </div>
 
                 <ui-code-block title="示例代码" language="vue" :code="codeSize" />
@@ -229,6 +231,7 @@ const codeTheme = `<template>
 const codeSize = `<template>
     <ui-button size="small">Small</ui-button>
     <ui-button>Medium</ui-button>
+    <ui-button size="large">Large</ui-button>
 <\/template>`
 
 const codeIcon = `<template>

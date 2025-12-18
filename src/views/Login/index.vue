@@ -52,7 +52,7 @@
                     </div>
 
                     <!-- 提交按钮 -->
-                    <ui-button type="submit" variant="primary" size="medium" class="login-button" :disabled="isLoading || !isValid">
+                    <ui-button type="submit" variant="primary" size="large" class="login-button" :disabled="isLoading">
                         {{ isLoading ? '登录中...' : '登录' }}
                     </ui-button>
                 </form>
@@ -292,7 +292,6 @@ const handleForgotPassword = () => {
 // 登录按钮
 .login-button {
     width: 100%;
-    height: 44px;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -345,10 +344,6 @@ const handleForgotPassword = () => {
 
     .login-header {
         margin-bottom: 32px;
-    }
-
-    .login-button {
-        height: 40px;
     }
 }
 </style>

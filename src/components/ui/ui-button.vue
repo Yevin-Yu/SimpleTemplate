@@ -33,7 +33,7 @@
  */
 
 export type UiButtonVariant = 'default' | 'primary' | 'blank' | 'station' | 'danger'
-export type UiButtonSize = 'small' | 'medium'
+export type UiButtonSize = 'small' | 'medium' | 'large'
 export type UiButtonNativeType = 'button' | 'submit' | 'reset'
 
 const props = withDefaults(
@@ -136,6 +136,12 @@ const onClick = (event: MouseEvent) => {
     padding: 0 10px;
     line-height: 32px;
     height: 32px;
+}
+
+.ui-button-size-large {
+    padding: 0 14px;
+    line-height: 42px;
+    height: 42px;
 }
 
 .ui-button.only-icon {

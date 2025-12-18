@@ -1,7 +1,6 @@
 /**
- * localStorage 的安全访问封装：
- * - SSR/无 window 环境下不报错（返回 undefined）
- * - 捕获异常（浏览器隐私模式/容量/禁用存储等）
+ * localStorage 安全访问封装
+ * 处理 SSR 环境和浏览器存储异常（隐私模式/容量限制等）
  */
 
 export function safeGetItem(key: string): string | undefined {
@@ -20,5 +19,14 @@ export function safeSetItem(key: string, value: string): void {
         window.localStorage.setItem(key, value)
     } catch (error) {
         console.error(`[storage] Failed to write key "${key}"`, error)
+    }
+}
+
+export function safeRemoveItem(key: string): void {
+    try {
+        if (typeof window === 'undefined') return
+        window.localStorage.removeItem(key)
+    } catch (error) {
+        console.error(`[storage] Failed to remove key "${key}"`, error)
     }
 }
