@@ -5,6 +5,9 @@
 export const ROUTE_PATHS = {
     ROOT: '/',
 
+    // auth
+    LOGIN: '/login',
+
     // module entry
     SIMPLE_HOME: '/simple-home',
     SIMPLE_TEMPLATE_HOME: '/home',

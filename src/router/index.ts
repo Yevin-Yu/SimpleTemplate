@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { simpleHomeRoutes } from './modules/simpleHome'
 import { simpleTemplateRoutes } from './modules/simpleTemplate'
+import { authRoutes } from './modules/auth'
 import { STORAGE_KEYS, safeGetItem } from '@/shared'
 import { ROUTE_PATHS } from '@/router/paths'
 import { normalizeSelectedProject } from '@/features/project/projectSelection'
@@ -20,7 +21,7 @@ const routes = [
         redirect: () => getSavedRoute(),
         name: 'BlankLayout',
         component: () => import('@/layout/BlankLayout.vue'),
-        children: simpleHomeRoutes,
+        children: [...simpleHomeRoutes, ...authRoutes],
     },
     {
         path: ROUTE_PATHS.SIMPLE_TEMPLATE_HOME,

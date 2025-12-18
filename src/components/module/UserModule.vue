@@ -20,7 +20,7 @@
                         </template>
                         Manage Account
                     </ui-button>
-                    <ui-button class="mt-2">
+                    <ui-button class="mt-2" @click="handleSignOut">
                         <template #icon>
                             <LogOutIcon size="16" />
                         </template>
@@ -37,7 +37,10 @@ import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import { SettingsIcon, LogOutIcon } from '@/components/icons'
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { ROUTE_PATHS } from '@/router/paths'
 
+const router = useRouter()
 const userBtnRef = ref(null)
 const userMenuRef = ref(null)
 const showMenu = ref(false)
@@ -52,6 +55,17 @@ const showMenus = () => {
 }
 const hideMenus = () => {
     showMenu.value = false
+}
+
+/**
+ * 处理登出操作
+ * 跳转到登录页
+ */
+const handleSignOut = () => {
+    // 关闭菜单
+    hideMenus()
+    // 跳转到登录页
+    router.push(ROUTE_PATHS.LOGIN)
 }
 
 watch(showMenu, newVal => {
