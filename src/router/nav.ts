@@ -3,10 +3,8 @@ import { ROUTE_PATHS } from '@/router/paths'
 import {
     HomeIcon,
     ExampleIcon,
-    FormIcon,
     TableIcon,
     CardIcon,
-    DashboardIcon,
     ComponentsIcon,
     ButtonIcon,
     TagIcon,
@@ -101,33 +99,6 @@ export const SIDEBAR_NAV: NavItem[] = [
                 key: 'dialog-components',
                 path: ROUTE_PATHS.DIALOG_COMPONENTS,
                 icon: CardIcon,
-            },
-        ],
-    },
-    {
-        key: 'example',
-        label: '示例演示',
-        icon: ExampleIcon,
-        children: [
-            {
-                key: 'form',
-                path: ROUTE_PATHS.FORM_DEMO,
-                icon: FormIcon,
-            },
-            {
-                key: 'table',
-                path: ROUTE_PATHS.TABLE_DEMO,
-                icon: TableIcon,
-            },
-            {
-                key: 'card',
-                path: ROUTE_PATHS.CARD_DEMO,
-                icon: CardIcon,
-            },
-            {
-                key: 'dashboard',
-                path: ROUTE_PATHS.DASHBOARD_DEMO,
-                icon: DashboardIcon,
             },
         ],
     },

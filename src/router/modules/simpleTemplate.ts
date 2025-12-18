@@ -11,38 +11,6 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/SimpleTemplate/Home.vue'),
     },
     {
-        path: ROUTE_PATHS.FORM_DEMO,
-        name: 'FormDemo',
-        meta: {
-            title: '表单示例',
-        },
-        component: () => import('@/views/SimpleTemplate/demo/FormDemo.vue'),
-    },
-    {
-        path: ROUTE_PATHS.TABLE_DEMO,
-        name: 'TableDemo',
-        meta: {
-            title: '表格示例',
-        },
-        component: () => import('@/views/SimpleTemplate/demo/TableDemo.vue'),
-    },
-    {
-        path: ROUTE_PATHS.CARD_DEMO,
-        name: 'CardDemo',
-        meta: {
-            title: '卡片示例',
-        },
-        component: () => import('@/views/SimpleTemplate/demo/CardDemo.vue'),
-    },
-    {
-        path: ROUTE_PATHS.DASHBOARD_DEMO,
-        name: 'DashboardDemo',
-        meta: {
-            title: '仪表盘示例',
-        },
-        component: () => import('@/views/SimpleTemplate/demo/DashboardDemo.vue'),
-    },
-    {
         path: ROUTE_PATHS.TABLE_DATA_TEMPLATE,
         name: 'TableDataTemplate',
         meta: {

@@ -12,12 +12,6 @@ export const ROUTE_PATHS = {
     SIMPLE_HOME: '/simple-home',
     SIMPLE_TEMPLATE_HOME: '/home',
 
-    // demos
-    FORM_DEMO: '/form-example',
-    TABLE_DEMO: '/table-example',
-    CARD_DEMO: '/card-example',
-    DASHBOARD_DEMO: '/dashboard-example',
-
     // templates
     TABLE_DATA_TEMPLATE: '/table-data-template',
 

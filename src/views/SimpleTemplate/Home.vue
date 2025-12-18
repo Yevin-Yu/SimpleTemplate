@@ -43,7 +43,13 @@
         <section id="features" class="features-section">
             <h2 class="section-title">功能特性</h2>
             <div class="features-grid">
-                <ui-card v-for="feature in features" :key="feature.title" class="feature-card">
+                <ui-card
+                    v-for="feature in features"
+                    :key="feature.title"
+                    class="feature-card"
+                    :class="{ 'feature-card-clickable': feature.path }"
+                    @click="feature.path && router.push(feature.path)"
+                >
                     <div class="feature-header">
                         <component :is="feature.icon" :size="24" class="feature-icon" />
                         <h3 class="feature-title">{{ feature.title }}</h3>
@@ -86,7 +92,11 @@
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiCodeBlock from '@/components/ui/ui-code-block.vue'
-import { HomeIcon, ExampleIcon, ComponentsIcon, FormIcon, TableIcon, CardIcon, DashboardIcon } from '@/components/icons'
+import { HomeIcon, ExampleIcon, ComponentsIcon, TableIcon } from '@/components/icons'
+import { useRouter } from 'vue-router'
+import { ROUTE_PATHS } from '@/router/paths'
+
+const router = useRouter()
 
 const techStack = [
     {
@@ -123,34 +133,22 @@ const techStack = [
 
 const features = [
     {
-        title: '示例演示',
-        description: '提供表单、表格、卡片、仪表盘等多种示例页面，帮助您快速了解项目结构和使用方式。',
-        icon: ExampleIcon,
-    },
-    {
         title: '组件库',
-        description: '内置丰富的 UI 组件，包括按钮、卡片、开关等，开箱即用，支持自定义主题。',
+        description: '内置 10+ 开箱即用的 UI 组件，包括按钮、卡片、输入框、选择器、开关、标签等，支持自定义主题。',
         icon: ComponentsIcon,
+        path: ROUTE_PATHS.BUTTON_COMPONENTS,
     },
     {
-        title: '表单组件',
-        description: '完善的表单组件集合，支持各种输入类型和验证规则，提升开发效率。',
-        icon: FormIcon,
+        title: '组件示例',
+        description: '提供完整的组件使用示例和代码演示，帮助您快速了解每个组件的用法和特性。',
+        icon: ExampleIcon,
+        path: ROUTE_PATHS.BUTTON_COMPONENTS,
     },
     {
-        title: '表格组件',
-        description: '功能强大的表格组件，支持排序、筛选、分页等常用功能。',
+        title: '模板演示',
+        description: '包含实用的业务模板，如表格数据管理模板，可直接用于生产环境或作为开发参考。',
         icon: TableIcon,
-    },
-    {
-        title: '卡片组件',
-        description: '灵活的卡片布局组件，适用于各种内容展示场景。',
-        icon: CardIcon,
-    },
-    {
-        title: '仪表盘',
-        description: '数据可视化仪表盘模板，快速构建数据分析界面。',
-        icon: DashboardIcon,
+        path: ROUTE_PATHS.TABLE_DATA_TEMPLATE,
     },
 ]
 
@@ -173,8 +171,8 @@ const quickStartSteps = [
 ]
 
 const stats = [
-    { value: '8+', label: 'UI 组件' },
-    { value: '10+', label: '图标组件' },
+    { value: '10+', label: 'UI 组件' },
+    { value: '20+', label: '图标组件' },
     { value: '100%', label: 'TypeScript' },
     { value: 'MIT', label: '开源协议' },
 ]
@@ -301,6 +299,15 @@ const scrollToQuickStart = () => {
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+}
+
+.feature-card-clickable {
+    cursor: pointer;
 
     &:hover {
         transform: translateY(-4px);
