@@ -91,6 +91,11 @@ export const SIDEBAR_NAV: NavItem[] = [
                 path: ROUTE_PATHS.TAG_COMPONENTS,
                 icon: TagIcon,
             },
+            {
+                key: 'icon-components',
+                path: ROUTE_PATHS.ICON_COMPONENTS,
+                icon: ComponentsIcon,
+            },
         ],
     },
     {

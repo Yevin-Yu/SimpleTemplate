@@ -26,6 +26,7 @@ export { default as TrashIcon } from './TrashIcon.vue'
 export { default as XIcon } from './XIcon.vue'
 export { default as EyeIcon } from './EyeIcon.vue'
 export { default as EyeOffIcon } from './EyeOffIcon.vue'
+export { default as SearchIcon } from './SearchIcon.vue'
 
 // 图标类型定义
 export interface IconProps {

@@ -11,7 +11,18 @@
             <div class="flex items-center gap-3 flex-wrap justify-start">
                 <!-- 关键词 -->
                 <div class="field">
-                    <input v-model="model.keyword" class="field-input" type="text" placeholder="关键词（姓名 / 邮箱）" aria-label="关键词" />
+                    <ui-input
+                        v-model="model.keyword"
+                        type="text"
+                        size="small"
+                        placeholder="关键词（姓名 / 邮箱）"
+                        aria-label="关键词"
+                        :disabled="loading"
+                    >
+                        <template #prefix>
+                            <SearchIcon :size="16" />
+                        </template>
+                    </ui-input>
                 </div>
 
                 <!-- 角色 -->
@@ -54,6 +65,8 @@ import { reactive, watch } from 'vue'
 import uiCard from '@/components/ui/ui-card.vue'
 import uiButton from '@/components/ui/ui-button.vue'
 import uiSelect from '@/components/ui/ui-select.vue'
+import uiInput from '@/components/ui/ui-input.vue'
+import { SearchIcon } from '@/components/icons'
 import type { SearchFormState } from '../types'
 
 /**
@@ -139,18 +152,7 @@ watch(
     flex-direction: column;
 }
 
-.field-input {
-    height: 32px;
-    min-width: 160px;
-    padding: 0 10px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--foreground);
-    box-shadow: var(--shadow-xs);
-    outline: none;
-}
-
-.field-input:focus {
-    border-color: var(--primary);
+.field :deep(.ui-input-wrapper) {
+    min-width: 120px;
 }
 </style>
