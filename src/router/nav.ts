@@ -15,6 +15,7 @@ import {
     CodeBlockIcon,
     ContextMenuIcon,
     InputIcon,
+    SettingsIcon,
 } from '@/components/icons'
 
 /**
@@ -94,7 +95,12 @@ export const SIDEBAR_NAV: NavItem[] = [
             {
                 key: 'icon-components',
                 path: ROUTE_PATHS.ICON_COMPONENTS,
-                icon: ComponentsIcon,
+                icon: ExampleIcon,
+            },
+            {
+                key: 'dialog-components',
+                path: ROUTE_PATHS.DIALOG_COMPONENTS,
+                icon: CardIcon,
             },
         ],
     },

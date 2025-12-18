@@ -16,20 +16,11 @@
 </template>
 <script setup lang="ts">
 /**
- * Button（基础按钮）
+ * Button（按钮组件）
  *
- * Props
- * - variant: 视觉样式（default/primary/blank/station/danger）
- * - size: 尺寸（small/medium）
- * - disabled: 禁用（会透传到原生 disabled，并阻止 click emit）
- * - nativeType: 原生 button type（button/submit/reset）
- *
- * Slots
- * - default: 文案
- * - icon: 左侧图标（无文案时会自动变为仅图标按钮）
- *
- * Emits
- * - click: 用户点击（disabled 时不会触发）
+ * Props: variant, size, disabled, nativeType
+ * Slots: default, icon
+ * Emits: click
  */
 
 export type UiButtonVariant = 'default' | 'primary' | 'blank' | 'station' | 'danger'
@@ -146,6 +137,14 @@ const onClick = (event: MouseEvent) => {
 
 .ui-button.only-icon {
     padding: 8px;
+}
+
+.ui-button.only-icon.ui-button-size-small {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    min-width: 28px;
+    line-height: 1;
 }
 
 .ui-button.is-disabled {

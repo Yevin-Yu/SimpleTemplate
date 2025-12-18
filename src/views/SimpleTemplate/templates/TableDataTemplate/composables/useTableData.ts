@@ -2,12 +2,8 @@ import { computed, reactive, ref, watch } from 'vue'
 import type { PaginationState, SearchFormState, TableUserRow, UserRole, UserStatus } from '../types'
 
 /**
- * 表格数据展示模板 - 数据层（composable）
- *
- * 设计要点（最佳实践）：
- * - 组件只负责展示与交互；数据获取/状态管理放到 composable
- * - 明确 loading / error / empty 的 UI 状态来源
- * - 使用 computed 派生数据，避免在多个组件里重复过滤/分页逻辑
+ * 表格数据展示模板 - 数据层
+ * 组件只负责展示，数据获取和状态管理集中在此
  */
 
 const ROLE_LABEL: Record<UserRole, string> = {
@@ -169,16 +165,16 @@ export const useTableData = () => {
         await fetchData()
     }
 
-    const addRow = async () => {
+    const addRow = async (data: { name: string; email: string; role: UserRole; status: UserStatus }) => {
         const nextId = dataset.value.reduce((max, r) => Math.max(max, r.id), 0) + 1
         const now = new Date().toISOString()
         dataset.value = [
             {
                 id: nextId,
-                name: `用户${nextId}`,
-                email: `user${nextId}@example.com`,
-                role: 'user',
-                status: 'active',
+                name: data.name,
+                email: data.email,
+                role: data.role,
+                status: data.status,
                 createdAt: now,
             },
             ...dataset.value,

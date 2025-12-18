@@ -122,4 +122,12 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/SimpleTemplate/example/IconComponents.vue'),
     },
+    {
+        path: ROUTE_PATHS.DIALOG_COMPONENTS,
+        name: 'DialogComponents',
+        meta: {
+            title: '弹窗组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/DialogComponents.vue'),
+    },
 ]

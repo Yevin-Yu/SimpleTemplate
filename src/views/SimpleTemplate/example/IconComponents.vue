@@ -37,11 +37,11 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-4 mb-4">
-                    <SearchIcon :size="20" />
-                    <SettingsIcon :size="20" />
-                    <EditIcon :size="20" />
-                    <TrashIcon :size="20" />
                     <HomeIcon :size="20" />
+                    <SearchIcon :size="20" />
+                    <EditIcon :size="20" />
+                    <SettingsIcon :size="20" />
+                    <TrashIcon :size="20" />
                 </div>
 
                 <ui-code-block title="示例代码" language="vue" :code="codeExample" />
@@ -166,13 +166,15 @@ const copyImportCode = async (iconName: string) => {
 }
 
 const codeExample = `<template>
+    <HomeIcon :size="20" />
     <SearchIcon :size="20" />
-    <SettingsIcon :size="20" />
     <EditIcon :size="20" />
+    <SettingsIcon :size="20" />
+    <TrashIcon :size="20" />
 </template>
 
 <script setup lang="ts">
-import { SearchIcon, SettingsIcon, EditIcon } from '@/components/icons'
+import { HomeIcon, SearchIcon, EditIcon, SettingsIcon, TrashIcon } from '@/components/icons'
 <\/script>`
 
 const codeSize = `<template>

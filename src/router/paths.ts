@@ -31,4 +31,5 @@ export const ROUTE_PATHS = {
     CONTEXT_MENU_COMPONENTS: '/context-menu-components',
     INPUT_COMPONENTS: '/input-components',
     ICON_COMPONENTS: '/icon-components',
+    DIALOG_COMPONENTS: '/dialog-components',
 } as const

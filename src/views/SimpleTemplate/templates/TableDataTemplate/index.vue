@@ -19,7 +19,7 @@
                     :role-label="roleLabel"
                     :status-label="statusLabel"
                     @retry="fetchData"
-                    @add="addRow"
+                    @add="showAddDialog = true"
                     @edit="editRow"
                     @delete="onDelete"
                     @page-change="setPage"
@@ -27,24 +27,60 @@
                 />
             </div>
         </div>
+
+        <!-- 新增数据弹窗 -->
+        <ui-dialog v-model="showAddDialog" title="新增用户" size="medium">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">姓名</label>
+                    <ui-input v-model="addForm.name" placeholder="请输入姓名" :error="addFormErrors.name" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">邮箱</label>
+                    <ui-input v-model="addForm.email" type="email" placeholder="请输入邮箱" :error="addFormErrors.email" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">角色</label>
+                    <ui-select
+                        v-model="addForm.role"
+                        :options="ROLE_OPTIONS"
+                        option-label="label"
+                        option-value="value"
+                        placeholder="请选择角色"
+                    />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">状态</label>
+                    <ui-select
+                        v-model="addForm.status"
+                        :options="STATUS_OPTIONS"
+                        option-label="label"
+                        option-value="value"
+                        placeholder="请选择状态"
+                    />
+                </div>
+            </div>
+
+            <template #footer>
+                <ui-button variant="blank" :disabled="loading" @click="handleAddCancel">取消</ui-button>
+                <ui-button variant="primary" :disabled="loading" @click="handleAddSubmit">确认</ui-button>
+            </template>
+        </ui-dialog>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import SearchPanel from './components/SearchPanel.vue'
 import DataTable from './components/DataTable.vue'
+import uiDialog from '@/components/ui/ui-dialog.vue'
+import uiInput from '@/components/ui/ui-input.vue'
+import uiSelect from '@/components/ui/ui-select.vue'
+import uiButton from '@/components/ui/ui-button.vue'
 import { useTableData } from './composables/useTableData'
+import { useAddForm } from './composables/useAddForm'
+import { ROLE_OPTIONS, STATUS_OPTIONS } from './constants'
 import type { SearchFormState, TableUserRow } from './types'
-
-/**
- * TableDataTemplate（表格模板页）
- *
- * 结构说明（资深前端常见组织方式）：
- * - 页面（index.vue）只负责“编排”：组合 SearchPanel + DataTable
- * - 数据与状态（查询/分页/loading/error）集中在 composable：useTableData
- * - 子组件用 props + emits 通信，避免隐式依赖与耦合
- */
 
 const {
     form,
@@ -66,7 +102,6 @@ const {
     deleteRow,
 } = useTableData()
 
-// v-model 需要一个可替换引用；这里用 computed 做一层“表单快照”
 const formModel = computed<SearchFormState>({
     get: () => ({ ...form }),
     set: v => {
@@ -76,8 +111,10 @@ const formModel = computed<SearchFormState>({
     },
 })
 
+const showAddDialog = ref(false)
+const { form: addForm, errors: addFormErrors, validate: validateAddForm, reset: resetAddForm } = useAddForm()
+
 onMounted(() => {
-    // 首次进入页面自动拉取
     fetchData()
 })
 
@@ -85,6 +122,24 @@ const onDelete = async (row: TableUserRow) => {
     const ok = window.confirm(`确定删除「${row.name}」吗？`)
     if (!ok) return
     await deleteRow(row)
+}
+
+const handleAddCancel = () => {
+    showAddDialog.value = false
+    resetAddForm()
+}
+
+const handleAddSubmit = async () => {
+    if (!validateAddForm()) return
+
+    await addRow({
+        name: addForm.name.trim(),
+        email: addForm.email.trim(),
+        role: addForm.role!,
+        status: addForm.status!,
+    })
+
+    handleAddCancel()
 }
 </script>
 
@@ -95,5 +150,9 @@ const onDelete = async (row: TableUserRow) => {
 
 .h-title {
     color: var(--foreground);
+}
+
+.space-y-4 > * + * {
+    margin-top: 16px;
 }
 </style>
