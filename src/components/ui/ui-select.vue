@@ -304,6 +304,9 @@ onUnmounted(() => {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: left;
+    display: flex;
+    align-items: center;
+    min-height: 0;
 }
 
 .value-text {

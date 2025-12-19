@@ -21,15 +21,14 @@
                 @change="goProject"
             >
                 <template #selected="{ option }">
-                    <div v-if="option" class="project-selected">
-                        <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="project-icon" />
+                    <div v-if="option" class="flex items-center gap-2">
+                        <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="w-4 h-4 flex-shrink-0" />
                         <span>{{ (option as ProjectOption).label }}</span>
                     </div>
-                    <span v-else class="placeholder">选择项目</span>
                 </template>
                 <template #option="{ option, selected }">
-                    <div class="project-option" :class="{ selected }">
-                        <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="project-icon" />
+                    <div class="flex items-center gap-2" :class="{ 'font-semibold': selected }">
+                        <component :is="iconMap[(option as ProjectOption).icon] || defaultIcon" class="w-4 h-4 flex-shrink-0" />
                         <span>{{ (option as ProjectOption).label }}</span>
                     </div>
                 </template>
@@ -114,29 +113,6 @@ const defaultIcon = HomeIcon
 
     .project-select {
         width: 200px;
-    }
-
-    .project-selected {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--foreground);
-    }
-
-    .project-option {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--foreground);
-
-        .project-icon {
-            width: 16px;
-            height: 16px;
-        }
-
-        &.selected {
-            font-weight: 600;
-        }
     }
 
     .logo-title {
