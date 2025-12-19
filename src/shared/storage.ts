@@ -1,8 +1,3 @@
-/**
- * localStorage 安全访问封装
- * 处理 SSR 环境和浏览器存储异常（隐私模式/容量限制等）
- */
-
 export function safeGetItem(key: string): string | undefined {
     try {
         if (typeof window === 'undefined') return undefined

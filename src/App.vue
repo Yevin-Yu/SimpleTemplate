@@ -5,10 +5,7 @@ import { RouterView } from 'vue-router'
 import HeaderModule from './components/module/HeaderModule.vue'
 import { ROUTE_PATHS } from '@/router/paths'
 
-// 获取当前路由
 const route = useRoute()
-
-// 判断是否为登录页，登录页不显示顶部导航
 const isLoginPage = computed(() => route.path === ROUTE_PATHS.LOGIN)
 </script>
 

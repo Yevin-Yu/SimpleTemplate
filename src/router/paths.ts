@@ -1,7 +1,3 @@
-/**
- * 统一管理路由 path，避免在组件/路由/store 中硬编码字符串。
- * 约定：只放 path（不放 name），并保持与现有路由完全一致。
- */
 export const ROUTE_PATHS = {
     ROOT: '/',
 

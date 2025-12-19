@@ -9,7 +9,6 @@ import { SIDEBAR_NAV } from '@/router/nav'
 import { validateNavPaths } from '@/router/validate'
 import { getDocumentTitleFromRoute } from '@/router/meta'
 
-// 获取保存的项目路由
 const getSavedRoute = (): string => {
     const stored = safeGetItem(STORAGE_KEYS.SELECTED_PROJECT)
     return normalizeSelectedProject(stored) || ROUTE_PATHS.SIMPLE_TEMPLATE_HOME
@@ -36,12 +35,10 @@ const router = createRouter({
     routes,
 })
 
-// 页面标题：根据路由 meta.title 自动更新
 router.afterEach(to => {
     document.title = getDocumentTitleFromRoute(to)
 })
 
-// 开发期校验：防止菜单与路由配置不一致
 if (import.meta.env.DEV) {
     validateNavPaths(router, SIDEBAR_NAV)
 }

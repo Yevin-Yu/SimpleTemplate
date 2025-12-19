@@ -1,11 +1,6 @@
 import type { Router } from 'vue-router'
 import type { NavItem } from '@/router/nav'
 
-/**
- * 开发期校验：导航菜单中引用的 path 必须在 router 路由表中存在。
- * - 仅建议在 DEV 环境调用
- * - 发现问题时只 warning，不中断运行
- */
 export function validateNavPaths(router: Router, nav: NavItem[]): void {
     const routePaths = new Set(router.getRoutes().map(r => r.path))
 

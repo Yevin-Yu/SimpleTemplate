@@ -61,30 +61,6 @@
 </template>
 
 <script setup lang="ts">
-/**
- * Select（下拉选择器）
- *
- * Props
- * - modelValue: 当前选中的 value（配合 v-model）
- * - options: 选项数组（支持 string/number 或对象）
- * - optionLabel: 对象选项的 label 字段名 / 或自定义取 label 的函数
- * - optionValue: 对象选项的 value 字段名 / 或自定义取 value 的函数
- * - placeholder: 未选择时占位文本
- * - disabled: 禁用
- *
- * Slots
- * - selected: 自定义已选中展示（slot props: { option }）
- * - option: 自定义下拉项展示（slot props: { option, selected }）
- * - empty: options 为空时的占位内容
- *
- * Emits
- * - update:modelValue: v-model 标准事件
- * - change: 选中变化（业务监听用）
- *
- * 交互
- * - Click：开合/选择
- * - Keyboard：Enter/Space/↑/↓/Esc 支持
- */
 import { ref, computed, onMounted, onUnmounted, watch, nextTick, useAttrs } from 'vue'
 import type { StyleValue } from 'vue'
 
