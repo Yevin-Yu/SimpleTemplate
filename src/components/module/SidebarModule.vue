@@ -326,6 +326,8 @@ const onItemClick = (item: NavItem) => {
     padding-left: 16px;
     border-left: 1px dashed var(--border);
     position: relative;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
 }
 
 .submenu-item {
@@ -432,42 +434,32 @@ const onItemClick = (item: NavItem) => {
 
 // 子菜单展开/收起动画
 .submenu-enter-active {
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
 }
 
 .submenu-leave-active {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
 }
 
 .submenu-enter-from {
     opacity: 0;
-    transform: translateY(-10px);
-    max-height: 0;
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    transform: translateY(-8px);
 }
 
 .submenu-enter-to {
     opacity: 1;
     transform: translateY(0);
-    max-height: 500px;
 }
 
 .submenu-leave-from {
     opacity: 1;
     transform: translateY(0);
-    max-height: 500px;
 }
 
 .submenu-leave-to {
     opacity: 0;
-    transform: translateY(-10px);
-    max-height: 0;
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    transform: translateY(-8px);
 }
 </style>
