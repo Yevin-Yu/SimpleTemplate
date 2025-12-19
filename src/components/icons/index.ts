@@ -27,6 +27,10 @@ export { default as XIcon } from './XIcon.vue'
 export { default as EyeIcon } from './EyeIcon.vue'
 export { default as EyeOffIcon } from './EyeOffIcon.vue'
 export { default as SearchIcon } from './SearchIcon.vue'
+export { default as GoogleIcon } from './GoogleIcon.vue'
+export { default as DuckDuckGoIcon } from './DuckDuckGoIcon.vue'
+export { default as BingIcon } from './BingIcon.vue'
+export { default as BaiduIcon } from './BaiduIcon.vue'
 
 // 图标类型定义
 export interface IconProps {

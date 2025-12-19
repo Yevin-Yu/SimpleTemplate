@@ -19,6 +19,7 @@
 .default-layout-content {
     flex: 1;
     min-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 </style>

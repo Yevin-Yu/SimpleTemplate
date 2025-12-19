@@ -2,19 +2,29 @@
     <div class="suggestions">
         <div v-if="history.length > 0" class="suggestion-group">
             <div class="suggestion-title">搜索记录</div>
-            <div v-for="item in history.slice(0, 5)" :key="item.id" class="suggestion-item" @click="$emit('select-history', item.query)">
+            <div
+                v-for="item in history.slice(0, 5)"
+                :key="item.id"
+                class="suggestion-item"
+                @click="$emit('select-history', item.query)"
+            >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
                 </svg>
                 <span>{{ item.query }}</span>
             </div>
         </div>
         <div v-if="bookmarks.length > 0" class="suggestion-group">
             <div class="suggestion-title">书签</div>
-            <div v-for="item in bookmarks.slice(0, 5)" :key="item.id" class="suggestion-item" @click="$emit('select-bookmark', item.url)">
+            <div
+                v-for="item in bookmarks.slice(0, 5)"
+                :key="item.id"
+                class="suggestion-item"
+                @click="$emit('select-bookmark', item.url)"
+            >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
                 </svg>
                 <span>{{ item.title }}</span>
             </div>
@@ -46,7 +56,7 @@ defineEmits<{
     right: 0;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 0;
     box-shadow: var(--shadow-lg);
     overflow: hidden;
     z-index: 100;

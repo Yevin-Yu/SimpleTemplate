@@ -7,72 +7,42 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
 
     const filteredHistory = computed(() => {
         if (!searchQuery.value) return []
-        return history.filter(item => item.query.toLowerCase().includes(searchQuery.value.toLowerCase()))
+        const query = searchQuery.value.toLowerCase()
+        return history.filter(item => item.query.toLowerCase().includes(query))
     })
 
     const filteredBookmarks = computed(() => {
         if (!searchQuery.value) return []
+        const query = searchQuery.value.toLowerCase()
         return bookmarks.filter(
-            item =>
-                item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) || item.url.toLowerCase().includes(searchQuery.value.toLowerCase())
+            item => item.title.toLowerCase().includes(query) || item.url.toLowerCase().includes(query)
         )
     })
 
-    const onSearchInput = () => {
+    function onSearchInput() {
         showSuggestions.value = searchQuery.value.length > 0
     }
 
-    const clearSearch = () => {
+    function clearSearch() {
         searchQuery.value = ''
         showSuggestions.value = false
     }
 
-    const isUrl = (str: string): boolean => {
-        try {
-            new URL(str)
-            return true
-        } catch {
-            return /^https?:\/\//.test(str) || /^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}/.test(str)
-        }
-    }
-
-    const openUrl = (url: string) => {
-        let finalUrl = url
-        if (!/^https?:\/\//.test(url)) {
-            finalUrl = `https://${url}`
-        }
-        window.open(finalUrl, '_blank')
-    }
-
-    const performSearch = (query: string, onHistoryAdd?: (item: SearchHistoryItem) => void) => {
-        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`
-        window.open(searchUrl, '_blank')
-
-        if (onHistoryAdd) {
-            const newHistoryItem: SearchHistoryItem = {
-                id: Date.now().toString(),
-                query,
-                timestamp: Date.now(),
-            }
-            onHistoryAdd(newHistoryItem)
-        }
-    }
-
-    const handleSearch = (onHistoryAdd?: (item: SearchHistoryItem) => void) => {
-        if (!searchQuery.value.trim()) return
-
+    function handleSearch(onHistoryAdd?: (item: SearchHistoryItem) => void) {
         const query = searchQuery.value.trim()
+        if (!query) return
 
-        if (isUrl(query)) {
-            openUrl(query)
-        } else {
-            performSearch(query, onHistoryAdd)
+        const isUrl = /^https?:\/\//.test(query) || /^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}/.test(query)
+        
+        if (isUrl) {
+            const finalUrl = /^https?:\/\//.test(query) ? query : `https://${query}`
+            window.open(finalUrl, '_blank')
         }
 
         showSuggestions.value = false
     }
 
-    const selectSuggestion = (query: string, onHistoryAdd?: (item: SearchHistoryItem) => void) => {
+    function selectSuggestion(query: string, onHistoryAdd?: (item: SearchHistoryItem) => void) {
         searchQuery.value = query
         showSuggestions.value = false
         handleSearch(onHistoryAdd)
@@ -87,6 +57,5 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
         clearSearch,
         handleSearch,
         selectSuggestion,
-        openUrl,
     }
 }

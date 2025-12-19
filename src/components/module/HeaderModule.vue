@@ -110,6 +110,9 @@ const defaultIcon = HomeIcon
     height: 48px;
     padding: 0 16px;
     color: var(--foreground);
+    position: relative;
+    z-index: 100;
+    background: var(--background);
 
     .project-select {
         width: 200px;

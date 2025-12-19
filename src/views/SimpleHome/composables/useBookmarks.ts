@@ -31,21 +31,7 @@ export function useBookmarks() {
         }
     }
 
-    function addBookmark(title: string, url: string) {
-        if (!title || !url) return false
-
-        const bookmark: Bookmark = {
-            id: Date.now().toString(),
-            title,
-            url,
-        }
-        bookmarks.value.unshift(bookmark)
-        saveBookmarks()
-        return true
-    }
-
     return {
         bookmarks,
-        addBookmark,
     }
 }
