@@ -30,33 +30,44 @@
 
         <!-- 新增数据弹窗 -->
         <ui-dialog v-model="showAddDialog" title="新增用户" size="medium">
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">姓名</label>
-                    <ui-input v-model="addForm.name" placeholder="请输入姓名" :error="addFormErrors.name" />
+            <div class="form-container">
+                <div class="form-row">
+                    <label class="form-label">姓名</label>
+                    <ui-input v-model="addForm.name" placeholder="请输入姓名" :error="addFormErrors.name" class="form-input" style="width: 280px" />
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">邮箱</label>
-                    <ui-input v-model="addForm.email" type="email" placeholder="请输入邮箱" :error="addFormErrors.email" />
+                <div class="form-row">
+                    <label class="form-label">邮箱</label>
+                    <ui-input
+                        v-model="addForm.email"
+                        type="email"
+                        placeholder="请输入邮箱"
+                        :error="addFormErrors.email"
+                        class="form-input"
+                        style="width: 280px"
+                    />
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">角色</label>
+                <div class="form-row">
+                    <label class="form-label">角色</label>
                     <ui-select
                         v-model="addForm.role"
                         :options="ROLE_OPTIONS"
                         option-label="label"
                         option-value="value"
                         placeholder="请选择角色"
+                        class="form-input"
+                        style="width: 280px"
                     />
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-[var(--foreground)] mb-2">状态</label>
+                <div class="form-row">
+                    <label class="form-label">状态</label>
                     <ui-select
                         v-model="addForm.status"
                         :options="STATUS_OPTIONS"
                         option-label="label"
                         option-value="value"
                         placeholder="请选择状态"
+                        class="form-input"
+                        style="width: 280px"
                     />
                 </div>
             </div>
@@ -154,5 +165,35 @@ const handleAddSubmit = async () => {
 
 .space-y-4 > * + * {
     margin-top: 16px;
+}
+
+// 优化弹窗表单布局
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: fit-content;
+    margin: 0 auto;
+    min-width: 400px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-label {
+    flex-shrink: 0;
+    width: 60px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+// 统一设置输入框和下拉框的宽度
+.form-input {
+    flex-shrink: 0;
 }
 </style>

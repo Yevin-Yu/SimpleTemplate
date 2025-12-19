@@ -203,7 +203,6 @@ onUnmounted(() => {
 
 .ui-dialog-content {
     padding: 24px;
-    overflow-y: auto;
     flex: 1;
     min-height: 0;
 }
@@ -265,4 +264,3 @@ onUnmounted(() => {
     }
 }
 </style>
-

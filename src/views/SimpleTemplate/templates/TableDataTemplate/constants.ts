@@ -16,4 +16,3 @@ export const STATUS_OPTIONS = [
 ] as const satisfies readonly Array<{ label: string; value: UserStatus }>
 
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-

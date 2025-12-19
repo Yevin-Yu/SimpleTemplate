@@ -7,9 +7,10 @@
                 'is-disabled': disabled,
                 'has-error': error,
                 'has-prefix': $slots.prefix,
-                'has-suffix': $slots.suffix || showClear,
+                'has-suffix': hasSuffix,
             },
         ]"
+        :style="wrapperStyle"
     >
         <span v-if="$slots.prefix" class="input-prefix" aria-hidden="true">
             <slot name="prefix" />
@@ -26,7 +27,7 @@
             :maxlength="maxlength"
             :autocomplete="autocomplete"
             class="ui-input"
-            :class="[`ui-input-size-${size}`, { 'has-prefix': $slots.prefix, 'has-suffix': $slots.suffix || showClear }]"
+            :class="[`ui-input-size-${size}`, { 'has-prefix': $slots.prefix, 'has-suffix': hasSuffix }]"
             :aria-invalid="error ? 'true' : undefined"
             :aria-describedby="error ? errorId : undefined"
             @input="handleInput"
@@ -47,38 +48,9 @@
 </template>
 
 <script setup lang="ts">
-/**
- * Input（输入框）
- *
- * Props
- * - modelValue: 当前值（配合 v-model）
- * - id: 输入框 ID（用于关联 label，如果不提供则自动生成）
- * - name: 输入框 name 属性（用于表单提交和自动填充）
- * - type: 输入类型（text/password/email/number/tel/url/search）
- * - size: 尺寸（small: 32px / medium: 36px / large: 42px）
- * - placeholder: 占位文本
- * - disabled: 禁用
- * - readonly: 只读
- * - maxlength: 最大长度
- * - autocomplete: 自动完成（on/off）
- * - clearable: 是否显示清除按钮（有值且非 disabled/readonly 时显示）
- * - clearText: 清除按钮提示文本
- * - error: 错误信息（显示时会改变输入框样式，并通过 aria-describedby 关联）
- *
- * Slots
- * - prefix: 前置内容（图标等）
- * - suffix: 后置内容（图标等，与 clearable 互斥）
- *
- * Emits
- * - update:modelValue: v-model 标准事件
- * - focus: 获得焦点
- * - blur: 失去焦点
- * - clear: 点击清除按钮
- * - enter: 按下 Enter 键
- */
-
-import { ref, computed } from 'vue'
+import { ref, computed, useAttrs, useSlots, nextTick } from 'vue'
 import { XIcon } from '@/components/icons'
+import type { StyleValue } from 'vue'
 
 export type UiInputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search'
 export type UiInputSize = 'small' | 'medium' | 'large'
@@ -119,15 +91,14 @@ const emit = defineEmits<{
     enter: [event: KeyboardEvent]
 }>()
 
+const attrs = useAttrs()
+const slots = useSlots()
 const inputRef = ref<HTMLInputElement>()
 
-/** 自动生成的唯一 ID（如果没有提供 id prop，只在组件初始化时生成一次） */
 const autoId = ref(`ui-input-${Math.random().toString(36).substring(2, 9)}`)
 
-/** 输入框 ID */
+const wrapperStyle = computed(() => attrs.style as StyleValue | undefined)
 const inputId = computed(() => props.id || autoId.value)
-
-/** 错误信息元素的 ID */
 const errorId = computed(() => `${inputId.value}-error`)
 
 const showClear = computed(() => {
@@ -135,6 +106,8 @@ const showClear = computed(() => {
     const value = props.modelValue
     return value !== '' && value !== null && value !== undefined
 })
+
+const hasSuffix = computed(() => !!(slots.suffix || showClear.value))
 
 const handleInput = (event: Event) => {
     const target = event.target as HTMLInputElement
@@ -149,17 +122,18 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 const handleClear = (event: MouseEvent) => {
     if (props.disabled || props.readonly) return
+
     event.preventDefault()
     event.stopPropagation()
+
     const hadFocus = document.activeElement === inputRef.value
     emit('update:modelValue', '')
     emit('clear')
-    if (hadFocus && inputRef.value) {
-        setTimeout(() => {
-            if (document.activeElement !== inputRef.value && inputRef.value) {
-                inputRef.value.focus({ preventScroll: true })
-            }
-        }, 0)
+
+    if (hadFocus) {
+        nextTick(() => {
+            inputRef.value?.focus({ preventScroll: true })
+        })
     }
 }
 
@@ -237,15 +211,14 @@ defineExpose({
     outline-offset: 0;
 }
 
-.ui-input:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+.ui-input:disabled,
+.ui-input:read-only {
     background-color: var(--muted);
+    cursor: not-allowed;
 }
 
 .ui-input:read-only {
     cursor: default;
-    background-color: var(--muted);
 }
 
 .input-prefix,
@@ -290,7 +263,6 @@ defineExpose({
 }
 
 .ui-input-wrapper.has-error .ui-input:focus {
-    box-shadow: var(--shadow-xs);
     outline: none;
 }
 
@@ -306,8 +278,8 @@ defineExpose({
     line-height: 1.4;
 }
 
-/* 错误信息过渡动画 */
-.input-error-enter-active {
+.input-error-enter-active,
+.input-error-leave-active {
     transition:
         opacity 0.2s ease,
         max-height 0.3s ease,
@@ -316,32 +288,19 @@ defineExpose({
 }
 
 .input-error-leave-active {
-    transition:
-        opacity 0.15s ease,
-        max-height 0.25s ease,
-        margin-top 0.25s ease;
-    overflow: hidden;
+    transition-duration: 0.15s, 0.25s, 0.25s;
 }
 
-.input-error-enter-from {
-    opacity: 0;
-    max-height: 0;
-    margin-top: 0;
-}
-
-.input-error-enter-to {
-    opacity: 1;
-    max-height: 100px;
-}
-
-.input-error-leave-from {
-    opacity: 1;
-    max-height: 100px;
-}
-
+.input-error-enter-from,
 .input-error-leave-to {
     opacity: 0;
     max-height: 0;
     margin-top: 0;
+}
+
+.input-error-enter-to,
+.input-error-leave-from {
+    opacity: 1;
+    max-height: 100px;
 }
 </style>

@@ -136,9 +136,7 @@
             <ui-card class="p-6">
                 <div class="mb-4">
                     <h2 class="h-title text-2xl font-semibold">关闭行为控制</h2>
-                    <p class="text-gray-600 mt-1">
-                        通过 <ui-tag>closable</ui-tag> 和 <ui-tag>closeOnClickOverlay</ui-tag> 控制关闭行为。
-                    </p>
+                    <p class="text-gray-600 mt-1">通过 <ui-tag>closable</ui-tag> 和 <ui-tag>closeOnClickOverlay</ui-tag> 控制关闭行为。</p>
                 </div>
 
                 <div class="flex flex-wrap gap-3 mb-4">
@@ -292,4 +290,3 @@ const codeCloseBehavior = `<template>
     margin-top: 16px;
 }
 </style>
-

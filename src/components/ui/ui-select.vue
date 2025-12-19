@@ -1,5 +1,10 @@
 <template>
-    <div class="ui-select-wrapper" :class="{ 'is-open': isOpen, 'is-disabled': disabled, [`size-${size}`]: true }" ref="wrapperRef">
+    <div
+        class="ui-select-wrapper"
+        :class="{ 'is-open': isOpen, 'is-disabled': disabled, [`size-${size}`]: true }"
+        :style="wrapperStyle"
+        ref="wrapperRef"
+    >
         <div class="ui-select-trigger" @click="toggleDropdown" :class="{ 'is-focused': isOpen }">
             <div class="select-value">
                 <template v-if="selectedOption">
@@ -80,7 +85,8 @@
  * - Click：开合/选择
  * - Keyboard：Enter/Space/↑/↓/Esc 支持
  */
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick, useAttrs } from 'vue'
+import type { StyleValue } from 'vue'
 
 export type UiSelectOption = Record<string, unknown> | string | number
 
@@ -100,6 +106,9 @@ const props = withDefaults(defineProps<Props>(), {
     disabled: false,
     size: 'medium',
 })
+
+const attrs = useAttrs()
+const wrapperStyle = computed(() => attrs.style as StyleValue | undefined)
 
 const emit = defineEmits<{
     'update:modelValue': [value: string | number | null]
