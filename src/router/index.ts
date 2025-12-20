@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 import { simpleHomeRoutes } from './modules/simpleHome'
 import { simpleTemplateRoutes } from './modules/simpleTemplate'
 import { authRoutes } from './modules/auth'
@@ -62,7 +62,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-    history: createWebHistory('/a/'),
+    history: createWebHashHistory('/a/'),
     routes,
 })
 
