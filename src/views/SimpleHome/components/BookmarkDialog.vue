@@ -11,7 +11,7 @@
             </div>
             <div class="form-item">
                 <label>图标</label>
-                <ui-input v-model="formData.icon" placeholder="单个字符或字母" maxlength="1" />
+                <ui-input v-model="formData.icon" placeholder="单个字符或字母" :maxlength="1" />
             </div>
             <div class="form-item">
                 <label>颜色</label>
@@ -23,7 +23,7 @@
         </div>
         <template #footer>
             <div class="dialog-footer">
-                <ui-button variant="neutral" @click="handleClose">取消</ui-button>
+                <ui-button variant="default" @click="handleClose">取消</ui-button>
                 <ui-button @click="handleSave">保存</ui-button>
             </div>
         </template>

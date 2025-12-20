@@ -112,7 +112,7 @@ function handleSave(link: CategoryLink) {
 }
 
 function handleLinkClick(link: CategoryLink) {
-    if (!dragState.isDragging) {
+    if (!dragState.value.isDragging) {
         emit('open-url', link.url)
     }
 }

@@ -92,7 +92,9 @@ export function useDragSort() {
 
         const newItems = [...items]
         const [draggedItem] = newItems.splice(dragIndex, 1)
-        newItems.splice(insertIdx, 0, draggedItem)
+        if (draggedItem !== undefined) {
+            newItems.splice(insertIdx, 0, draggedItem)
+        }
 
         onReorder(newItems)
         endDrag()
