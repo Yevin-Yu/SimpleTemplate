@@ -13,31 +13,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { formatTime, formatDate, getGreeting } from '../utils/date'
 
 const currentTime = ref(new Date())
-const timeInterval = ref<number | null>(null)
+let timeInterval: number | null = null
 
-const greeting = ref(getGreeting(currentTime.value))
-const formattedTime = ref(formatTime(currentTime.value))
-const formattedDate = ref(formatDate(currentTime.value))
+const greeting = computed(() => getGreeting(currentTime.value))
+const formattedTime = computed(() => formatTime(currentTime.value))
+const formattedDate = computed(() => formatDate(currentTime.value))
 
 function updateTime() {
     currentTime.value = new Date()
-    formattedTime.value = formatTime(currentTime.value)
-    formattedDate.value = formatDate(currentTime.value)
-    greeting.value = getGreeting(currentTime.value)
 }
 
 onMounted(() => {
     updateTime()
-    timeInterval.value = setInterval(updateTime, 1000)
+    timeInterval = setInterval(updateTime, 1000)
 })
 
 onUnmounted(() => {
-    if (timeInterval.value) {
-        clearInterval(timeInterval.value)
+    if (timeInterval) {
+        clearInterval(timeInterval)
     }
 })
 </script>

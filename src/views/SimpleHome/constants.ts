@@ -66,3 +66,14 @@ export const SHORTCUTS: Shortcut[] = [
     { key: '1-4', label: '引擎' },
     { key: 'Esc', label: '清除' },
 ]
+
+export const MAX_SEARCH_HISTORY = 20
+export const MAX_SUGGESTIONS_PER_GROUP = 5
+export const ENGINE_SHORTCUT_KEYS = ['1', '2', '3', '4'] as const
+
+export const CATEGORIES = [
+    { title: '开发', category: 'development' as const },
+    { title: '社交', category: 'social' as const },
+    { title: '媒体', category: 'media' as const },
+    { title: '生产力', category: 'productivity' as const },
+] as const

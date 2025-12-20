@@ -1,29 +1,66 @@
-import { ref } from 'vue'
-import type { Bookmark } from '../types'
-
-const STORAGE_KEY = 'simple-home-bookmarks'
+import { ref, computed } from 'vue'
+import { safeGetItem, safeSetItem } from '@/shared/storage'
+import { STORAGE_KEYS } from '@/shared/storageKeys'
+import { CATEGORY_LINKS as DEFAULT_CATEGORY_LINKS } from '../constants'
+import type { Bookmark, CategoryLink, CategoryKey } from '../types'
 
 export function useBookmarks() {
-    const bookmarks = ref<Bookmark[]>(loadBookmarks())
+    const categoryLinks = ref<Record<CategoryKey, CategoryLink[]>>(loadCategoryLinks())
 
-    function loadBookmarks(): Bookmark[] {
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY)
-            if (stored) {
-                return JSON.parse(stored)
-            }
-        } catch (error) {
-            console.error('Failed to load bookmarks:', error)
+    function loadCategoryLinks(): Record<CategoryKey, CategoryLink[]> {
+        const stored = safeGetItem(STORAGE_KEYS.CATEGORY_LINKS)
+        if (!stored) {
+            return { ...DEFAULT_CATEGORY_LINKS }
         }
-        // 默认书签
-        return [
-            { id: '1', title: 'Vue 3 文档', url: 'https://cn.vuejs.org' },
-            { id: '2', title: 'TypeScript 文档', url: 'https://www.typescriptlang.org' },
-            { id: '3', title: 'Tailwind CSS', url: 'https://tailwindcss.com' },
-        ]
+
+        try {
+            const parsed = JSON.parse(stored)
+            const result: Record<CategoryKey, CategoryLink[]> = { ...DEFAULT_CATEGORY_LINKS }
+            
+            ;(Object.keys(DEFAULT_CATEGORY_LINKS) as CategoryKey[]).forEach((categoryKey) => {
+                const storedLinks = parsed[categoryKey]
+                if (Array.isArray(storedLinks)) {
+                    result[categoryKey] = storedLinks.filter(
+                        (item: unknown): item is CategoryLink =>
+                            item &&
+                            typeof item === 'object' &&
+                            'id' in item &&
+                            'title' in item &&
+                            'url' in item &&
+                            'icon' in item &&
+                            'color' in item
+                    )
+                }
+            })
+            
+            return result
+        } catch {
+            return { ...DEFAULT_CATEGORY_LINKS }
+        }
     }
 
+    function saveCategoryLinks() {
+        safeSetItem(STORAGE_KEYS.CATEGORY_LINKS, JSON.stringify(categoryLinks.value))
+    }
+
+    function updateCategoryLinks(category: CategoryKey, links: CategoryLink[]) {
+        categoryLinks.value[category] = links
+        saveCategoryLinks()
+    }
+
+    const bookmarks = computed<Bookmark[]>(() => {
+        return Object.values(categoryLinks.value).flatMap(links =>
+            links.map(link => ({
+                id: link.id,
+                title: link.title,
+                url: link.url,
+            }))
+        )
+    })
+
     return {
+        categoryLinks,
         bookmarks,
+        updateCategoryLinks,
     }
 }

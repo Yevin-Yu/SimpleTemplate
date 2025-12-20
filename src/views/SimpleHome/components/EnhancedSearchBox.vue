@@ -4,13 +4,14 @@
             <div class="search-box">
                 <SearchIcon :size="20" class="search-icon" />
                 <input
+                    ref="inputRef"
                     v-model="searchQuery"
                     type="text"
                     class="search-input"
                     :placeholder="`Search ${currentEngine.name}...`"
                     @keyup.enter="handleSearch"
-                    @input="onSearchInput"
-                    @focus="showSuggestions = true"
+                    @input="updateSuggestionsVisibility"
+                    @focus="updateSuggestionsVisibility"
                 />
                 <button v-if="searchQuery" class="clear-button" @click="clearSearch">
                     <XIcon :size="16" />
@@ -32,9 +33,8 @@
                 </div>
             </div>
             <SearchSuggestions
-                v-if="showSuggestions && (filteredHistory.length > 0 || filteredBookmarks.length > 0)"
-                :history="filteredHistory"
-                :bookmarks="filteredBookmarks"
+                v-if="showSuggestions && suggestions.length > 0"
+                :suggestions="suggestions"
                 @select-history="selectSuggestion"
                 @select-bookmark="handleBookmarkClick"
             />
@@ -43,10 +43,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { SearchIcon, XIcon } from '@/components/icons'
 import UiButton from '@/components/ui/ui-button.vue'
-import { SEARCH_ENGINES, DEFAULT_SEARCH_ENGINE } from '../constants'
+import { SEARCH_ENGINES, DEFAULT_SEARCH_ENGINE, ENGINE_SHORTCUT_KEYS } from '../constants'
+import { isUrl, normalizeUrl } from '../utils/url'
 import { useSearch } from '../composables/useSearch'
 import type { SearchHistoryItem, Bookmark, SearchEngine } from '../types'
 import SearchSuggestions from './SearchSuggestions.vue'
@@ -64,12 +65,17 @@ const emit = defineEmits<{
 }>()
 
 const engines = SEARCH_ENGINES
-const defaultEngine: SearchEngine = engines.find(e => e.id === DEFAULT_SEARCH_ENGINE) ?? engines[0]!
-const currentEngine = ref<SearchEngine>(defaultEngine)
+const currentEngine = ref<SearchEngine>(
+    engines.find(e => e.id === DEFAULT_SEARCH_ENGINE) ?? engines[0]!
+)
 
 const wrapperRef = ref<HTMLElement>()
+const inputRef = ref<HTMLInputElement>()
 
-const { searchQuery, showSuggestions, filteredHistory, filteredBookmarks, onSearchInput, clearSearch } = useSearch(props.history, props.bookmarks)
+const { searchQuery, showSuggestions, suggestions, updateSuggestionsVisibility, clearSearch } = useSearch(
+    computed(() => props.history),
+    computed(() => props.bookmarks)
+)
 
 function selectEngine(engineId: string) {
     const engine = engines.find(e => e.id === engineId)
@@ -78,29 +84,22 @@ function selectEngine(engineId: string) {
     }
 }
 
-function handleSearch() {
-    const query = searchQuery.value.trim()
-    if (!query) return
-
-    const isUrl = /^https?:\/\//.test(query) || /^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}/.test(query)
-
-    if (isUrl) {
-        const finalUrl = /^https?:\/\//.test(query) ? query : `https://${query}`
-        window.open(finalUrl, '_blank')
-    } else {
-        const searchUrl = `${currentEngine.value.url}${encodeURIComponent(query)}`
-        window.open(searchUrl, '_blank')
-    }
-
+function performSearch(query: string) {
+    const url = isUrl(query) ? normalizeUrl(query) : `${currentEngine.value.url}${encodeURIComponent(query)}`
+    window.open(url, '_blank')
     showSuggestions.value = false
     emit('search', query)
 }
 
+function handleSearch() {
+    const query = searchQuery.value.trim()
+    if (!query) return
+    performSearch(query)
+}
+
 function selectSuggestion(query: string) {
     searchQuery.value = query
-    showSuggestions.value = false
-    const searchUrl = `${currentEngine.value.url}${encodeURIComponent(query)}`
-    window.open(searchUrl, '_blank')
+    performSearch(query)
     emit('select-history', query)
 }
 
@@ -115,12 +114,49 @@ function handleClickOutside(e: MouseEvent) {
     }
 }
 
+function handleKeydown(e: KeyboardEvent) {
+    const target = e.target as HTMLElement
+    const isInputFocused = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA'
+
+    if (isInputFocused) {
+        if (e.key === 'Escape' && target === inputRef.value) {
+            e.preventDefault()
+            clearSearch()
+            inputRef.value?.blur()
+        }
+        return
+    }
+
+    switch (e.key) {
+        case '/':
+            e.preventDefault()
+            inputRef.value?.focus()
+            break
+        case 'Escape':
+            e.preventDefault()
+            clearSearch()
+            inputRef.value?.blur()
+            break
+        default:
+            if (ENGINE_SHORTCUT_KEYS.includes(e.key as typeof ENGINE_SHORTCUT_KEYS[number])) {
+                const index = parseInt(e.key) - 1
+                const engine = engines[index]
+                if (engine) {
+                    e.preventDefault()
+                    selectEngine(engine.id)
+                }
+            }
+    }
+}
+
 onMounted(() => {
     document.addEventListener('click', handleClickOutside)
+    document.addEventListener('keydown', handleKeydown)
 })
 
 onUnmounted(() => {
     document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('keydown', handleKeydown)
 })
 </script>
 

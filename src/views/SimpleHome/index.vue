@@ -7,46 +7,23 @@
         </div>
 
         <div class="search-container">
-            <EnhancedSearchBox :history="searchHistory" :bookmarks="bookmarks" @search="handleSearchAdd" @select-history="handleHistorySelect" />
+            <EnhancedSearchBox :history="searchHistory" :bookmarks="bookmarks" @search="handleSearch" @select-history="handleSearch" />
         </div>
 
         <div class="categories-container">
             <div class="categories-grid">
-                <CategoryCard title="开发" :links="CATEGORY_LINKS.development" theme="light" @open-url="openUrl">
+                <CategoryCard
+                    v-for="cat in categories"
+                    :key="cat.category"
+                    :title="cat.title"
+                    :category="cat.category"
+                    :links="categoryLinks[cat.category]"
+                    theme="light"
+                    @open-url="openUrl"
+                    @update-links="handleUpdateLinks"
+                >
                     <template #icon>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="16 18 22 12 16 6" />
-                            <polyline points="8 6 2 12 8 18" />
-                        </svg>
-                    </template>
-                </CategoryCard>
-
-                <CategoryCard title="社交" :links="CATEGORY_LINKS.social" theme="light" @open-url="openUrl">
-                    <template #icon>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                    </template>
-                </CategoryCard>
-
-                <CategoryCard title="媒体" :links="CATEGORY_LINKS.media" theme="light" @open-url="openUrl">
-                    <template #icon>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="23 7 16 12 23 17 23 7" />
-                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                        </svg>
-                    </template>
-                </CategoryCard>
-
-                <CategoryCard title="生产力" :links="CATEGORY_LINKS.productivity" theme="light" @open-url="openUrl">
-                    <template #icon>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                        </svg>
+                        <CategoryIcon :category="cat.category" />
                     </template>
                 </CategoryCard>
             </div>
@@ -61,22 +38,26 @@
 <script setup lang="ts">
 import { useBookmarks } from './composables/useBookmarks'
 import { useSearchHistory } from './composables/useSearchHistory'
-import { CATEGORY_LINKS } from './constants'
+import { CATEGORIES } from './constants'
 import { openUrl } from './utils/url'
 import HeaderInfo from './components/HeaderInfo.vue'
 import EnhancedSearchBox from './components/EnhancedSearchBox.vue'
 import CategoryCard from './components/CategoryCard.vue'
+import CategoryIcon from './components/CategoryIcon.vue'
 import FooterInfo from './components/FooterInfo.vue'
+import type { CategoryKey, CategoryLink } from './types'
 
-const { bookmarks } = useBookmarks()
+const { categoryLinks, bookmarks, updateCategoryLinks } = useBookmarks()
 const { searchHistory, addHistory } = useSearchHistory()
 
-function handleSearchAdd(query: string) {
+const categories = CATEGORIES
+
+function handleSearch(query: string) {
     addHistory(query)
 }
 
-function handleHistorySelect(query: string) {
-    addHistory(query)
+function handleUpdateLinks(category: CategoryKey, links: CategoryLink[]) {
+    updateCategoryLinks(category, links)
 }
 </script>
 

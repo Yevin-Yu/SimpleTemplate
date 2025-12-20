@@ -7,30 +7,97 @@
             <h3 class="category-title">{{ title }}</h3>
         </div>
         <div class="category-links">
-            <button v-for="link in links" :key="link.id" class="category-link" @click="$emit('open-url', link.url)">
+            <button
+                v-for="link in links"
+                :key="link.id"
+                class="category-link"
+                @click="$emit('open-url', link.url)"
+                @contextmenu.prevent="handleContextMenu($event, link)"
+            >
                 <div class="link-icon" :style="{ backgroundColor: link.color }">
                     {{ link.icon }}
                 </div>
                 <span class="link-title">{{ link.title }}</span>
             </button>
         </div>
+        <ui-context-menu ref="contextMenuRef" />
+        <BookmarkDialog
+            v-model="showDialog"
+            :link="editingLink"
+            :category="category"
+            @save="handleSave"
+        />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { CategoryLink } from '../types'
+import { ref } from 'vue'
+import UiContextMenu from '@/components/ui/ui-context-menu.vue'
+import { EditIcon, TrashIcon, PlusIcon } from '@/components/icons'
+import type { CategoryLink, CategoryKey } from '../types'
+import BookmarkDialog from './BookmarkDialog.vue'
 
 interface Props {
     title: string
+    category: CategoryKey
     links: CategoryLink[]
     theme: 'light' | 'dark'
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
-defineEmits<{
+const emit = defineEmits<{
     'open-url': [url: string]
+    'update-links': [category: CategoryKey, links: CategoryLink[]]
 }>()
+
+const contextMenuRef = ref<InstanceType<typeof UiContextMenu>>()
+const showDialog = ref(false)
+const editingLink = ref<CategoryLink | null>(null)
+
+function handleContextMenu(e: MouseEvent, link: CategoryLink) {
+    contextMenuRef.value?.openWithEvent(e, [
+        {
+            key: 'edit',
+            label: '修改',
+            icon: EditIcon,
+            onSelect: () => {
+                editingLink.value = link
+                showDialog.value = true
+            },
+        },
+        {
+            key: 'delete',
+            label: '删除',
+            icon: TrashIcon,
+            variant: 'danger',
+            onSelect: () => {
+                emit('update-links', props.category, props.links.filter(l => l.id !== link.id))
+            },
+        },
+        { type: 'divider' },
+        {
+            key: 'add',
+            label: '新增',
+            icon: PlusIcon,
+            onSelect: () => {
+                editingLink.value = null
+                showDialog.value = true
+            },
+        },
+    ])
+}
+
+function handleSave(link: CategoryLink) {
+    const isEdit = !!editingLink.value
+    const newLinks = isEdit
+        ? props.links.map(l => (l.id === link.id ? link : l))
+        : [...props.links, link]
+
+    emit('update-links', props.category, newLinks)
+    showDialog.value = false
+    editingLink.value = null
+}
 </script>
 
 <style scoped lang="less">

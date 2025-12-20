@@ -1,52 +1,44 @@
 import { ref } from 'vue'
+import { safeGetItem, safeSetItem } from '@/shared/storage'
+import { STORAGE_KEYS } from '@/shared/storageKeys'
+import { MAX_SEARCH_HISTORY } from '../constants'
 import type { SearchHistoryItem } from '../types'
-
-const STORAGE_KEY = 'simple-home-search-history'
-const MAX_HISTORY = 20
 
 export function useSearchHistory() {
     const searchHistory = ref<SearchHistoryItem[]>(loadHistory())
 
     function loadHistory(): SearchHistoryItem[] {
+        const stored = safeGetItem(STORAGE_KEYS.SEARCH_HISTORY)
+        if (!stored) return []
+
         try {
-            const stored = localStorage.getItem(STORAGE_KEY)
-            if (stored) {
-                return JSON.parse(stored)
-            }
-        } catch (error) {
-            console.error('Failed to load search history:', error)
+            return JSON.parse(stored)
+        } catch {
+            return []
         }
-        // 默认历史记录
-        return [
-            { id: '1', query: 'Vue 3 教程', timestamp: Date.now() - 3600000 },
-            { id: '2', query: 'TypeScript 类型', timestamp: Date.now() - 7200000 },
-            { id: '3', query: 'CSS 动画', timestamp: Date.now() - 86400000 },
-        ]
     }
 
     function saveHistory() {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(searchHistory.value))
-        } catch (error) {
-            console.error('Failed to save search history:', error)
-        }
+        safeSetItem(STORAGE_KEYS.SEARCH_HISTORY, JSON.stringify(searchHistory.value))
     }
 
     function addHistory(query: string) {
-        // 去除重复：移除已存在的相同查询
-        searchHistory.value = searchHistory.value.filter(item => item.query.toLowerCase() !== query.toLowerCase())
+        const trimmedQuery = query.trim()
+        if (!trimmedQuery) return
 
-        const newHistoryItem: SearchHistoryItem = {
-            id: Date.now().toString(),
-            query,
-            timestamp: Date.now(),
-        }
-        searchHistory.value.unshift(newHistoryItem)
+        const lowerQuery = trimmedQuery.toLowerCase()
+        const filtered = searchHistory.value
+            .filter((item) => item.query.toLowerCase() !== lowerQuery)
+            .slice(0, MAX_SEARCH_HISTORY - 1)
 
-        // 限制历史记录数量
-        if (searchHistory.value.length > MAX_HISTORY) {
-            searchHistory.value = searchHistory.value.slice(0, MAX_HISTORY)
-        }
+        searchHistory.value = [
+            {
+                id: Date.now().toString(),
+                query: trimmedQuery,
+                timestamp: Date.now(),
+            },
+            ...filtered,
+        ]
 
         saveHistory()
     }

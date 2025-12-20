@@ -29,3 +29,14 @@ export interface Shortcut {
     key: string
     label: string
 }
+
+export interface SearchSuggestion {
+    id: string
+    type: 'history' | 'bookmark'
+    title: string
+    url?: string
+    query?: string
+    score: number
+}
+
+export type CategoryKey = 'development' | 'social' | 'media' | 'productivity'
