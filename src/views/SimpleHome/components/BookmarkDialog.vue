@@ -38,6 +38,13 @@ import UiButton from '@/components/ui/ui-button.vue'
 import { normalizeUrl } from '../utils/url'
 import type { CategoryLink, CategoryKey } from '../types'
 
+const DEFAULT_FORM_DATA: Omit<CategoryLink, 'id'> = {
+    title: '',
+    url: '',
+    icon: '',
+    color: '#000000',
+}
+
 interface Props {
     modelValue: boolean
     link?: CategoryLink | null
@@ -53,48 +60,36 @@ const emit = defineEmits<{
 
 const dialogVisible = computed({
     get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value),
+    set: value => emit('update:modelValue', value),
 })
 
 const dialogTitle = computed(() => (props.link ? '编辑书签' : '新增书签'))
 
+const formData = ref<CategoryLink>({
+    id: Date.now().toString(),
+    ...DEFAULT_FORM_DATA,
+})
+
+function resetForm() {
+    formData.value = {
+        id: Date.now().toString(),
+        ...DEFAULT_FORM_DATA,
+    }
+}
+
 watch(
     () => props.modelValue,
-    (newVal) => {
-        if (newVal) {
-            if (props.link) {
-                formData.value = { ...props.link }
-            } else {
-                formData.value = {
-                    id: Date.now().toString(),
-                    title: '',
-                    url: '',
-                    icon: '',
-                    color: '#000000',
-                }
-            }
+    isOpen => {
+        if (isOpen) {
+            formData.value = props.link ? { ...props.link } : { id: Date.now().toString(), ...DEFAULT_FORM_DATA }
         }
     },
     { immediate: true }
 )
 
-const formData = ref<CategoryLink>({
-    id: Date.now().toString(),
-    title: '',
-    url: '',
-    icon: '',
-    color: '#000000',
-})
-
 function handleClose() {
     dialogVisible.value = false
-    formData.value = {
-        id: Date.now().toString(),
-        title: '',
-        url: '',
-        icon: '',
-        color: '#000000',
-    }
+    resetForm()
 }
 
 function handleSave() {
@@ -151,4 +146,3 @@ function handleSave() {
     gap: 8px;
 }
 </style>
-

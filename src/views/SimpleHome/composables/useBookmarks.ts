@@ -4,40 +4,35 @@ import { STORAGE_KEYS } from '@/shared/storageKeys'
 import { CATEGORY_LINKS as DEFAULT_CATEGORY_LINKS } from '../constants'
 import type { Bookmark, CategoryLink, CategoryKey } from '../types'
 
+function isValidCategoryLink(item: unknown): item is CategoryLink {
+    return typeof item === 'object' && item !== null && 'id' in item && 'title' in item && 'url' in item && 'icon' in item && 'color' in item
+}
+
+function loadCategoryLinks(): Record<CategoryKey, CategoryLink[]> {
+    const stored = safeGetItem(STORAGE_KEYS.CATEGORY_LINKS)
+    if (!stored) {
+        return { ...DEFAULT_CATEGORY_LINKS }
+    }
+
+    try {
+        const parsed = JSON.parse(stored)
+        const result: Record<CategoryKey, CategoryLink[]> = { ...DEFAULT_CATEGORY_LINKS }
+
+        ;(Object.keys(DEFAULT_CATEGORY_LINKS) as CategoryKey[]).forEach(key => {
+            const storedLinks = parsed[key]
+            if (Array.isArray(storedLinks)) {
+                result[key] = storedLinks.filter(isValidCategoryLink)
+            }
+        })
+
+        return result
+    } catch {
+        return { ...DEFAULT_CATEGORY_LINKS }
+    }
+}
+
 export function useBookmarks() {
     const categoryLinks = ref<Record<CategoryKey, CategoryLink[]>>(loadCategoryLinks())
-
-    function loadCategoryLinks(): Record<CategoryKey, CategoryLink[]> {
-        const stored = safeGetItem(STORAGE_KEYS.CATEGORY_LINKS)
-        if (!stored) {
-            return { ...DEFAULT_CATEGORY_LINKS }
-        }
-
-        try {
-            const parsed = JSON.parse(stored)
-            const result: Record<CategoryKey, CategoryLink[]> = { ...DEFAULT_CATEGORY_LINKS }
-            
-            ;(Object.keys(DEFAULT_CATEGORY_LINKS) as CategoryKey[]).forEach((categoryKey) => {
-                const storedLinks = parsed[categoryKey]
-                if (Array.isArray(storedLinks)) {
-                    result[categoryKey] = storedLinks.filter(
-                        (item: unknown): item is CategoryLink =>
-                            item &&
-                            typeof item === 'object' &&
-                            'id' in item &&
-                            'title' in item &&
-                            'url' in item &&
-                            'icon' in item &&
-                            'color' in item
-                    )
-                }
-            })
-            
-            return result
-        } catch {
-            return { ...DEFAULT_CATEGORY_LINKS }
-        }
-    }
 
     function saveCategoryLinks() {
         safeSetItem(STORAGE_KEYS.CATEGORY_LINKS, JSON.stringify(categoryLinks.value))

@@ -27,9 +27,7 @@ export function useSearchHistory() {
         if (!trimmedQuery) return
 
         const lowerQuery = trimmedQuery.toLowerCase()
-        const filtered = searchHistory.value
-            .filter((item) => item.query.toLowerCase() !== lowerQuery)
-            .slice(0, MAX_SEARCH_HISTORY - 1)
+        const filtered = searchHistory.value.filter(item => item.query.toLowerCase() !== lowerQuery).slice(0, MAX_SEARCH_HISTORY - 1)
 
         searchHistory.value = [
             {

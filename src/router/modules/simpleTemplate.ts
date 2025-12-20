@@ -3,7 +3,7 @@ import { ROUTE_PATHS } from '@/router/paths'
 
 export const simpleTemplateRoutes: RouteRecordRaw[] = [
     {
-        path: ROUTE_PATHS.SIMPLE_TEMPLATE_HOME,
+        path: '',
         name: 'Home',
         meta: {
             title: '首页',

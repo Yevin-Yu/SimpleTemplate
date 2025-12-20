@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { simpleHomeRoutes } from './modules/simpleHome'
 import { simpleTemplateRoutes } from './modules/simpleTemplate'
 import { authRoutes } from './modules/auth'
@@ -14,14 +14,45 @@ const getSavedRoute = (): string => {
     return normalizeSelectedProject(stored) || ROUTE_PATHS.SIMPLE_TEMPLATE_HOME
 }
 
-const routes = [
+const blankLayoutRoutes: RouteRecordRaw[] = [
+    ...simpleHomeRoutes.map(
+        route =>
+            ({
+                path: route.path,
+                component: () => import('@/layout/BlankLayout.vue'),
+                children: [
+                    {
+                        path: '',
+                        name: route.name,
+                        meta: route.meta,
+                        component: route.component,
+                    },
+                ],
+            }) as RouteRecordRaw
+    ),
+    ...authRoutes.map(
+        route =>
+            ({
+                path: route.path,
+                component: () => import('@/layout/BlankLayout.vue'),
+                children: [
+                    {
+                        path: '',
+                        name: route.name,
+                        meta: route.meta,
+                        component: route.component,
+                    },
+                ],
+            }) as RouteRecordRaw
+    ),
+]
+
+const routes: RouteRecordRaw[] = [
     {
         path: ROUTE_PATHS.ROOT,
         redirect: () => getSavedRoute(),
-        name: 'BlankLayout',
-        component: () => import('@/layout/BlankLayout.vue'),
-        children: [...simpleHomeRoutes, ...authRoutes],
     },
+    ...blankLayoutRoutes,
     {
         path: ROUTE_PATHS.SIMPLE_TEMPLATE_HOME,
         name: 'DefaultLayout',
@@ -31,7 +62,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/a/'),
     routes,
 })
 

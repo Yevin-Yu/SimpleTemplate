@@ -24,7 +24,7 @@ export function useSearch(history: MaybeRef<SearchHistoryItem[]>, bookmarks: May
         const currentHistory = unref(history)
         const currentBookmarks = unref(bookmarks)
 
-        currentHistory.forEach((item) => {
+        currentHistory.forEach(item => {
             const lowerQueryText = item.query.toLowerCase()
             if (lowerQueryText.includes(lowerQuery)) {
                 results.push({
@@ -37,7 +37,7 @@ export function useSearch(history: MaybeRef<SearchHistoryItem[]>, bookmarks: May
             }
         })
 
-        currentBookmarks.forEach((item) => {
+        currentBookmarks.forEach(item => {
             const lowerTitle = item.title.toLowerCase()
             const lowerUrl = item.url.toLowerCase()
             const titleMatch = lowerTitle.includes(lowerQuery)

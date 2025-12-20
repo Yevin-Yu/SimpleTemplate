@@ -6,34 +6,42 @@
             </div>
             <h3 class="category-title">{{ title }}</h3>
         </div>
-        <div class="category-links">
+        <TransitionGroup name="sort" tag="div" class="category-links">
             <button
-                v-for="link in links"
+                v-for="(link, index) in links"
                 :key="link.id"
                 class="category-link"
-                @click="$emit('open-url', link.url)"
+                :class="{
+                    dragging: dragState.draggedIndex === index,
+                    'insert-before': dragState.insertIndex === index && dragState.insertPosition === 'before',
+                    'insert-after': dragState.insertIndex === index && dragState.insertPosition === 'after',
+                }"
+                draggable="true"
+                @click="handleLinkClick(link)"
                 @contextmenu.prevent="handleContextMenu($event, link)"
+                @dragstart="dragSort.startDrag(index, $event)"
+                @dragend="dragSort.endDrag"
+                @dragover.prevent="dragSort.updateInsertPosition($event, index)"
+                @dragenter.prevent="dragSort.updateInsertPosition($event, index)"
+                @dragleave="dragSort.clearInsertPosition"
+                @drop.prevent="dragSort.handleDrop($event, index, props.links, handleReorder)"
             >
                 <div class="link-icon" :style="{ backgroundColor: link.color }">
                     {{ link.icon }}
                 </div>
                 <span class="link-title">{{ link.title }}</span>
             </button>
-        </div>
+        </TransitionGroup>
         <ui-context-menu ref="contextMenuRef" />
-        <BookmarkDialog
-            v-model="showDialog"
-            :link="editingLink"
-            :category="category"
-            @save="handleSave"
-        />
+        <BookmarkDialog v-model="showDialog" :link="editingLink" :category="category" @save="handleSave" />
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, TransitionGroup } from 'vue'
 import UiContextMenu from '@/components/ui/ui-context-menu.vue'
 import { EditIcon, TrashIcon, PlusIcon } from '@/components/icons'
+import { useDragSort } from '../composables/useDragSort'
 import type { CategoryLink, CategoryKey } from '../types'
 import BookmarkDialog from './BookmarkDialog.vue'
 
@@ -55,6 +63,9 @@ const contextMenuRef = ref<InstanceType<typeof UiContextMenu>>()
 const showDialog = ref(false)
 const editingLink = ref<CategoryLink | null>(null)
 
+const dragSort = useDragSort()
+const { state: dragState } = dragSort
+
 function handleContextMenu(e: MouseEvent, link: CategoryLink) {
     contextMenuRef.value?.openWithEvent(e, [
         {
@@ -72,7 +83,11 @@ function handleContextMenu(e: MouseEvent, link: CategoryLink) {
             icon: TrashIcon,
             variant: 'danger',
             onSelect: () => {
-                emit('update-links', props.category, props.links.filter(l => l.id !== link.id))
+                emit(
+                    'update-links',
+                    props.category,
+                    props.links.filter(l => l.id !== link.id)
+                )
             },
         },
         { type: 'divider' },
@@ -89,14 +104,21 @@ function handleContextMenu(e: MouseEvent, link: CategoryLink) {
 }
 
 function handleSave(link: CategoryLink) {
-    const isEdit = !!editingLink.value
-    const newLinks = isEdit
-        ? props.links.map(l => (l.id === link.id ? link : l))
-        : [...props.links, link]
+    const newLinks = editingLink.value ? props.links.map(l => (l.id === link.id ? link : l)) : [...props.links, link]
 
     emit('update-links', props.category, newLinks)
     showDialog.value = false
     editingLink.value = null
+}
+
+function handleLinkClick(link: CategoryLink) {
+    if (!dragState.isDragging) {
+        emit('open-url', link.url)
+    }
+}
+
+function handleReorder(newLinks: CategoryLink[]) {
+    emit('update-links', props.category, newLinks)
 }
 </script>
 
@@ -150,6 +172,32 @@ function handleSave(link: CategoryLink) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 6px;
+    position: relative;
+}
+
+.sort-move {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sort-enter-active {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sort-leave-active {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+}
+
+.sort-enter-from {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.sort-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
 }
 
 .category-link {
@@ -161,12 +209,52 @@ function handleSave(link: CategoryLink) {
     border: none;
     background: transparent;
     border-radius: 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    cursor: grab;
+    transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease,
+        background 0.2s ease;
+    position: relative;
 
-    &:hover {
+    &:active {
+        cursor: grabbing;
+    }
+
+    &:hover:not(.dragging) {
         background: var(--muted);
         transform: translateY(-2px);
+    }
+
+    &.dragging {
+        opacity: 0.5;
+        cursor: grabbing;
+        transform: scale(0.95);
+    }
+
+    &.insert-before::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        bottom: -2px;
+        left: -4px;
+        width: 2px;
+        background: var(--primary);
+        z-index: 10;
+        pointer-events: none;
+        box-shadow: 0 0 4px var(--primary);
+    }
+
+    &.insert-after::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        bottom: -2px;
+        right: -4px;
+        width: 2px;
+        background: var(--primary);
+        z-index: 10;
+        pointer-events: none;
+        box-shadow: 0 0 4px var(--primary);
     }
 
     .link-icon {

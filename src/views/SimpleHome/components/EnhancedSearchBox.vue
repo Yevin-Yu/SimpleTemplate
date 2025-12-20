@@ -65,9 +65,7 @@ const emit = defineEmits<{
 }>()
 
 const engines = SEARCH_ENGINES
-const currentEngine = ref<SearchEngine>(
-    engines.find(e => e.id === DEFAULT_SEARCH_ENGINE) ?? engines[0]!
-)
+const currentEngine = ref<SearchEngine>(engines.find(e => e.id === DEFAULT_SEARCH_ENGINE) ?? engines[0]!)
 
 const wrapperRef = ref<HTMLElement>()
 const inputRef = ref<HTMLInputElement>()
@@ -138,7 +136,7 @@ function handleKeydown(e: KeyboardEvent) {
             inputRef.value?.blur()
             break
         default:
-            if (ENGINE_SHORTCUT_KEYS.includes(e.key as typeof ENGINE_SHORTCUT_KEYS[number])) {
+            if (ENGINE_SHORTCUT_KEYS.includes(e.key as (typeof ENGINE_SHORTCUT_KEYS)[number])) {
                 const index = parseInt(e.key) - 1
                 const engine = engines[index]
                 if (engine) {
