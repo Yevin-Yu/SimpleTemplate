@@ -58,10 +58,7 @@ const route = useRoute()
 
 const menu = computed<NavItem[]>(() => SIDEBAR_NAV)
 
-/**
- * 叶子节点文案：优先使用路由 meta.title，避免菜单与标题不一致。
- * 分组节点（无 path）仍使用 nav.ts 里手写的 label。
- */
+// 从路由 meta 获取标题映射（优先使用路由标题，避免菜单与页面标题不一致）
 const titleByPath = computed<Record<string, string>>(() => {
     const map: Record<string, string> = {}
     for (const r of router.getRoutes()) {
@@ -123,12 +120,17 @@ const findActiveKeyChain = (items: NavItem[]): KeyChain => {
     return dfs(items) ? [...stack] : []
 }
 
+// 路由变化时自动展开对应父级菜单（保留其他已展开的菜单）
 watch(
     () => route.fullPath,
     () => {
         const chain = findActiveKeyChain(menu.value)
         // 只展开父级分组：链路最后一段是叶子节点 key，不属于“可展开分组”
-        openKeys.value = new Set(chain.slice(0, -1))
+        const parentKeys = chain.slice(0, -1)
+        // 只添加当前激活链路的父级，不折叠其他已展开的菜单
+        parentKeys.forEach(key => {
+            openKeys.value.add(key)
+        })
     },
     { immediate: true }
 )
@@ -147,28 +149,26 @@ const toggleOpen = (item: NavItem) => {
 }
 
 const isActive = (item: NavItem): boolean => {
-    // 如果菜单项有子菜单，检查是否有子菜单项被激活
-    if (item.children && item.children.length > 0) {
+    if (item.children?.length) {
         return item.children.some(child => isActive(child))
     }
-
-    // 如果没有路径，返回 false
     if (!item.path) return false
-
-    // 判断当前路由是否匹配该菜单项（处理带 hash 的路径，如 /home#buttons）
     return isRouteMatchPath(item.path)
 }
 
 const onItemClick = (item: NavItem) => {
+    // 纯分组节点：仅切换展开状态
     if (item.children && !item.path) {
         toggleOpen(item)
         return
     }
 
+    // 有子菜单且有路径：切换展开状态并跳转
     if (item.children && item.path) {
         toggleOpen(item)
     }
 
+    // 跳转路由
     if (item.path) {
         router.push(item.path)
     }
@@ -215,7 +215,7 @@ const onItemClick = (item: NavItem) => {
     color: var(--foreground);
     cursor: pointer;
     position: relative;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     transform: translateX(0);
     border: 1px solid transparent;
     overflow: hidden;
@@ -230,7 +230,7 @@ const onItemClick = (item: NavItem) => {
         height: 0;
         background: var(--primary);
         border-radius: 0 2px 2px 0;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.2s ease, height 0.2s ease;
     }
 
     &:hover {
@@ -273,7 +273,7 @@ const onItemClick = (item: NavItem) => {
     margin-right: 8px;
     flex-shrink: 0;
     color: var(--foreground);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease, transform 0.15s ease;
 }
 
 .menu-item-label:hover .menu-item-icon {
@@ -287,7 +287,7 @@ const onItemClick = (item: NavItem) => {
 
 .menu-item-text {
     flex: 1;
-    transition: transform 0.2s ease;
+    transition: transform 0.15s ease;
 }
 
 .menu-item-label:hover .menu-item-text {
@@ -301,12 +301,12 @@ const onItemClick = (item: NavItem) => {
     width: 18px;
     height: 18px;
     color: var(--foreground);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease, transform 0.15s ease;
     transform-origin: center;
     flex-shrink: 0;
 
     svg {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.2s ease;
     }
 
     &.open {
@@ -326,8 +326,6 @@ const onItemClick = (item: NavItem) => {
     padding-left: 16px;
     border-left: 1px dashed var(--border);
     position: relative;
-    will-change: opacity, transform;
-    backface-visibility: hidden;
 }
 
 .submenu-item {
@@ -346,7 +344,7 @@ const onItemClick = (item: NavItem) => {
     color: var(--foreground);
     cursor: pointer;
     position: relative;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease, transform 0.2s ease;
     overflow: hidden;
 
     &::after {
@@ -359,7 +357,7 @@ const onItemClick = (item: NavItem) => {
         height: 0;
         background: var(--primary);
         border-radius: 0 2px 2px 0;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.2s ease, height 0.2s ease;
     }
 
     &:hover {
@@ -379,7 +377,7 @@ const onItemClick = (item: NavItem) => {
 
     &.active {
         color: var(--primary);
-        font-size: 15px;
+        font-weight: 500;
 
         &::after {
             transform: translateY(-50%) translateX(0);
@@ -401,7 +399,7 @@ const onItemClick = (item: NavItem) => {
     margin-right: 8px;
     opacity: 0;
     transform: scale(0);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s ease, transform 0.2s ease;
     flex-shrink: 0;
 }
 
@@ -412,7 +410,7 @@ const onItemClick = (item: NavItem) => {
     margin-right: 8px;
     flex-shrink: 0;
     color: var(--foreground);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease, transform 0.15s ease;
 }
 
 .submenu-item-label:hover .submenu-item-icon {
@@ -425,7 +423,7 @@ const onItemClick = (item: NavItem) => {
 }
 
 .submenu-item-text {
-    transition: transform 0.2s ease;
+    transition: transform 0.15s ease;
 }
 
 .submenu-item-label:hover .submenu-item-text {
@@ -434,18 +432,18 @@ const onItemClick = (item: NavItem) => {
 
 // 子菜单展开/收起动画
 .submenu-enter-active {
-    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s ease, transform 0.2s ease;
     overflow: hidden;
 }
 
 .submenu-leave-active {
-    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.15s ease, transform 0.15s ease;
     overflow: hidden;
 }
 
 .submenu-enter-from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-4px);
 }
 
 .submenu-enter-to {
@@ -460,6 +458,6 @@ const onItemClick = (item: NavItem) => {
 
 .submenu-leave-to {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-4px);
 }
 </style>
