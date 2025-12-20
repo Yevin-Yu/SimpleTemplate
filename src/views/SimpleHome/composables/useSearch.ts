@@ -14,9 +14,7 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
     const filteredBookmarks = computed(() => {
         if (!searchQuery.value) return []
         const query = searchQuery.value.toLowerCase()
-        return bookmarks.filter(
-            item => item.title.toLowerCase().includes(query) || item.url.toLowerCase().includes(query)
-        )
+        return bookmarks.filter(item => item.title.toLowerCase().includes(query) || item.url.toLowerCase().includes(query))
     })
 
     function onSearchInput() {
@@ -33,7 +31,7 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
         if (!query) return
 
         const isUrl = /^https?:\/\//.test(query) || /^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}/.test(query)
-        
+
         if (isUrl) {
             const finalUrl = /^https?:\/\//.test(query) ? query : `https://${query}`
             window.open(finalUrl, '_blank')

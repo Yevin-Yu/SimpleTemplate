@@ -69,14 +69,7 @@ const currentEngine = ref<SearchEngine>(defaultEngine)
 
 const wrapperRef = ref<HTMLElement>()
 
-const {
-    searchQuery,
-    showSuggestions,
-    filteredHistory,
-    filteredBookmarks,
-    onSearchInput,
-    clearSearch,
-} = useSearch(props.history, props.bookmarks)
+const { searchQuery, showSuggestions, filteredHistory, filteredBookmarks, onSearchInput, clearSearch } = useSearch(props.history, props.bookmarks)
 
 function selectEngine(engineId: string) {
     const engine = engines.find(e => e.id === engineId)
@@ -88,9 +81,9 @@ function selectEngine(engineId: string) {
 function handleSearch() {
     const query = searchQuery.value.trim()
     if (!query) return
-    
+
     const isUrl = /^https?:\/\//.test(query) || /^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}/.test(query)
-    
+
     if (isUrl) {
         const finalUrl = /^https?:\/\//.test(query) ? query : `https://${query}`
         window.open(finalUrl, '_blank')
@@ -98,7 +91,7 @@ function handleSearch() {
         const searchUrl = `${currentEngine.value.url}${encodeURIComponent(query)}`
         window.open(searchUrl, '_blank')
     }
-    
+
     showSuggestions.value = false
     emit('search', query)
 }
@@ -217,23 +210,23 @@ onUnmounted(() => {
     height: 24px;
     min-width: 24px;
     padding: 0;
-    
+
     &.active {
         background-color: var(--primary);
         color: var(--primary-foreground);
-        
+
         :deep(svg) {
             opacity: 1;
         }
     }
-    
+
     :deep(svg) {
         width: 14px;
         height: 14px;
         opacity: 0.8;
         transition: opacity 0.2s ease;
     }
-    
+
     &:hover :deep(svg) {
         opacity: 1;
     }

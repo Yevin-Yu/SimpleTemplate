@@ -7,12 +7,7 @@
             <h3 class="category-title">{{ title }}</h3>
         </div>
         <div class="category-links">
-            <button
-                v-for="link in links"
-                :key="link.id"
-                class="category-link"
-                @click="$emit('open-url', link.url)"
-            >
+            <button v-for="link in links" :key="link.id" class="category-link" @click="$emit('open-url', link.url)">
                 <div class="link-icon" :style="{ backgroundColor: link.color }">
                     {{ link.icon }}
                 </div>
@@ -53,7 +48,7 @@ defineEmits<{
 .category-card-dark {
     background: color-mix(in srgb, var(--muted) 85%, var(--card) 15%);
     border: 1px solid var(--border);
-    
+
     .category-link {
         &:hover {
             background: color-mix(in srgb, var(--muted) 60%, var(--card) 40%);
@@ -66,7 +61,7 @@ defineEmits<{
     align-items: center;
     gap: 12px;
     margin-bottom: 16px;
-    
+
     .category-icon {
         display: flex;
         align-items: center;
@@ -75,7 +70,7 @@ defineEmits<{
         height: 32px;
         color: var(--foreground);
     }
-    
+
     .category-title {
         font-size: 16px;
         font-weight: 600;
@@ -101,12 +96,12 @@ defineEmits<{
     border-radius: 0;
     cursor: pointer;
     transition: all 0.2s ease;
-    
+
     &:hover {
         background: var(--muted);
         transform: translateY(-2px);
     }
-    
+
     .link-icon {
         width: 32px;
         height: 32px;
@@ -120,7 +115,7 @@ defineEmits<{
         box-shadow: var(--shadow-xs);
         flex-shrink: 0;
     }
-    
+
     .link-title {
         font-size: 11px;
         color: var(--foreground);

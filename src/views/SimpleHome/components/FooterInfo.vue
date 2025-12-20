@@ -2,11 +2,7 @@
     <div class="footer-info">
         <div class="footer-center">
             <div class="shortcuts">
-                <div
-                    v-for="shortcut in SHORTCUTS"
-                    :key="shortcut.key"
-                    class="shortcut-item"
-                >
+                <div v-for="shortcut in SHORTCUTS" :key="shortcut.key" class="shortcut-item">
                     <ui-tag variant="neutral" class="shortcut-key-tag">
                         <span class="shortcut-key">{{ shortcut.key }}</span>
                     </ui-tag>
@@ -36,13 +32,13 @@ import { SHORTCUTS } from '../constants'
 .footer-center {
     display: flex;
     justify-content: center;
-    
+
     .shortcuts {
         display: flex;
         gap: 12px;
         align-items: center;
     }
-    
+
     .shortcut-item {
         display: flex;
         align-items: center;
@@ -50,7 +46,7 @@ import { SHORTCUTS } from '../constants'
         cursor: pointer;
         transition: all 0.2s ease;
         user-select: none;
-        
+
         &:hover {
             .shortcut-key-tag {
                 background: var(--muted);
@@ -58,7 +54,7 @@ import { SHORTCUTS } from '../constants'
                 box-shadow: var(--shadow-sm);
             }
         }
-        
+
         .shortcut-key-tag {
             .shortcut-key {
                 font-size: 12px;
@@ -67,7 +63,7 @@ import { SHORTCUTS } from '../constants'
                 font-family: var(--font-mono);
             }
         }
-        
+
         .shortcut-label {
             font-size: 12px;
             color: var(--foreground);

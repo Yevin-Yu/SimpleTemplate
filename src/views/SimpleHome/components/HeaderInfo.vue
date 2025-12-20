@@ -59,7 +59,7 @@ onUnmounted(() => {
         align-items: center;
         gap: 12px;
     }
-    
+
     .greeting-text {
         font-size: 20px;
         font-weight: 500;
@@ -69,7 +69,7 @@ onUnmounted(() => {
 
 .header-right {
     text-align: right;
-    
+
     .time {
         font-size: 32px;
         font-weight: 600;
@@ -77,7 +77,7 @@ onUnmounted(() => {
         line-height: 1.2;
         margin-bottom: 4px;
     }
-    
+
     .date {
         font-size: 12px;
         color: var(--muted-foreground);

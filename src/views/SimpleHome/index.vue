@@ -1,28 +1,18 @@
 <template>
     <div class="simple-home">
         <div class="diagonal-background"></div>
-        
+
         <div class="header-wrapper">
             <HeaderInfo />
         </div>
-        
+
         <div class="search-container">
-            <EnhancedSearchBox
-                :history="searchHistory"
-                :bookmarks="bookmarks"
-                @search="handleSearchAdd"
-                @select-history="handleHistorySelect"
-            />
+            <EnhancedSearchBox :history="searchHistory" :bookmarks="bookmarks" @search="handleSearchAdd" @select-history="handleHistorySelect" />
         </div>
-        
+
         <div class="categories-container">
             <div class="categories-grid">
-                <CategoryCard
-                    title="开发"
-                    :links="CATEGORY_LINKS.development"
-                    theme="light"
-                    @open-url="openUrl"
-                >
+                <CategoryCard title="开发" :links="CATEGORY_LINKS.development" theme="light" @open-url="openUrl">
                     <template #icon>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="16 18 22 12 16 6" />
@@ -30,13 +20,8 @@
                         </svg>
                     </template>
                 </CategoryCard>
-                
-                <CategoryCard
-                    title="社交"
-                    :links="CATEGORY_LINKS.social"
-                    theme="light"
-                    @open-url="openUrl"
-                >
+
+                <CategoryCard title="社交" :links="CATEGORY_LINKS.social" theme="light" @open-url="openUrl">
                     <template #icon>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -46,13 +31,8 @@
                         </svg>
                     </template>
                 </CategoryCard>
-                
-                <CategoryCard
-                    title="媒体"
-                    :links="CATEGORY_LINKS.media"
-                    theme="light"
-                    @open-url="openUrl"
-                >
+
+                <CategoryCard title="媒体" :links="CATEGORY_LINKS.media" theme="light" @open-url="openUrl">
                     <template #icon>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polygon points="23 7 16 12 23 17 23 7" />
@@ -60,13 +40,8 @@
                         </svg>
                     </template>
                 </CategoryCard>
-                
-                <CategoryCard
-                    title="生产力"
-                    :links="CATEGORY_LINKS.productivity"
-                    theme="light"
-                    @open-url="openUrl"
-                >
+
+                <CategoryCard title="生产力" :links="CATEGORY_LINKS.productivity" theme="light" @open-url="openUrl">
                     <template #icon>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -76,7 +51,7 @@
                 </CategoryCard>
             </div>
         </div>
-        
+
         <div class="footer-wrapper">
             <FooterInfo />
         </div>
@@ -124,7 +99,7 @@ function handleHistorySelect(query: string) {
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -135,7 +110,7 @@ function handleHistorySelect(query: string) {
         background: var(--background);
         clip-path: polygon(0 0, 0 100%, 50% 100%);
     }
-    
+
     &::after {
         content: '';
         position: absolute;
@@ -150,7 +125,7 @@ function handleHistorySelect(query: string) {
 
 .search-container {
     position: relative;
-    z-index: 10;
+    z-index: 99;
     padding: 0 32px;
     flex-shrink: 0;
 }
@@ -182,12 +157,12 @@ function handleHistorySelect(query: string) {
     .categories-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .search-container,
     .categories-container {
         padding: 0 16px;
     }
-    
+
     .header-wrapper :deep(.header-info),
     .footer-wrapper :deep(.footer-info) {
         padding: 16px;

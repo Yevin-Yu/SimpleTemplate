@@ -215,7 +215,11 @@ const onItemClick = (item: NavItem) => {
     color: var(--foreground);
     cursor: pointer;
     position: relative;
-    transition: color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
     transform: translateX(0);
     border: 1px solid transparent;
     overflow: hidden;
@@ -230,7 +234,9 @@ const onItemClick = (item: NavItem) => {
         height: 0;
         background: var(--primary);
         border-radius: 0 2px 2px 0;
-        transition: transform 0.2s ease, height 0.2s ease;
+        transition:
+            transform 0.2s ease,
+            height 0.2s ease;
     }
 
     &:hover {
@@ -273,7 +279,9 @@ const onItemClick = (item: NavItem) => {
     margin-right: 8px;
     flex-shrink: 0;
     color: var(--foreground);
-    transition: color 0.2s ease, transform 0.15s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.15s ease;
 }
 
 .menu-item-label:hover .menu-item-icon {
@@ -301,7 +309,9 @@ const onItemClick = (item: NavItem) => {
     width: 18px;
     height: 18px;
     color: var(--foreground);
-    transition: color 0.2s ease, transform 0.15s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.15s ease;
     transform-origin: center;
     flex-shrink: 0;
 
@@ -344,7 +354,9 @@ const onItemClick = (item: NavItem) => {
     color: var(--foreground);
     cursor: pointer;
     position: relative;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
     overflow: hidden;
 
     &::after {
@@ -357,7 +369,9 @@ const onItemClick = (item: NavItem) => {
         height: 0;
         background: var(--primary);
         border-radius: 0 2px 2px 0;
-        transition: transform 0.2s ease, height 0.2s ease;
+        transition:
+            transform 0.2s ease,
+            height 0.2s ease;
     }
 
     &:hover {
@@ -399,7 +413,9 @@ const onItemClick = (item: NavItem) => {
     margin-right: 8px;
     opacity: 0;
     transform: scale(0);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     flex-shrink: 0;
 }
 
@@ -410,7 +426,9 @@ const onItemClick = (item: NavItem) => {
     margin-right: 8px;
     flex-shrink: 0;
     color: var(--foreground);
-    transition: color 0.2s ease, transform 0.15s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.15s ease;
 }
 
 .submenu-item-label:hover .submenu-item-icon {
@@ -432,12 +450,16 @@ const onItemClick = (item: NavItem) => {
 
 // 子菜单展开/收起动画
 .submenu-enter-active {
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     overflow: hidden;
 }
 
 .submenu-leave-active {
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
     overflow: hidden;
 }
 
