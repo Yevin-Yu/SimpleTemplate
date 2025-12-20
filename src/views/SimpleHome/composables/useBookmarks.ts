@@ -23,14 +23,6 @@ export function useBookmarks() {
         ]
     }
 
-    function saveBookmarks() {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks.value))
-        } catch (error) {
-            console.error('Failed to save bookmarks:', error)
-        }
-    }
-
     return {
         bookmarks,
     }

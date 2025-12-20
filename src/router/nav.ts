@@ -13,7 +13,6 @@ import {
     CodeBlockIcon,
     ContextMenuIcon,
     InputIcon,
-    SettingsIcon,
 } from '@/components/icons'
 
 /**

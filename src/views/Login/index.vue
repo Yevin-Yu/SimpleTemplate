@@ -99,7 +99,7 @@ import UiInput from '@/components/ui/ui-input.vue'
  */
 
 // 使用登录表单 composable（管理表单状态、提交逻辑）
-const { formData, errors, isLoading, isValid, handleSubmit } = useLoginForm()
+const { formData, errors, isLoading, handleSubmit } = useLoginForm()
 
 // 使用表单验证 composable（提供验证方法）
 const { validateUsername, validatePassword } = useLoginValidation()

@@ -64,9 +64,8 @@ const emit = defineEmits<{
 }>()
 
 const engines = SEARCH_ENGINES
-const currentEngine = ref<SearchEngine>(
-    engines.find(e => e.id === DEFAULT_SEARCH_ENGINE) || engines[0]
-)
+const defaultEngine: SearchEngine = engines.find(e => e.id === DEFAULT_SEARCH_ENGINE) ?? engines[0]!
+const currentEngine = ref<SearchEngine>(defaultEngine)
 
 const wrapperRef = ref<HTMLElement>()
 

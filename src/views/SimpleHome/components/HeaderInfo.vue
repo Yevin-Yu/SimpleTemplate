@@ -17,7 +17,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { formatTime, formatDate, getGreeting } from '../utils/date'
 
 const currentTime = ref(new Date())
-const timeInterval = ref<NodeJS.Timeout | null>(null)
+const timeInterval = ref<number | null>(null)
 
 const greeting = ref(getGreeting(currentTime.value))
 const formattedTime = ref(formatTime(currentTime.value))

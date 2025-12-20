@@ -28,7 +28,7 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
         showSuggestions.value = false
     }
 
-    function handleSearch(onHistoryAdd?: (item: SearchHistoryItem) => void) {
+    function handleSearch() {
         const query = searchQuery.value.trim()
         if (!query) return
 
@@ -42,10 +42,10 @@ export function useSearch(history: SearchHistoryItem[], bookmarks: Bookmark[]) {
         showSuggestions.value = false
     }
 
-    function selectSuggestion(query: string, onHistoryAdd?: (item: SearchHistoryItem) => void) {
+    function selectSuggestion(query: string) {
         searchQuery.value = query
         showSuggestions.value = false
-        handleSearch(onHistoryAdd)
+        handleSearch()
     }
 
     return {
