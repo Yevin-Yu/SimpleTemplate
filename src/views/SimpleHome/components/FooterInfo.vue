@@ -33,14 +33,16 @@ import UiButton from '@/components/ui/ui-button.vue'
 import { DownloadIcon, UploadIcon } from '@/components/icons'
 import { SHORTCUTS } from '../constants'
 import { useConfigImportExport } from '../composables/useConfigImportExport'
+import { toast } from '@/shared'
 
 const { exportConfig, handleImportClick } = useConfigImportExport()
 
 function handleExport() {
     try {
         exportConfig()
+        toast.success('配置导出成功')
     } catch (error) {
-        alert(error instanceof Error ? error.message : '导出配置失败')
+        toast.error(error instanceof Error ? error.message : '导出配置失败')
     }
 }
 </script>

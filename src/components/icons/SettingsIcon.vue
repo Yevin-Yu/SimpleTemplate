@@ -19,20 +19,17 @@
     </svg>
 </template>
 
-<script setup>
-defineProps({
-    size: {
-        type: [Number, String],
-        default: 16,
-    },
-    color: {
-        type: String,
-        default: 'currentColor',
-    },
-    customClass: {
-        type: String,
-        default: '',
-    },
+<script setup lang="ts">
+interface Props {
+    size?: number | string
+    color?: string
+    customClass?: string
+}
+
+withDefaults(defineProps<Props>(), {
+    size: 16,
+    color: 'currentColor',
+    customClass: '',
 })
 </script>
 

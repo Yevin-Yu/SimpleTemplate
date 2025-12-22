@@ -4,7 +4,7 @@ import type { LoginFormData, LoginFormErrors, LoginPayload } from '../types'
 import { useLoginValidation } from './useLoginValidation'
 import { ROUTE_PATHS } from '@/router/paths'
 import { STORAGE_KEYS } from '@/shared/storageKeys'
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/shared/storage'
+import { safeGetItem, safeSetItem, safeRemoveItem, logger } from '@/shared'
 
 /**
  * 登录表单逻辑 Composable
@@ -29,7 +29,7 @@ export function useLoginForm() {
 
     const loginApi = async (payload: LoginPayload): Promise<void> => {
         await new Promise(resolve => setTimeout(resolve, 1000))
-        console.log('登录请求:', payload)
+        logger.log('登录请求:', payload)
         // TODO: 替换为实际的 API 调用
     }
 
@@ -70,7 +70,7 @@ export function useLoginForm() {
 
             router.push(ROUTE_PATHS.SIMPLE_TEMPLATE_HOME)
         } catch (error) {
-            console.error('登录失败:', error)
+            logger.error('登录失败:', error)
             errors.password = VALIDATION_RULES.invalidCredentials
         } finally {
             isLoading.value = false

@@ -4,8 +4,16 @@ import { STORAGE_KEYS } from '@/shared/storageKeys'
 import { CATEGORY_LINKS as DEFAULT_CATEGORY_LINKS } from '../constants'
 import type { Bookmark, CategoryLink, CategoryKey } from '../types'
 
+/**
+ * 类型守卫：检查对象是否为有效的 CategoryLink
+ */
 function isValidCategoryLink(item: unknown): item is CategoryLink {
-    return typeof item === 'object' && item !== null && 'id' in item && 'title' in item && 'url' in item && 'icon' in item && 'color' in item
+    if (typeof item !== 'object' || item === null) {
+        return false
+    }
+
+    const requiredFields: (keyof CategoryLink)[] = ['id', 'title', 'url', 'icon', 'color']
+    return requiredFields.every(field => field in item)
 }
 
 function loadCategoryLinks(): Record<CategoryKey, CategoryLink[]> {

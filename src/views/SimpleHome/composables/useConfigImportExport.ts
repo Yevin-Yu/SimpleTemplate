@@ -1,5 +1,6 @@
 import { safeGetItem, safeSetItem } from '@/shared/storage'
 import { STORAGE_KEYS } from '@/shared/storageKeys'
+import { toast, logger } from '@/shared'
 import type { CategoryLink, SearchHistoryItem, CategoryKey } from '../types'
 
 export interface ConfigData {
@@ -44,7 +45,7 @@ export function useConfigImportExport() {
             document.body.removeChild(link)
             URL.revokeObjectURL(url)
         } catch (error) {
-            console.error('[ConfigExport] Failed to export config:', error)
+            logger.error('[ConfigExport] Failed to export config:', error)
             throw new Error('导出配置失败')
         }
     }
@@ -67,7 +68,7 @@ export function useConfigImportExport() {
 
                     resolve()
                 } catch (error) {
-                    console.error('[ConfigImport] Failed to import config:', error)
+                    logger.error('[ConfigImport] Failed to import config:', error)
                     reject(new Error('导入配置失败：文件格式不正确'))
                 }
             }
@@ -93,9 +94,12 @@ export function useConfigImportExport() {
 
             try {
                 await importConfig(file)
-                window.location.reload()
+                toast.success('配置导入成功，页面即将刷新')
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
             } catch (error) {
-                alert(error instanceof Error ? error.message : '导入配置失败')
+                toast.error(error instanceof Error ? error.message : '导入配置失败')
             } finally {
                 input.remove()
             }

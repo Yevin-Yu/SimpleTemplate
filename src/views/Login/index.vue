@@ -74,6 +74,7 @@ import LoginBackground from './components/LoginBackground.vue'
 import UiCard from '@/components/ui/ui-card.vue'
 import UiButton from '@/components/ui/ui-button.vue'
 import UiInput from '@/components/ui/ui-input.vue'
+import { logger } from '@/shared'
 
 /**
  * 登录页面组件
@@ -123,7 +124,7 @@ const handlePasswordBlur = () => {
  * TODO: 实现忘记密码功能（跳转到忘记密码页面或显示对话框）
  */
 const handleForgotPassword = () => {
-    console.log('忘记密码功能待实现')
+    logger.log('忘记密码功能待实现')
     // 示例：可以跳转到忘记密码页面
     // router.push(ROUTE_PATHS.FORGOT_PASSWORD)
 }
