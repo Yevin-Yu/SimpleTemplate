@@ -41,8 +41,14 @@ export function useSearchHistory() {
         saveHistory()
     }
 
+    function clearHistory() {
+        searchHistory.value = []
+        saveHistory()
+    }
+
     return {
         searchHistory,
         addHistory,
+        clearHistory,
     }
 }

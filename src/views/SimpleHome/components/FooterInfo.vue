@@ -9,13 +9,40 @@
                     <span class="shortcut-label">{{ shortcut.label }}</span>
                 </div>
             </div>
+            <div class="config-actions">
+                <ui-button variant="blank" size="small" @click="handleExport">
+                    <template #icon>
+                        <DownloadIcon :size="14" />
+                    </template>
+                    <span>导出</span>
+                </ui-button>
+                <ui-button variant="blank" size="small" @click="handleImportClick">
+                    <template #icon>
+                        <UploadIcon :size="14" />
+                    </template>
+                    <span>导入</span>
+                </ui-button>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import UiTag from '@/components/ui/ui-tag.vue'
+import UiButton from '@/components/ui/ui-button.vue'
+import { DownloadIcon, UploadIcon } from '@/components/icons'
 import { SHORTCUTS } from '../constants'
+import { useConfigImportExport } from '../composables/useConfigImportExport'
+
+const { exportConfig, handleImportClick } = useConfigImportExport()
+
+function handleExport() {
+    try {
+        exportConfig()
+    } catch (error) {
+        alert(error instanceof Error ? error.message : '导出配置失败')
+    }
+}
 </script>
 
 <style scoped lang="less">
@@ -32,11 +59,31 @@ import { SHORTCUTS } from '../constants'
 .footer-center {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
 
     .shortcuts {
         display: flex;
         gap: 12px;
         align-items: center;
+    }
+
+    .config-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        :deep(.ui-button) {
+            font-size: 12px;
+            color: var(--muted-foreground);
+            transition: all 0.2s ease;
+
+            &:hover {
+                color: var(--foreground);
+                background-color: var(--muted);
+            }
+        }
     }
 
     .shortcut-item {

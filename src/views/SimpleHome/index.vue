@@ -7,7 +7,13 @@
         </div>
 
         <div class="search-container">
-            <EnhancedSearchBox :history="searchHistory" :bookmarks="bookmarks" @search="handleSearch" @select-history="handleSearch" />
+            <EnhancedSearchBox
+                :history="searchHistory"
+                :bookmarks="bookmarks"
+                @search="handleSearch"
+                @select-history="handleSearch"
+                @clear-history="handleClearHistory"
+            />
         </div>
 
         <div class="categories-container">
@@ -48,12 +54,16 @@ import FooterInfo from './components/FooterInfo.vue'
 import type { CategoryKey, CategoryLink } from './types'
 
 const { categoryLinks, bookmarks, updateCategoryLinks } = useBookmarks()
-const { searchHistory, addHistory } = useSearchHistory()
+const { searchHistory, addHistory, clearHistory } = useSearchHistory()
 
 const categories = CATEGORIES
 
 function handleSearch(query: string) {
     addHistory(query)
+}
+
+function handleClearHistory() {
+    clearHistory()
 }
 
 function handleUpdateLinks(category: CategoryKey, links: CategoryLink[]) {

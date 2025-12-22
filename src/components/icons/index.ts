@@ -32,6 +32,8 @@ export { default as GoogleIcon } from './GoogleIcon.vue'
 export { default as DuckDuckGoIcon } from './DuckDuckGoIcon.vue'
 export { default as BingIcon } from './BingIcon.vue'
 export { default as BaiduIcon } from './BaiduIcon.vue'
+export { default as DownloadIcon } from './DownloadIcon.vue'
+export { default as UploadIcon } from './UploadIcon.vue'
 
 // 图标类型定义
 export interface IconProps {

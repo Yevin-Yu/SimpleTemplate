@@ -37,6 +37,7 @@
                 :suggestions="suggestions"
                 @select-history="selectSuggestion"
                 @select-bookmark="handleBookmarkClick"
+                @clear-history="handleClearHistory"
             />
         </div>
     </div>
@@ -62,6 +63,7 @@ const props = defineProps<Props>()
 const emit = defineEmits<{
     search: [query: string]
     'select-history': [query: string]
+    'clear-history': []
 }>()
 
 const engines = SEARCH_ENGINES
@@ -103,6 +105,10 @@ function selectSuggestion(query: string) {
 
 function handleBookmarkClick(url: string) {
     window.open(url, '_blank')
+}
+
+function handleClearHistory() {
+    emit('clear-history')
 }
 
 function handleClickOutside(e: MouseEvent) {
