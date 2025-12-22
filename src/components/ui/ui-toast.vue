@@ -4,8 +4,8 @@
             <div class="ui-toast__icon">
                 <CheckIcon v-if="type === 'success'" :size="20" />
                 <XIcon v-else-if="type === 'error'" :size="20" />
-                <SettingsIcon v-else-if="type === 'warning'" :size="20" />
-                <SearchIcon v-else :size="20" />
+                <WarningIcon v-else-if="type === 'warning'" :size="20" />
+                <InfoIcon v-else :size="20" />
             </div>
             <div class="ui-toast__content">
                 <div class="ui-toast__message">{{ message }}</div>
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { CheckIcon, XIcon, SettingsIcon, SearchIcon } from '@/components/icons'
+import { CheckIcon, XIcon, WarningIcon, InfoIcon } from '@/components/icons'
 
 interface Props {
     message: string
@@ -58,12 +58,11 @@ onMounted(() => {
     display: flex;
     align-items: center;
     gap: 12px;
-    min-width: 300px;
-    max-width: 500px;
+    min-width: 250px;
+    max-width: 400px;
     padding: 12px 16px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 8px;
     box-shadow: var(--shadow-lg);
     cursor: pointer;
     transition: all 0.2s ease;

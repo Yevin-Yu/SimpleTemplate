@@ -22,4 +22,5 @@ export const ROUTE_PATHS = {
     INPUT_COMPONENTS: '/input-components',
     ICON_COMPONENTS: '/icon-components',
     DIALOG_COMPONENTS: '/dialog-components',
+    TOAST_COMPONENTS: '/toast-components',
 } as const

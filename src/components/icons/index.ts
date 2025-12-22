@@ -34,6 +34,8 @@ export { default as BingIcon } from './BingIcon.vue'
 export { default as BaiduIcon } from './BaiduIcon.vue'
 export { default as DownloadIcon } from './DownloadIcon.vue'
 export { default as UploadIcon } from './UploadIcon.vue'
+export { default as WarningIcon } from './WarningIcon.vue'
+export { default as InfoIcon } from './InfoIcon.vue'
 
 // 图标类型定义
 export interface IconProps {

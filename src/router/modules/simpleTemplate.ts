@@ -98,4 +98,12 @@ export const simpleTemplateRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/SimpleTemplate/example/DialogComponents.vue'),
     },
+    {
+        path: ROUTE_PATHS.TOAST_COMPONENTS,
+        name: 'ToastComponents',
+        meta: {
+            title: '提示组件',
+        },
+        component: () => import('@/views/SimpleTemplate/example/ToastComponents.vue'),
+    },
 ]

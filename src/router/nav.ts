@@ -99,6 +99,11 @@ export const SIDEBAR_NAV: NavItem[] = [
                 path: ROUTE_PATHS.DIALOG_COMPONENTS,
                 icon: CardIcon,
             },
+            {
+                key: 'toast-components',
+                path: ROUTE_PATHS.TOAST_COMPONENTS,
+                icon: ExampleIcon,
+            },
         ],
     },
     {
