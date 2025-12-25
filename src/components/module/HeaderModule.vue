@@ -59,7 +59,7 @@ import UiButton from '@/components/ui/ui-button.vue'
 import UiSwitch from '@/components/ui/ui-switch.vue'
 import UiSelect from '@/components/ui/ui-select.vue'
 import UserModule from '@/components/module/UserModule.vue'
-import { GitHubIcon, SwitchOnIcon, SwitchOffIcon, HomeIcon, DashboardIcon } from '@/components/icons'
+import { GitHubIcon, SwitchOnIcon, SwitchOffIcon, HomeIcon, DashboardIcon, ChatIcon } from '@/components/icons'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/project'
@@ -100,6 +100,7 @@ const goProject = (value: string | number | null) => {
 const iconMap: Record<string, Component> = {
     home: HomeIcon,
     template: DashboardIcon,
+    chat: ChatIcon,
 }
 const defaultIcon = HomeIcon
 </script>

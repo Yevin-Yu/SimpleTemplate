@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 import { simpleHomeRoutes } from './modules/simpleHome'
+import { simpleChatRoutes } from './modules/simpleChat'
 import { simpleTemplateRoutes } from './modules/simpleTemplate'
 import { authRoutes } from './modules/auth'
 import { STORAGE_KEYS, safeGetItem } from '@/shared'
@@ -16,6 +17,21 @@ const getSavedRoute = (): string => {
 
 const blankLayoutRoutes: RouteRecordRaw[] = [
     ...simpleHomeRoutes.map(
+        route =>
+            ({
+                path: route.path,
+                component: () => import('@/layout/BlankLayout.vue'),
+                children: [
+                    {
+                        path: '',
+                        name: route.name,
+                        meta: route.meta,
+                        component: route.component,
+                    },
+                ],
+            }) as RouteRecordRaw
+    ),
+    ...simpleChatRoutes.map(
         route =>
             ({
                 path: route.path,

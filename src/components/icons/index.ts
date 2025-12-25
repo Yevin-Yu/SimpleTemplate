@@ -36,12 +36,16 @@ export { default as DownloadIcon } from './DownloadIcon.vue'
 export { default as UploadIcon } from './UploadIcon.vue'
 export { default as WarningIcon } from './WarningIcon.vue'
 export { default as InfoIcon } from './InfoIcon.vue'
+export { default as ChatIcon } from './ChatIcon.vue'
+export { default as AvatarAIIcon } from './AvatarAIIcon.vue'
+export { default as AvatarUserIcon } from './AvatarUserIcon.vue'
 
 // 图标类型定义
 export interface IconProps {
     size?: number | string
     color?: string
     customClass?: string
+    ariaHidden?: boolean
 }
 
 // 图标名称类型
@@ -73,6 +77,9 @@ export type IconName =
     | 'x'
     | 'eye'
     | 'eyeOff'
+    | 'chat'
+    | 'avatarAI'
+    | 'avatarUser'
 
 // 图标映射
 export const iconMap: Record<IconName, () => Promise<unknown>> = {
@@ -103,6 +110,9 @@ export const iconMap: Record<IconName, () => Promise<unknown>> = {
     x: () => import('./XIcon.vue'),
     eye: () => import('./EyeIcon.vue'),
     eyeOff: () => import('./EyeOffIcon.vue'),
+    chat: () => import('./ChatIcon.vue'),
+    avatarAI: () => import('./AvatarAIIcon.vue'),
+    avatarUser: () => import('./AvatarUserIcon.vue'),
 }
 
 // 动态加载图标

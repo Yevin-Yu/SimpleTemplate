@@ -7,6 +7,7 @@ export const ROUTE_PATHS = {
     // module entry
     SIMPLE_HOME: '/simple-home',
     SIMPLE_TEMPLATE_HOME: '/home',
+    SIMPLE_CHAT: '/simple-chat',
 
     // templates
     TABLE_DATA_TEMPLATE: '/table-data-template',
