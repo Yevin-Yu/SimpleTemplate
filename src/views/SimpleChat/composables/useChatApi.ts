@@ -63,7 +63,7 @@ async function processSSEStream(
  * 发送聊天消息并处理 SSE 流式响应
  */
 export async function sendChatMessage(
-    messages: Array<{ role: string; content: string }>,
+    messages: { role: string; content: string }[],
     onContent: (content: string) => void,
     onComplete: () => void,
     onError: (error: Error) => void
